@@ -19145,10 +19145,17 @@ int32 skill_vfcastfix(block_list *bl, double time, uint16 skill_id, uint16 skill
 		time = time * (1 - (float)min(varcast_r, 100) / 100);
 
 	// Apply Variable CastTime calculation by INT & DEX
-	if (!(flag&1))
-		time = time * (1 - sqrt(((float)(status_get_dex(bl) * 2 + status_get_int(bl)) / battle_config.vcast_stat_scale)));
+	// MemeRO mechanics. Cast agora é a soma dos atributos requeridos + reducao de cast variavel para alcancar 100%.
+	if (!(flag&1)){
+		time = time * (1 - ((float)min(reduce_cast_rate, 100) / 100) - (sqrt(((float)(status_get_dex(bl) * 2 + status_get_int(bl)) / battle_config.vcast_stat_scale))));
+	} else {
+		time = time * (1 - (float)min(reduce_cast_rate, 100) / 100);
+	}
+//		time = time * (1 - sqrt(((float)(status_get_dex(bl) * 2 + status_get_int(bl)) / battle_config.vcast_stat_scale))); MemeRO desativado
 
-	time = time * (1 - (float)min(reduce_cast_rate, 100) / 100);
+	// MemeRO - Elimina completamente o cast fixo caso na config esteja 0.
+	if (battle_config.default_fixed_castrate == 0) fixed = 0;
+
 	time = max((int32)time, 0) + (1 - (float)min(fixcast_r, 100) / 100) * max(fixed, 0); //Underflow checking/capping
 
 	return (int32)time;
