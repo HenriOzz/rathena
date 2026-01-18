@@ -63,7 +63,8 @@ Expanded Super Novice: EXSUPNOV_Q -> job_super2
 
 // Main NPCs :: job_repair
 //============================================================
-prt_in,38,104,4	script	Valerie	811,{
+// MemeRO removed (replaced)
+prt_in,88,108,4	script	Valerie	811,{
 	if (checkweight(1201,1) == 0) {
 		mes "I think you have too many items. Let's try it again after you take some out.";
 		close;
@@ -264,7 +265,7 @@ L_Third:
 in_moc_16,17,33,4	duplicate(Valerie#sign)	Valerie#asn	837
 ein_in01,13,28,4	duplicate(Valerie#sign)	Valerie#bls	837
 hu_in01,386,377,4	duplicate(Valerie#sign)	Valerie#hnt	837
-prt_in,88,108,4	duplicate(Valerie#sign)	Valerie#knt	837
+//prt_in,88,108,4	duplicate(Valerie#sign)	Valerie#knt	837
 prt_church,19,36,4	duplicate(Valerie#sign)	Valerie#prst	837
 gef_tower,110,30,4	duplicate(Valerie#sign)	Valerie#wiz	837
 comodo,215,155,4	duplicate(Valerie#sign)	Valerie#danc	837
