@@ -1,0 +1,9 @@
+-	script	MemeROLevelUP	-1,{
+OnPcBaseLvUpEvent:
+	specialeffect2 EF_INCAGILITY;
+	sc_start SC_INCREASEAGI,600000,10;
+	specialeffect2 EF_BLESSING;
+	sc_start SC_BLESSING,600000,10;
+	sc_start SC_MAGNIFICAT,600000,5;
+	end;
+}

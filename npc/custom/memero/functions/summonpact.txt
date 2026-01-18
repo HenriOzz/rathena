@@ -1,0 +1,63 @@
+// simplified version, testing
+// full version
+
+function	script	F_Summon_Pact	{
+	MonsterID	 = getarg(0, 0);
+	SummonDuration = getarg(1, 0);
+	//doevent "F_Summon_Pact::OnUse";
+		//			OnUse:
+					getmapxy(@mapname$,@mapx,@mapy);
+					@SummonName$ = strcharinfo(0)+"'s Minion"; //"'s monster";		
+	//	switch(select("call","call back","catch")){
+		//	case 1:
+					killmonster @mapname$,"Ofuda::On"+@SummonName$;
+					if (MonsterID > 0) {
+					summon @SummonName$,MonsterID,SummonDuration,"Ofuda::On"+@SummonName$;
+					showscript "Help me, " + getmonsterinfo(MonsterID,1) + "!";
+					sleep2 500; // start loop
+					if ((mobcount(@mapname$,"Ofuda::On"+@SummonName$)) > 1){
+					dispbottom "Duplicate Summon Detected! ";
+					killmonster @mapname$,"Ofuda::On"+@SummonName$;
+					} // end loop
+					sleep2 1000; // start loop
+					if ((mobcount(@mapname$,"Ofuda::On"+@SummonName$)) > 1){
+					dispbottom "Duplicate Summon Detected! ";
+					killmonster @mapname$,"Ofuda::On"+@SummonName$;
+					} // end loop
+					sleep2 1500; // start loop
+					if ((mobcount(@mapname$,"Ofuda::On"+@SummonName$)) > 1){
+					dispbottom "Duplicate Summon Detected! ";
+					killmonster @mapname$,"Ofuda::On"+@SummonName$;
+					} // end loop
+					sleep2 2000; // start loop
+					if ((mobcount(@mapname$,"Ofuda::On"+@SummonName$)) > 1){
+					dispbottom "Duplicate Summon Detected! ";
+					killmonster @mapname$,"Ofuda::On"+@SummonName$;
+					} // end loop
+					sleep2 2500; // start loop
+					if ((mobcount(@mapname$,"Ofuda::On"+@SummonName$)) > 1){
+					dispbottom "Duplicate Summon Detected! ";
+					killmonster @mapname$,"Ofuda::On"+@SummonName$;
+					} // end loop
+					sleep2 3000; // start loop
+					if ((mobcount(@mapname$,"Ofuda::On"+@SummonName$)) > 1){
+					dispbottom "Duplicate Summon Detected! ";
+					killmonster @mapname$,"Ofuda::On"+@SummonName$;
+					} // end loop
+					sleep2 3500; // start loop
+					if ((mobcount(@mapname$,"Ofuda::On"+@SummonName$)) > 1){
+					dispbottom "Duplicate Summon Detected! ";
+					killmonster @mapname$,"Ofuda::On"+@SummonName$;
+					} // end loop
+					sleep2 5000; // start loop
+					if ((mobcount(@mapname$,"Ofuda::On"+@SummonName$)) > 1){
+					dispbottom "Duplicate Summon Detected! ";
+					killmonster @mapname$,"Ofuda::On"+@SummonName$;
+					} // end loop
+					sleep2 10000; // start loop
+					if ((mobcount(@mapname$,"Ofuda::On"+@SummonName$)) > 1){
+					dispbottom "Duplicate Summon Detected! ";
+					killmonster @mapname$,"Ofuda::On"+@SummonName$;
+					} // end loop		
+					}
+					}

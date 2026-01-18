@@ -1,0 +1,57 @@
+// - MEME RO Open player's storage. Teleports back to Safety.
+// - No arguments.
+function	script	F_MemeDevice	{
+	
+	.@PartyTPDelay = 15;	// Leader Teleport delay, in seconds... e PTPD && @PTPD > gettimetick(2)
+	if( !getcharid(1) || getcharid(3) != getpartyleader( getcharid(1),1 ) ){
+	mes "[Meme Device]";
+	mes "You have opened the Meme Device.";
+	mes "What do you need?";
+	switch(select("Use Storage:Teleport to Meme Headquarters:Teleport to Party Leader:Cancel")) {
+	case 1:
+		close2;
+		openstorage;
+		//return;
+		end;
+	case 2:
+		warp "prt_in",44,106;
+		end;
+	case 3:
+	    if (getcharid(1) == 0) {
+        mes "You are not in a party, " +strcharinfo(0);
+        close;
+    } else {
+		.@aid = getpartyleader(getcharid(1),1);
+		.@cid = getpartyleader(getcharid(1),2);
+		if(!isloggedin(.@aid,.@cid)){
+			message strcharinfo(0),"Party Leader is Offline";
+			end;
+			}
+		getmapxy(.@map$,.@x,.@y,BL_PC,.@aid);
+		warp .@map$,.@x,.@y;
+		if (.@PartyTPDelay)
+		@PTPD = gettimetick(2) + .@PartyTPDelay;
+		end;
+		}
+	case 4:
+		close;
+	}
+	} else {
+	mes "[Meme Device]";
+	mes "You have opened the Meme Device.";
+	mes "What do you need?";
+	switch(select("Use Storage:Teleport to Meme Headquarters:Cancel")) {
+	case 1:
+		close2;
+		openstorage;
+		break;
+		//return;
+		end;
+	case 2:
+		warp "prt_in",44,106;
+		end;
+	case 3:
+		close;
+	}		
+	}
+}

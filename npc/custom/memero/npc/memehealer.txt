@@ -1,0 +1,24 @@
+// a galinha era 800 o sprite, 19997 pug
+prt_in,45,100,3	script	Quick Rest	800,{
+
+	.@Buffs = 1;	// Also buff players? (1: yes / 0: no)
+	.@Delay = 5;	// Heal delay, in seconds
+
+	if (@HD > gettimetick(2))
+		end;
+	specialeffect2 EF_HEAL2;
+	percentheal 100,100;
+
+	if (.@Buffs) {
+		specialeffect2 EF_INCAGILITY;
+		sc_start SC_INCREASEAGI,600000,10;
+		specialeffect2 EF_BLESSING;
+		sc_start SC_BLESSING,600000,10;
+		sc_start SC_MAGNIFICAT,600000,5;
+		repairall;
+	}
+	
+	if (.@Delay)
+		@HD = gettimetick(2) + .@Delay;
+	end;
+}

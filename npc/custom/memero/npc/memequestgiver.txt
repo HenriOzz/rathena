@@ -1,0 +1,218 @@
+prt_in,38,104,4	script	Meme Questgiver	420,{
+	
+	mes "[Meme Questgiver]";
+	mes "Oh, I was loafing around, doing nothing at all but...";
+	mes "Fucking Kiwi made me start to work, fuck.";
+	mes "What do you want?";
+	next;
+	switch(select("Use Storage:Guild Dungeon Access:World Instance Dungeon:Cancel")) {
+	case 1:
+		close2;
+		openstorage;
+		break;
+		end;
+	case 2:
+		mes "[Meme Questgiver]";
+		mes "Too weak to join a strong guild and conquer a castle huh? Fuck me.";
+		mes "Give me 30x ^0000CCWorld Tour Tickets^000000 and I'll take you there... I mean, not me, but someone will.";
+		next;
+//
+		switch(select("Ok:Cancel")) {
+		case 1: 
+		if (countitem(25464) >= 30) {
+			switch(select("Valkyrie:Greenwood Lake:Luina:Britoniah:Schwaltzvalt / Arunafeltz:TE Subterranean:Cancel")){
+				case 1: // valk
+				switch(select("1st Floor:2nd Floor:Warrior Road:Cancel")){
+					case 1:
+					delitem(25464, 30);
+					warp "gld_dun03",0,0;
+					end;
+					case 2:
+					delitem(25464, 30);
+					warp "gld_dun03_2",0,0;
+					end;
+					case 3:
+					delitem(25464, 30);
+					warp "gld2_prt",0,0;
+					end;
+					case 4:
+					end;
+					}
+				case 2: // greenwood
+				switch(select("1st Floor:2nd Floor:Winds of Beginning:Cancel")){
+					case 1:
+					delitem(25464, 30);
+					warp "gld_dun01",0,0;
+					end;
+					case 2:
+					delitem(25464, 30);
+					warp "gld_dun01_2",0,0;
+					end;
+					case 3:
+					delitem(25464, 30);
+					warp "gld2_pay",0,0;
+					end;
+					case 4:
+					end;
+					}
+				case 3: // luina
+				switch(select("1st Floor:2nd Floor:Tear of Hero:Cancel")){
+					case 1:
+					delitem(25464, 30);
+					warp "gld_dun02",0,0;
+					end;
+					case 2:
+					delitem(25464, 30);
+					warp "gld_dun02_2",0,0;
+					end;
+					case 3:
+					delitem(25464, 30);
+					warp "gld2_ald",0,0;
+					end;
+					case 4:
+					end;
+					}
+				case 4: // brit
+				switch(select("1st Floor:2nd Floor:Hill of Death:Cancel")){
+					case 1:
+					delitem(25464, 30);
+					warp "gld_dun04",0,0;
+					end;
+					case 2:
+					delitem(25464, 30);
+					warp "gld_dun04_2",0,0;
+					end;
+					case 3:
+					delitem(25464, 30);
+					warp "gld2_gef",0,0;
+					end;
+					case 4:
+					end;
+					}
+				case 5: // schw arug
+				switch(select("Schwaltzvalt:Arunafeltz:Cancel")){
+					case 1:
+					delitem(25464, 30);
+					warp "schg_dun01",0,0;
+					end;
+					case 2:
+					delitem(25464, 30);
+					warp "arug_dun01",0,0;
+					end;
+					case 3:
+					end;
+					}
+				case 6: // te sub
+				switch(select("1st Floor:2nd Floor:Cancel")){
+					case 1:
+					delitem(25464, 30);
+					warp "teg_dun01",0,0;
+					end;
+					case 2:
+					delitem(25464, 30);
+					warp "teg_dun02",0,0;
+					end;
+					case 3:
+					end;
+					}
+				case 7:
+				end;
+			}
+		} else {
+			mes "[Meme Questgiver]";
+			mes "Don't scam the scammer, fuck!";
+			mes "You don't have enough tickets.";
+			npctalk "Don't scam the scammer, fuck!";
+			sleep2 500;
+			percentheal -10,0; // test damage
+			specialeffect2 1;
+			close;
+		}
+		case 2:
+		end;
+		}
+//
+		close;
+	case 3:
+		mes "[Meme Questgiver]";
+		mes "Fuck! Apparently this Rune Midgard allows anyone to enter instances as an open field, even plebs such as you.";
+		mes "Give me 50x ^0000CCWorld Tour Tickets^000000 and I'll take you there... I mean, not me, but someone will.";
+		next;
+//
+		switch(select("Ok:Cancel")) {
+		case 1: 
+		if (countitem(25464) >= 50) {
+			switch(select("Nidhogg:Sealed Shrine:Old Glast Heim:The Hazy Maze Forest:Malangdo Culvert:Cancel")){
+				case 1: // valk
+				switch(select("Nidhogg's Dungeon:Nidhoggur's Nest:Cancel")){
+					case 1:
+					delitem(25464, 50);
+					warp "nyd_dun01",0,0;
+					end;
+					case 2:
+					delitem(25464, 50);
+					warp "1@nyd",0,0;
+					end;
+					case 3:
+					end;
+					}
+				case 2:
+					delitem(25464, 50);
+					warp "2@cata",0,0;
+					end;
+				end;
+				case 3:
+				switch(select("1st Floor:2nd Floor:Cancel")){
+					case 1:
+					delitem(25464, 50);
+					warp "1@gl_k",0,0;
+					end;
+					case 2:
+					delitem(25464, 50);
+					warp "2@gl_k",0,0;
+					end;
+					case 3:
+					end;
+					}
+				case 4:
+					delitem(25464, 50);
+					warp "1@mist",0,0;
+					end;
+				case 5:
+				switch(select("1st Drain:2nd Drain:Cancel")){
+					case 1:
+					delitem(25464, 50);
+					warp "1@pump",0,0;
+					end;
+					case 2:
+					delitem(25464, 50);
+					warp "2@pump",0,0;
+					end;
+					case 3:
+					end;
+					}
+				case 6:
+				end;
+			}
+		} else {
+			mes "[Meme Questgiver]";
+			mes "Don't scam the scammer, fuck!";
+			mes "You don't have enough tickets.";
+			npctalk "Don't scam the scammer, fuck!";
+			sleep2 500;
+			percentheal -10,0; // test damage
+			specialeffect2 1;
+			close;
+		}
+		case 2:
+		end;
+		}
+//
+		close;
+	case 4:
+		close;
+	}	
+	
+	
+	
+}
