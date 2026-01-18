@@ -6509,6 +6509,8 @@ int32 pc_useitem(map_session_data *sd,int32 n)
 	if( itemdb_group.item_exists(IG_CASH_FOOD, nameid) )
 		sd->canusecashfood_tick = tick + battle_config.cashfood_use_interval;
 
+	//
+/* MemeRO rAthena bug fix, depois que "corrigiram isso, bugou os itens q executam funcoes com mensagens, ex: 'MemeDevice'
 	// Save the old script the player was attached to
 	struct script_state* previous_st = sd->st;
 
@@ -6517,9 +6519,9 @@ int32 pc_useitem(map_session_data *sd,int32 n)
 		// Detach the player from the current script
 		script_detach_rid( previous_st );
 	}
-
+*/
 	run_script( script, 0, sd->id, fake_nd->id );
-
+/*
 	if( sd->st != nullptr ){
 		script_free_state( sd->st );
 		sd->st = nullptr;
@@ -6533,7 +6535,7 @@ int32 pc_useitem(map_session_data *sd,int32 n)
 		// Reattach the player to it, so that the limitations of that script kick back in
 		script_attach_state( previous_st );
 	}
-
+*/
 	potion_flag = 0;
 	return 1;
 }
