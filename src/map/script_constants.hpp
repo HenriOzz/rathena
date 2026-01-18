@@ -1577,6 +1577,9 @@
 	export_constant(SC_REUSE_LIMIT_D);
 	export_constant(SC_REUSE_LIMIT_E);
 	export_constant(SC_REUSE_LIMIT_F);
+	// MemeRO Summon Scroll
+	export_constant(SC_REUSE_LIMIT_SUMMONSCROLL);
+	//
 	export_constant(SC_REUSE_LIMIT_G);
 	export_constant(SC_REUSE_LIMIT_H);
 	export_constant(SC_REUSE_LIMIT_MTF);
@@ -2319,6 +2322,9 @@
 	export_constant(EFST_REUSE_LIMIT_D);
 	export_constant(EFST_REUSE_LIMIT_E);
 	export_constant(EFST_REUSE_LIMIT_F);
+	// MemeRO Summon Scroll
+	export_constant(EFST_REUSE_LIMIT_SUMMONSCROLL);
+	//
 	export_constant(EFST_INVINCIBLE);
 	export_constant(EFST_CASH_PLUSONLYJOBEXP);
 	export_constant(EFST_PARTYFLEE);
