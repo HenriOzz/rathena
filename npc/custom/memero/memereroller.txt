@@ -1,0 +1,2365 @@
+//===== rAthena Script =======================================
+//= Random Option NPC dealer'
+// Function: get_randomopt_id
+// Usage: set .@id = get_randomopt_id("VAR_MAXHPAMOUNT");
+function	script	F_GetOptIDByName	{
+	// Function to get Option ID by Name
+	// Usage: callfunc("F_GetOptIDByName", "VAR_MAXHPAMOUNT");
+	// Returns: 1 (the ID)
+	
+	set .@opt_name$, getarg(0);
+	
+	// Map option names to their IDs using if statements
+	if (.@opt_name$ == "VAR_MAXHPAMOUNT")			return 1;
+	if (.@opt_name$ == "VAR_MAXSPAMOUNT")			return 2;
+	if (.@opt_name$ == "VAR_STRAMOUNT")			return 3;
+	if (.@opt_name$ == "VAR_AGIAMOUNT")			return 4;
+	if (.@opt_name$ == "VAR_VITAMOUNT")			return 5;
+	if (.@opt_name$ == "VAR_INTAMOUNT")			return 6;
+	if (.@opt_name$ == "VAR_DEXAMOUNT")			return 7;
+	if (.@opt_name$ == "VAR_LUKAMOUNT")			return 8;
+	if (.@opt_name$ == "VAR_MAXHPPERCENT")		return 9;
+	if (.@opt_name$ == "VAR_MAXSPPERCENT")		return 10;
+	if (.@opt_name$ == "VAR_HPACCELERATION")		return 11;
+	if (.@opt_name$ == "VAR_SPACCELERATION")		return 12;
+	if (.@opt_name$ == "VAR_ATKPERCENT")			return 13;
+	if (.@opt_name$ == "VAR_MAGICATKPERCENT")		return 14;
+	if (.@opt_name$ == "VAR_PLUSASPD")			return 15;
+	if (.@opt_name$ == "VAR_PLUSASPDPERCENT")		return 16;
+	if (.@opt_name$ == "VAR_ATTPOWER")			return 17;
+	if (.@opt_name$ == "VAR_HITSUCCESSVALUE")		return 18;
+	if (.@opt_name$ == "VAR_ATTMPOWER")			return 19;
+	if (.@opt_name$ == "VAR_ITEMDEFPOWER")		return 20;
+	if (.@opt_name$ == "VAR_MDEFPOWER")			return 21;
+	if (.@opt_name$ == "VAR_AVOIDSUCCESSVALUE")	return 22;
+	if (.@opt_name$ == "VAR_PLUSAVOIDSUCCESSVALUE")	return 23;
+	if (.@opt_name$ == "VAR_CRITICALSUCCESSVALUE")	return 24;
+	
+	// Element tolerance (25-35)
+	if (.@opt_name$ == "ATTR_TOLERACE_NOTHING")		return 25;
+	if (.@opt_name$ == "ATTR_TOLERACE_WATER")		return 26;
+	if (.@opt_name$ == "ATTR_TOLERACE_GROUND")		return 27;
+	if (.@opt_name$ == "ATTR_TOLERACE_FIRE")		return 28;
+	if (.@opt_name$ == "ATTR_TOLERACE_WIND")		return 29;
+	if (.@opt_name$ == "ATTR_TOLERACE_POISON")		return 30;
+	if (.@opt_name$ == "ATTR_TOLERACE_SAINT")		return 31;
+	if (.@opt_name$ == "ATTR_TOLERACE_DARKNESS")	return 32;
+	if (.@opt_name$ == "ATTR_TOLERACE_TELEKINESIS")	return 33;
+	if (.@opt_name$ == "ATTR_TOLERACE_UNDEAD")		return 34;
+	if (.@opt_name$ == "ATTR_TOLERACE_ALLBUTNOTHING")	return 35;
+	
+	// Damage property (36-75)
+	if (.@opt_name$ == "DAMAGE_PROPERTY_NOTHING_USER")	return 36;
+	if (.@opt_name$ == "DAMAGE_PROPERTY_NOTHING_TARGET")	return 37;
+	if (.@opt_name$ == "DAMAGE_PROPERTY_WATER_USER")	return 38;
+	if (.@opt_name$ == "DAMAGE_PROPERTY_WATER_TARGET")	return 39;
+	if (.@opt_name$ == "DAMAGE_PROPERTY_GROUND_USER")	return 40;
+	if (.@opt_name$ == "DAMAGE_PROPERTY_GROUND_TARGET")	return 41;
+	if (.@opt_name$ == "DAMAGE_PROPERTY_FIRE_USER")	return 42;
+	if (.@opt_name$ == "DAMAGE_PROPERTY_FIRE_TARGET")	return 43;
+	if (.@opt_name$ == "DAMAGE_PROPERTY_WIND_USER")	return 44;
+	if (.@opt_name$ == "DAMAGE_PROPERTY_WIND_TARGET")	return 45;
+	if (.@opt_name$ == "DAMAGE_PROPERTY_POISON_USER")	return 46;
+	if (.@opt_name$ == "DAMAGE_PROPERTY_POISON_TARGET")	return 47;
+	if (.@opt_name$ == "DAMAGE_PROPERTY_SAINT_USER")	return 48;
+	if (.@opt_name$ == "DAMAGE_PROPERTY_SAINT_TARGET")	return 49;
+	if (.@opt_name$ == "DAMAGE_PROPERTY_DARKNESS_USER")	return 50;
+	if (.@opt_name$ == "DAMAGE_PROPERTY_DARKNESS_TARGET")return 51;
+	if (.@opt_name$ == "DAMAGE_PROPERTY_TELEKINESIS_USER")return 52;
+	if (.@opt_name$ == "DAMAGE_PROPERTY_TELEKINESIS_TARGET")return 53;
+	if (.@opt_name$ == "DAMAGE_PROPERTY_UNDEAD_USER")	return 54;
+	if (.@opt_name$ == "DAMAGE_PROPERTY_UNDEAD_TARGET")	return 55;
+	
+	if (.@opt_name$ == "MDAMAGE_PROPERTY_NOTHING_USER")	return 56;
+	if (.@opt_name$ == "MDAMAGE_PROPERTY_NOTHING_TARGET")return 57;
+	if (.@opt_name$ == "MDAMAGE_PROPERTY_WATER_USER")	return 58;
+	if (.@opt_name$ == "MDAMAGE_PROPERTY_WATER_TARGET")	return 59;
+	if (.@opt_name$ == "MDAMAGE_PROPERTY_GROUND_USER")	return 60;
+	if (.@opt_name$ == "MDAMAGE_PROPERTY_GROUND_TARGET")	return 61;
+	if (.@opt_name$ == "MDAMAGE_PROPERTY_FIRE_USER")	return 62;
+	if (.@opt_name$ == "MDAMAGE_PROPERTY_FIRE_TARGET")	return 63;
+	if (.@opt_name$ == "MDAMAGE_PROPERTY_WIND_USER")	return 64;
+	if (.@opt_name$ == "MDAMAGE_PROPERTY_WIND_TARGET")	return 65;
+	if (.@opt_name$ == "MDAMAGE_PROPERTY_POISON_USER")	return 66;
+	if (.@opt_name$ == "MDAMAGE_PROPERTY_POISON_TARGET")	return 67;
+	if (.@opt_name$ == "MDAMAGE_PROPERTY_SAINT_USER")	return 68;
+	if (.@opt_name$ == "MDAMAGE_PROPERTY_SAINT_TARGET")	return 69;
+	if (.@opt_name$ == "MDAMAGE_PROPERTY_DARKNESS_USER")	return 70;
+	if (.@opt_name$ == "MDAMAGE_PROPERTY_DARKNESS_TARGET")return 71;
+	if (.@opt_name$ == "MDAMAGE_PROPERTY_TELEKINESIS_USER")return 72;
+	if (.@opt_name$ == "MDAMAGE_PROPERTY_TELEKINESIS_TARGET")return 73;
+	if (.@opt_name$ == "MDAMAGE_PROPERTY_UNDEAD_USER")	return 74;
+	if (.@opt_name$ == "MDAMAGE_PROPERTY_UNDEAD_TARGET")	return 75;
+	
+	// Body attributes (76-85)
+	if (.@opt_name$ == "BODY_ATTR_NOTHING")		return 76;
+	if (.@opt_name$ == "BODY_ATTR_WATER")		return 77;
+	if (.@opt_name$ == "BODY_ATTR_GROUND")		return 78;
+	if (.@opt_name$ == "BODY_ATTR_FIRE")		return 79;
+	if (.@opt_name$ == "BODY_ATTR_WIND")		return 80;
+	if (.@opt_name$ == "BODY_ATTR_POISON")		return 81;
+	if (.@opt_name$ == "BODY_ATTR_SAINT")		return 82;
+	if (.@opt_name$ == "BODY_ATTR_DARKNESS")		return 83;
+	if (.@opt_name$ == "BODY_ATTR_TELEKINESIS")	return 84;
+	if (.@opt_name$ == "BODY_ATTR_UNDEAD")		return 85;
+	
+	// Race tolerance/damage (87-146)
+	if (.@opt_name$ == "RACE_TOLERACE_NOTHING")	return 87;
+	if (.@opt_name$ == "RACE_TOLERACE_UNDEAD")	return 88;
+	if (.@opt_name$ == "RACE_TOLERACE_ANIMAL")	return 89;
+	if (.@opt_name$ == "RACE_TOLERACE_PLANT")		return 90;
+	if (.@opt_name$ == "RACE_TOLERACE_INSECT")	return 91;
+	if (.@opt_name$ == "RACE_TOLERACE_FISHS")		return 92;
+	if (.@opt_name$ == "RACE_TOLERACE_DEVIL")		return 93;
+	if (.@opt_name$ == "RACE_TOLERACE_HUMAN")		return 94;
+	if (.@opt_name$ == "RACE_TOLERACE_ANGEL")		return 95;
+	if (.@opt_name$ == "RACE_TOLERACE_DRAGON")	return 96;
+	
+	if (.@opt_name$ == "RACE_DAMAGE_NOTHING")		return 97;
+	if (.@opt_name$ == "RACE_DAMAGE_UNDEAD")		return 98;
+	if (.@opt_name$ == "RACE_DAMAGE_ANIMAL")		return 99;
+	if (.@opt_name$ == "RACE_DAMAGE_PLANT")		return 100;
+	if (.@opt_name$ == "RACE_DAMAGE_INSECT")		return 101;
+	if (.@opt_name$ == "RACE_DAMAGE_FISHS")		return 102;
+	if (.@opt_name$ == "RACE_DAMAGE_DEVIL")		return 103;
+	if (.@opt_name$ == "RACE_DAMAGE_HUMAN")		return 104;
+	if (.@opt_name$ == "RACE_DAMAGE_ANGEL")		return 105;
+	if (.@opt_name$ == "RACE_DAMAGE_DRAGON")		return 106;
+	
+	if (.@opt_name$ == "RACE_MDAMAGE_NOTHING")	return 107;
+	if (.@opt_name$ == "RACE_MDAMAGE_UNDEAD")		return 108;
+	if (.@opt_name$ == "RACE_MDAMAGE_ANIMAL")		return 109;
+	if (.@opt_name$ == "RACE_MDAMAGE_PLANT")		return 110;
+	if (.@opt_name$ == "RACE_MDAMAGE_INSECT")		return 111;
+	if (.@opt_name$ == "RACE_MDAMAGE_FISHS")		return 112;
+	if (.@opt_name$ == "RACE_MDAMAGE_DEVIL")		return 113;
+	if (.@opt_name$ == "RACE_MDAMAGE_HUMAN")		return 114;
+	if (.@opt_name$ == "RACE_MDAMAGE_ANGEL")		return 115;
+	if (.@opt_name$ == "RACE_MDAMAGE_DRAGON")		return 116;
+	
+	if (.@opt_name$ == "RACE_CRI_PERCENT_NOTHING")	return 117;
+	if (.@opt_name$ == "RACE_CRI_PERCENT_UNDEAD")	return 118;
+	if (.@opt_name$ == "RACE_CRI_PERCENT_ANIMAL")	return 119;
+	if (.@opt_name$ == "RACE_CRI_PERCENT_PLANT")	return 120;
+	if (.@opt_name$ == "RACE_CRI_PERCENT_INSECT")	return 121;
+	if (.@opt_name$ == "RACE_CRI_PERCENT_FISHS")	return 122;
+	if (.@opt_name$ == "RACE_CRI_PERCENT_DEVIL")	return 123;
+	if (.@opt_name$ == "RACE_CRI_PERCENT_HUMAN")	return 124;
+	if (.@opt_name$ == "RACE_CRI_PERCENT_ANGEL")	return 125;
+	if (.@opt_name$ == "RACE_CRI_PERCENT_DRAGON")	return 126;
+	
+	if (.@opt_name$ == "RACE_IGNORE_DEF_PERCENT_NOTHING")	return 127;
+	if (.@opt_name$ == "RACE_IGNORE_DEF_PERCENT_UNDEAD")	return 128;
+	if (.@opt_name$ == "RACE_IGNORE_DEF_PERCENT_ANIMAL")	return 129;
+	if (.@opt_name$ == "RACE_IGNORE_DEF_PERCENT_PLANT")		return 130;
+	if (.@opt_name$ == "RACE_IGNORE_DEF_PERCENT_INSECT")		return 131;
+	if (.@opt_name$ == "RACE_IGNORE_DEF_PERCENT_FISHS")		return 132;
+	if (.@opt_name$ == "RACE_IGNORE_DEF_PERCENT_DEVIL")		return 133;
+	if (.@opt_name$ == "RACE_IGNORE_DEF_PERCENT_HUMAN")		return 134;
+	if (.@opt_name$ == "RACE_IGNORE_DEF_PERCENT_ANGEL")		return 135;
+	if (.@opt_name$ == "RACE_IGNORE_DEF_PERCENT_DRAGON")		return 136;
+	
+	if (.@opt_name$ == "RACE_IGNORE_MDEF_PERCENT_NOTHING")	return 137;
+	if (.@opt_name$ == "RACE_IGNORE_MDEF_PERCENT_UNDEAD")	return 138;
+	if (.@opt_name$ == "RACE_IGNORE_MDEF_PERCENT_ANIMAL")	return 139;
+	if (.@opt_name$ == "RACE_IGNORE_MDEF_PERCENT_PLANT")		return 140;
+	if (.@opt_name$ == "RACE_IGNORE_MDEF_PERCENT_INSECT")		return 141;
+	if (.@opt_name$ == "RACE_IGNORE_MDEF_PERCENT_FISHS")		return 142;
+	if (.@opt_name$ == "RACE_IGNORE_MDEF_PERCENT_DEVIL")		return 143;
+	if (.@opt_name$ == "RACE_IGNORE_MDEF_PERCENT_HUMAN")		return 144;
+	if (.@opt_name$ == "RACE_IGNORE_MDEF_PERCENT_ANGEL")		return 145;
+	if (.@opt_name$ == "RACE_IGNORE_MDEF_PERCENT_DRAGON")		return 146;
+	
+	// Class damage (147-156)
+	if (.@opt_name$ == "CLASS_DAMAGE_NORMAL_TARGET")	return 147;
+	if (.@opt_name$ == "CLASS_DAMAGE_BOSS_TARGET")	return 148;
+	if (.@opt_name$ == "CLASS_DAMAGE_NORMAL_USER")	return 149;
+	if (.@opt_name$ == "CLASS_DAMAGE_BOSS_USER")		return 150;
+	if (.@opt_name$ == "CLASS_MDAMAGE_NORMAL")		return 151;
+	if (.@opt_name$ == "CLASS_MDAMAGE_BOSS")		return 152;
+	if (.@opt_name$ == "CLASS_IGNORE_DEF_PERCENT_NORMAL")	return 153;
+	if (.@opt_name$ == "CLASS_IGNORE_DEF_PERCENT_BOSS")	return 154;
+	if (.@opt_name$ == "CLASS_IGNORE_MDEF_PERCENT_NORMAL")return 155;
+	if (.@opt_name$ == "CLASS_IGNORE_MDEF_PERCENT_BOSS")	return 156;
+	
+	// Size damage (157-163)
+	if (.@opt_name$ == "DAMAGE_SIZE_SMALL_TARGET")	return 157;
+	if (.@opt_name$ == "DAMAGE_SIZE_MIDIUM_TARGET")	return 158;
+	if (.@opt_name$ == "DAMAGE_SIZE_LARGE_TARGET")	return 159;
+	if (.@opt_name$ == "DAMAGE_SIZE_SMALL_USER")		return 160;
+	if (.@opt_name$ == "DAMAGE_SIZE_MIDIUM_USER")	return 161;
+	if (.@opt_name$ == "DAMAGE_SIZE_LARGE_USER")		return 162;
+	if (.@opt_name$ == "DAMAGE_SIZE_PERFECT")		return 163;
+	
+	// Critical and range (164-167)
+	if (.@opt_name$ == "DAMAGE_CRI_TARGET")		return 164;
+	if (.@opt_name$ == "DAMAGE_CRI_USER")		return 165;
+	if (.@opt_name$ == "RANGE_ATTACK_DAMAGE_TARGET")return 166;
+	if (.@opt_name$ == "RANGE_ATTACK_DAMAGE_USER")	return 167;
+	
+	// Healing (168-169)
+	if (.@opt_name$ == "HEAL_VALUE")			return 168;
+	if (.@opt_name$ == "HEAL_MODIFY_PERCENT")		return 169;
+	
+	// Spell modifiers (170-172)
+	if (.@opt_name$ == "DEC_SPELL_CAST_TIME")		return 170;
+	if (.@opt_name$ == "DEC_SPELL_DELAY_TIME")		return 171;
+	if (.@opt_name$ == "DEC_SP_CONSUMPTION")		return 172;
+	
+	// Weapon attributes (175-185)
+	if (.@opt_name$ == "WEAPON_ATTR_NOTHING")		return 175;
+	if (.@opt_name$ == "WEAPON_ATTR_WATER")		return 176;
+	if (.@opt_name$ == "WEAPON_ATTR_GROUND")		return 177;
+	if (.@opt_name$ == "WEAPON_ATTR_FIRE")		return 178;
+	if (.@opt_name$ == "WEAPON_ATTR_WIND")		return 179;
+	if (.@opt_name$ == "WEAPON_ATTR_POISON")		return 180;
+	if (.@opt_name$ == "WEAPON_ATTR_SAINT")		return 181;
+	if (.@opt_name$ == "WEAPON_ATTR_DARKNESS")		return 182;
+	if (.@opt_name$ == "WEAPON_ATTR_TELEKINESIS")	return 183;
+	if (.@opt_name$ == "WEAPON_ATTR_UNDEAD")		return 184;
+	if (.@opt_name$ == "WEAPON_INDESTRUCTIBLE")	return 185;
+	
+	// Body indestructible
+	if (.@opt_name$ == "BODY_INDESTRUCTIBLE")		return 186;
+	
+	// Magic size damage (187-192)
+	if (.@opt_name$ == "MDAMAGE_SIZE_SMALL_TARGET")	return 187;
+	if (.@opt_name$ == "MDAMAGE_SIZE_MIDIUM_TARGET")	return 188;
+	if (.@opt_name$ == "MDAMAGE_SIZE_LARGE_TARGET")	return 189;
+	if (.@opt_name$ == "MDAMAGE_SIZE_SMALL_USER")	return 190;
+	if (.@opt_name$ == "MDAMAGE_SIZE_MIDIUM_USER")	return 191;
+	if (.@opt_name$ == "MDAMAGE_SIZE_LARGE_USER")	return 192;
+	
+	// All element tolerance
+	if (.@opt_name$ == "ATTR_TOLERACE_ALL")		return 193;
+	
+	// Race weapon tolerance (194-203)
+	if (.@opt_name$ == "RACE_WEAPON_TOLERACE_NOTHING")	return 194;
+	if (.@opt_name$ == "RACE_WEAPON_TOLERACE_UNDEAD")		return 195;
+	if (.@opt_name$ == "RACE_WEAPON_TOLERACE_ANIMAL")		return 196;
+	if (.@opt_name$ == "RACE_WEAPON_TOLERACE_PLANT")		return 197;
+	if (.@opt_name$ == "RACE_WEAPON_TOLERACE_INSECT")		return 198;
+	if (.@opt_name$ == "RACE_WEAPON_TOLERACE_FISHS")		return 199;
+	if (.@opt_name$ == "RACE_WEAPON_TOLERACE_DEVIL")		return 200;
+	if (.@opt_name$ == "RACE_WEAPON_TOLERACE_HUMAN")		return 201;
+	if (.@opt_name$ == "RACE_WEAPON_TOLERACE_ANGEL")		return 202;
+	if (.@opt_name$ == "RACE_WEAPON_TOLERACE_DRAGON")		return 203;
+	
+	// Player race tolerance/damage (206-217)
+	if (.@opt_name$ == "RACE_TOLERACE_PLAYER_HUMAN")		return 206;
+	if (.@opt_name$ == "RACE_TOLERACE_PLAYER_DORAM")		return 207;
+	if (.@opt_name$ == "RACE_DAMAGE_PLAYER_HUMAN")		return 208;
+	if (.@opt_name$ == "RACE_DAMAGE_PLAYER_DORAM")		return 209;
+	if (.@opt_name$ == "RACE_MDAMAGE_PLAYER_HUMAN")		return 210;
+	if (.@opt_name$ == "RACE_MDAMAGE_PLAYER_DORAM")		return 211;
+	if (.@opt_name$ == "RACE_CRI_PERCENT_PLAYER_HUMAN")	return 212;
+	if (.@opt_name$ == "RACE_CRI_PERCENT_PLAYER_DORAM")	return 213;
+	if (.@opt_name$ == "RACE_IGNORE_DEF_PERCENT_PLAYER_HUMAN")	return 214;
+	if (.@opt_name$ == "RACE_IGNORE_DEF_PERCENT_PLAYER_DORAM")	return 215;
+	if (.@opt_name$ == "RACE_IGNORE_MDEF_PERCENT_PLAYER_HUMAN")	return 216;
+	if (.@opt_name$ == "RACE_IGNORE_MDEF_PERCENT_PLAYER_DORAM")	return 217;
+	
+	// Misc (218-257)
+	if (.@opt_name$ == "REFLECT_DAMAGE_PERCENT")		return 218;
+	if (.@opt_name$ == "MELEE_ATTACK_DAMAGE_TARGET")	return 219;
+	if (.@opt_name$ == "MELEE_ATTACK_DAMAGE_USER")	return 220;
+	
+	// Add skill magic damage (221-231)
+	if (.@opt_name$ == "ADDSKILLMDAMAGE_NOTHING")		return 221;
+	if (.@opt_name$ == "ADDSKILLMDAMAGE_WATER")		return 222;
+	if (.@opt_name$ == "ADDSKILLMDAMAGE_GROUND")		return 223;
+	if (.@opt_name$ == "ADDSKILLMDAMAGE_FIRE")		return 224;
+	if (.@opt_name$ == "ADDSKILLMDAMAGE_WIND")		return 225;
+	if (.@opt_name$ == "ADDSKILLMDAMAGE_POISON")		return 226;
+	if (.@opt_name$ == "ADDSKILLMDAMAGE_SAINT")		return 227;
+	if (.@opt_name$ == "ADDSKILLMDAMAGE_DARKNESS")	return 228;
+	if (.@opt_name$ == "ADDSKILLMDAMAGE_TELEKINESIS")	return 229;
+	if (.@opt_name$ == "ADDSKILLMDAMAGE_UNDEAD")		return 230;
+	if (.@opt_name$ == "ADDSKILLMDAMAGE_ALL")		return 231;
+	
+	// EXP bonuses (232-242)
+	if (.@opt_name$ == "ADDEXPPERCENT_KILLRACE_NOTHING")	return 232;
+	if (.@opt_name$ == "ADDEXPPERCENT_KILLRACE_UNDEAD")	return 233;
+	if (.@opt_name$ == "ADDEXPPERCENT_KILLRACE_ANIMAL")	return 234;
+	if (.@opt_name$ == "ADDEXPPERCENT_KILLRACE_PLANT")	return 235;
+	if (.@opt_name$ == "ADDEXPPERCENT_KILLRACE_INSECT")	return 236;
+	if (.@opt_name$ == "ADDEXPPERCENT_KILLRACE_FISHS")	return 237;
+	if (.@opt_name$ == "ADDEXPPERCENT_KILLRACE_DEVIL")	return 238;
+	if (.@opt_name$ == "ADDEXPPERCENT_KILLRACE_HUMAN")	return 239;
+	if (.@opt_name$ == "ADDEXPPERCENT_KILLRACE_ANGEL")	return 240;
+	if (.@opt_name$ == "ADDEXPPERCENT_KILLRACE_DRAGON")	return 241;
+	if (.@opt_name$ == "ADDEXPPERCENT_KILLRACE_ALL")	return 242;
+	
+	// Additional stats (243-257)
+	if (.@opt_name$ == "VAR_POWAMOUNT")			return 243;
+	if (.@opt_name$ == "VAR_SPLAMOUNT")			return 244;
+	if (.@opt_name$ == "VAR_STAAMOUNT")			return 245;
+	if (.@opt_name$ == "VAR_WISAMOUNT")			return 246;
+	if (.@opt_name$ == "VAR_CONAMOUNT")			return 247;
+	if (.@opt_name$ == "VAR_CRTAMOUNT")			return 248;
+	if (.@opt_name$ == "VAR_PATKAMOUNT")			return 249;
+	if (.@opt_name$ == "VAR_SMATKAMOUNT")		return 250;
+	if (.@opt_name$ == "VAR_RESAMOUNT")			return 251;
+	if (.@opt_name$ == "VAR_MRESAMOUNT")			return 252;
+	if (.@opt_name$ == "VAR_HEAL_PLUS")			return 253;
+	if (.@opt_name$ == "VAR_CRITICAL_RATE")		return 254;
+	if (.@opt_name$ == "VAR_MOVESPEED")			return 255;
+	if (.@opt_name$ == "VAR_POCKETMETEOR")		return 256;
+	if (.@opt_name$ == "VAR_DROPRATE")			return 257;
+	
+	// Option not found
+	debugmes "Option '" + .@opt_name$ + "' not found!";
+	return 0;
+}
+//===== By: ==================================================
+// Function to get Option Name by ID (reverse of F_GetOptIDByName)
+// Function to check if option has value 0 (cannot be rerolled)
+// Function to get Option Name by ID (reverse of F_GetOptIDByName)
+function	script	F_GetOptNameByID	{
+	set .@opt_id, getarg(0);
+	
+	// Map ALL option IDs to their names
+	if (.@opt_id == 1)	return "Max HP";
+	if (.@opt_id == 2)	return "Max SP";
+	if (.@opt_id == 3)	return "STR";
+	if (.@opt_id == 4)	return "AGI";
+	if (.@opt_id == 5)	return "VIT";
+	if (.@opt_id == 6)	return "INT";
+	if (.@opt_id == 7)	return "DEX";
+	if (.@opt_id == 8)	return "LUK";
+	if (.@opt_id == 9)	return "Max HP%";
+	if (.@opt_id == 10)	return "Max SP%";
+	if (.@opt_id == 11)	return "HP Regen Rate";
+	if (.@opt_id == 12)	return "SP Regen Rate";
+	if (.@opt_id == 13)	return "ATK %";
+	if (.@opt_id == 14)	return "MATK %";
+	if (.@opt_id == 15)	return "ASPD";
+	if (.@opt_id == 16)	return "Delay After Attack";
+	if (.@opt_id == 17)	return "ATK";
+	if (.@opt_id == 18)	return "HIT";
+	if (.@opt_id == 19)	return "MATK";
+	if (.@opt_id == 20)	return "DEF";
+	if (.@opt_id == 21)	return "MDEF";
+	if (.@opt_id == 22)	return "Flee";
+	if (.@opt_id == 23)	return "Perfect Dodge";
+	if (.@opt_id == 24)	return "Crit Rate";
+	
+	// Element tolerance (25-35)
+	if (.@opt_id == 25)	return "Neutral Damage Reduction";
+	if (.@opt_id == 26)	return "Water Damage Reduction";
+	if (.@opt_id == 27)	return "Ground Damage Reduction";
+	if (.@opt_id == 28)	return "Fire Damage Reduction";
+	if (.@opt_id == 29)	return "Wind Damage Reduction";
+	if (.@opt_id == 30)	return "Poison Damage Reduction";
+	if (.@opt_id == 31)	return "Holy Damage Reduction";
+	if (.@opt_id == 32)	return "Dark Damage Reduction";
+	if (.@opt_id == 33)	return "Ghost Damage Reduction";
+	if (.@opt_id == 34)	return "Undead Element Damage Reduction";
+	if (.@opt_id == 35)	return "All Elemental (except Neutral) Damage Reduction";
+	
+	// Damage property (36-75)
+	if (.@opt_id == 36)	return "DAMAGE_PROPERTY_NOTHING_USER";
+	if (.@opt_id == 37)	return "Damage against Neutral monsters";
+	if (.@opt_id == 38)	return "DAMAGE_PROPERTY_WATER_USER";
+	if (.@opt_id == 39)	return "Damage against Water monsters";
+	if (.@opt_id == 40)	return "DAMAGE_PROPERTY_GROUND_USER";
+	if (.@opt_id == 41)	return "Damage against Earth monsters";
+	if (.@opt_id == 42)	return "DAMAGE_PROPERTY_FIRE_USER";
+	if (.@opt_id == 43)	return "Damage against Fire monsters";
+	if (.@opt_id == 44)	return "DAMAGE_PROPERTY_WIND_USER";
+	if (.@opt_id == 45)	return "Damage against Wind monsters";
+	if (.@opt_id == 46)	return "DAMAGE_PROPERTY_POISON_USER";
+	if (.@opt_id == 47)	return "Damage against Poison monsters";
+	if (.@opt_id == 48)	return "DAMAGE_PROPERTY_SAINT_USER";
+	if (.@opt_id == 49)	return "Damage against Holy monsters";
+	if (.@opt_id == 50)	return "DAMAGE_PROPERTY_DARKNESS_USER";
+	if (.@opt_id == 51)	return "Damage against Shadow monsters";
+	if (.@opt_id == 52)	return "DAMAGE_PROPERTY_TELEKINESIS_USER";
+	if (.@opt_id == 53)	return "Damage against Ghost monsters";
+	if (.@opt_id == 54)	return "DAMAGE_PROPERTY_UNDEAD_USER";
+	if (.@opt_id == 55)	return "Damage against Undead monsters";
+	
+	if (.@opt_id == 56)	return "MDAMAGE_PROPERTY_NOTHING_USER";
+	if (.@opt_id == 57)	return "MDAMAGE_PROPERTY_NOTHING_TARGET";
+	if (.@opt_id == 58)	return "MDAMAGE_PROPERTY_WATER_USER";
+	if (.@opt_id == 59)	return "MDAMAGE_PROPERTY_WATER_TARGET";
+	if (.@opt_id == 60)	return "MDAMAGE_PROPERTY_GROUND_USER";
+	if (.@opt_id == 61)	return "MDAMAGE_PROPERTY_GROUND_TARGET";
+	if (.@opt_id == 62)	return "MDAMAGE_PROPERTY_FIRE_USER";
+	if (.@opt_id == 63)	return "MDAMAGE_PROPERTY_FIRE_TARGET";
+	if (.@opt_id == 64)	return "MDAMAGE_PROPERTY_WIND_USER";
+	if (.@opt_id == 65)	return "MDAMAGE_PROPERTY_WIND_TARGET";
+	if (.@opt_id == 66)	return "MDAMAGE_PROPERTY_POISON_USER";
+	if (.@opt_id == 67)	return "MDAMAGE_PROPERTY_POISON_TARGET";
+	if (.@opt_id == 68)	return "MDAMAGE_PROPERTY_SAINT_USER";
+	if (.@opt_id == 69)	return "MDAMAGE_PROPERTY_SAINT_TARGET";
+	if (.@opt_id == 70)	return "MDAMAGE_PROPERTY_DARKNESS_USER";
+	if (.@opt_id == 71)	return "MDAMAGE_PROPERTY_DARKNESS_TARGET";
+	if (.@opt_id == 72)	return "MDAMAGE_PROPERTY_TELEKINESIS_USER";
+	if (.@opt_id == 73)	return "MDAMAGE_PROPERTY_TELEKINESIS_TARGET";
+	if (.@opt_id == 74)	return "MDAMAGE_PROPERTY_UNDEAD_USER";
+	if (.@opt_id == 75)	return "MDAMAGE_PROPERTY_UNDEAD_TARGET";
+	
+	// Body attributes (76-85)
+	if (.@opt_id == 76)	return "Neutral Armor Element";
+	if (.@opt_id == 77)	return "Water Armor Element";
+	if (.@opt_id == 78)	return "Groud Armor Element";
+	if (.@opt_id == 79)	return "Fire Armor Element";
+	if (.@opt_id == 80)	return "Wind Armor Element";
+	if (.@opt_id == 81)	return "Poison Armor Element";
+	if (.@opt_id == 82)	return "Holy Armor Element";
+	if (.@opt_id == 83)	return "Dark Armor Element";
+	if (.@opt_id == 84)	return "Ghost Armor Element";
+	if (.@opt_id == 85)	return "Undead Armor Element";
+	
+	// Race tolerance/damage (87-146)
+	if (.@opt_id == 87)	return "Formless Race Resistance";
+	if (.@opt_id == 88)	return "Undead Race Resistance";
+	if (.@opt_id == 89)	return "Brute Race Resistance";
+	if (.@opt_id == 90)	return "Plant Race Resistance";
+	if (.@opt_id == 91)	return "Insect Race Resistance";
+	if (.@opt_id == 92)	return "Fish Race Resistance";
+	if (.@opt_id == 93)	return "Demon Race Resistance";
+	if (.@opt_id == 94)	return "Demihuman Race Resistance";
+	if (.@opt_id == 95)	return "Angel Race Resistance";
+	if (.@opt_id == 96)	return "Dragon Race Resistance";
+	
+	if (.@opt_id == 97)	return "ATK% against Formless Race";
+	if (.@opt_id == 98)	return "ATK% against Undead Race";
+	if (.@opt_id == 99)	return "ATK% against Brute Race";
+	if (.@opt_id == 100)	return "ATK% against Plant Race";
+	if (.@opt_id == 101)	return "ATK% against Insect Race";
+	if (.@opt_id == 102)	return "ATK% against Fish Race";
+	if (.@opt_id == 103)	return "ATK% against Demon Race";
+	if (.@opt_id == 104)	return "ATK% against Demihuman Race";
+	if (.@opt_id == 105)	return "ATK% against Angel Race";
+	if (.@opt_id == 106)	return "ATK% against Dragon Race";
+	
+	if (.@opt_id == 107)	return "MATK% against Formless Race";
+	if (.@opt_id == 108)	return "MATK% against Undead Race";
+	if (.@opt_id == 109)	return "MATK% against Brute Race";
+	if (.@opt_id == 110)	return "MATK% against Plant Race";
+	if (.@opt_id == 111)	return "MATK% against Insect Race";
+	if (.@opt_id == 112)	return "MATK% against Fish Race";
+	if (.@opt_id == 113)	return "MATK% against Demon Race";
+	if (.@opt_id == 114)	return "MATK% against Demihuman Race";
+	if (.@opt_id == 115)	return "MATK% against Angel Race";
+	if (.@opt_id == 116)	return "MATK% against Dragon Race";
+	
+	if (.@opt_id == 117)	return "Crit Damage against Formless Race";
+	if (.@opt_id == 118)	return "Crit Damage against Undead Race";
+	if (.@opt_id == 119)	return "Crit Damage against Brute Race";
+	if (.@opt_id == 120)	return "Crit Damage against Plant Race";
+	if (.@opt_id == 121)	return "Crit Damage against Insect Race";
+	if (.@opt_id == 122)	return "Crit Damage against Fish Race";
+	if (.@opt_id == 123)	return "Crit Damage against Demon Race";
+	if (.@opt_id == 124)	return "Crit Damage against Demihuman Race";
+	if (.@opt_id == 125)	return "Crit Damage against Angel Race";
+	if (.@opt_id == 126)	return "Crit Damage against Dragon Race";
+	
+	if (.@opt_id == 127)	return "RACE_IGNORE_DEF_PERCENT_NOTHING";
+	if (.@opt_id == 128)	return "RACE_IGNORE_DEF_PERCENT_UNDEAD";
+	if (.@opt_id == 129)	return "RACE_IGNORE_DEF_PERCENT_ANIMAL";
+	if (.@opt_id == 130)	return "RACE_IGNORE_DEF_PERCENT_PLANT";
+	if (.@opt_id == 131)	return "RACE_IGNORE_DEF_PERCENT_INSECT";
+	if (.@opt_id == 132)	return "RACE_IGNORE_DEF_PERCENT_FISHS";
+	if (.@opt_id == 133)	return "RACE_IGNORE_DEF_PERCENT_DEVIL";
+	if (.@opt_id == 134)	return "RACE_IGNORE_DEF_PERCENT_HUMAN";
+	if (.@opt_id == 135)	return "RACE_IGNORE_DEF_PERCENT_ANGEL";
+	if (.@opt_id == 136)	return "RACE_IGNORE_DEF_PERCENT_DRAGON";
+	
+	if (.@opt_id == 137)	return "RACE_IGNORE_MDEF_PERCENT_NOTHING";
+	if (.@opt_id == 138)	return "RACE_IGNORE_MDEF_PERCENT_UNDEAD";
+	if (.@opt_id == 139)	return "RACE_IGNORE_MDEF_PERCENT_ANIMAL";
+	if (.@opt_id == 140)	return "RACE_IGNORE_MDEF_PERCENT_PLANT";
+	if (.@opt_id == 141)	return "RACE_IGNORE_MDEF_PERCENT_INSECT";
+	if (.@opt_id == 142)	return "RACE_IGNORE_MDEF_PERCENT_FISHS";
+	if (.@opt_id == 143)	return "RACE_IGNORE_MDEF_PERCENT_DEVIL";
+	if (.@opt_id == 144)	return "RACE_IGNORE_MDEF_PERCENT_HUMAN";
+	if (.@opt_id == 145)	return "RACE_IGNORE_MDEF_PERCENT_ANGEL";
+	if (.@opt_id == 146)	return "RACE_IGNORE_MDEF_PERCENT_DRAGON";
+	
+	// Class damage (147-156)
+	if (.@opt_id == 147)	return "Damage against Normal Monsters";
+	if (.@opt_id == 148)	return "Damage against Boss Monsters";
+	if (.@opt_id == 149)	return "Normal Monster Resistance";
+	if (.@opt_id == 150)	return "Boss Monster Resistance";
+	if (.@opt_id == 151)	return "MATK % Against Normal Monsters";
+	if (.@opt_id == 152)	return "MATK % Against Boss Monsters";
+	if (.@opt_id == 153)	return "CLASS_IGNORE_DEF_PERCENT_NORMAL";
+	if (.@opt_id == 154)	return "CLASS_IGNORE_DEF_PERCENT_BOSS";
+	if (.@opt_id == 155)	return "CLASS_IGNORE_MDEF_PERCENT_NORMAL";
+	if (.@opt_id == 156)	return "CLASS_IGNORE_MDEF_PERCENT_BOSS";
+	
+	// Size damage (157-163)
+	if (.@opt_id == 157)	return "Damage against Small-size Monsters";
+	if (.@opt_id == 158)	return "Damage against Medium-size Monsters";
+	if (.@opt_id == 159)	return "Damage against Large-size Monsters";
+	if (.@opt_id == 160)	return "Small-size Monster Resistance";
+	if (.@opt_id == 161)	return "Medium-size Monster Resistance";
+	if (.@opt_id == 162)	return "Large-size Monster Resistance";
+	if (.@opt_id == 163)	return "No Weapon Size Penalty";
+	
+	// Critical and range (164-167)
+	if (.@opt_id == 164)	return "Crit Damage";
+	if (.@opt_id == 165)	return "Crit Damage Reduction";
+	if (.@opt_id == 166)	return "Ranged ATK%";
+	if (.@opt_id == 167)	return "Ranged ATK Reduction";
+	
+	// Healing (168-169)
+	if (.@opt_id == 168)	return "Healing Skills";
+	if (.@opt_id == 169)	return "Healing Received";
+	
+	// Spell modifiers (170-172)
+	if (.@opt_id == 170)	return "Variable Cast Time";
+	if (.@opt_id == 171)	return "After Cast Delay";
+	if (.@opt_id == 172)	return "SP Cost Reduction";
+	
+	// Weapon attributes (175-185)
+	if (.@opt_id == 175)	return "Weapon endowed with Neutral";
+	if (.@opt_id == 176)	return "Weapon endowed with Water";
+	if (.@opt_id == 177)	return "Weapon endowed with Groud";
+	if (.@opt_id == 178)	return "Weapon endowed with Fire";
+	if (.@opt_id == 179)	return "Weapon endowed with Wind";
+	if (.@opt_id == 180)	return "Weapon endowed with Poison";
+	if (.@opt_id == 181)	return "Weapon endowed with Holy";
+	if (.@opt_id == 182)	return "Weapon endowed with Dark";
+	if (.@opt_id == 183)	return "Weapon endowed with Ghost";
+	if (.@opt_id == 184)	return "Weapon endowed with Undead";
+	if (.@opt_id == 185)	return "Indestructible Weapon";
+	
+	// Body indestructible
+	if (.@opt_id == 186)	return "Indestructible Armor";
+	
+	// Magic size damage (187-192)
+	if (.@opt_id == 187)	return "MDAMAGE_SIZE_SMALL_TARGET";
+	if (.@opt_id == 188)	return "MDAMAGE_SIZE_MIDIUM_TARGET";
+	if (.@opt_id == 189)	return "MDAMAGE_SIZE_LARGE_TARGET";
+	if (.@opt_id == 190)	return "MDAMAGE_SIZE_SMALL_USER";
+	if (.@opt_id == 191)	return "MDAMAGE_SIZE_MIDIUM_USER";
+	if (.@opt_id == 192)	return "MDAMAGE_SIZE_LARGE_USER";
+	
+	// All element tolerance
+	if (.@opt_id == 193)	return "All Elements Resistance";
+	
+	// Race weapon tolerance (194-203)
+	if (.@opt_id == 194)	return "RACE_WEAPON_TOLERACE_NOTHING";
+	if (.@opt_id == 195)	return "RACE_WEAPON_TOLERACE_UNDEAD";
+	if (.@opt_id == 196)	return "RACE_WEAPON_TOLERACE_ANIMAL";
+	if (.@opt_id == 197)	return "RACE_WEAPON_TOLERACE_PLANT";
+	if (.@opt_id == 198)	return "RACE_WEAPON_TOLERACE_INSECT";
+	if (.@opt_id == 199)	return "RACE_WEAPON_TOLERACE_FISHS";
+	if (.@opt_id == 200)	return "RACE_WEAPON_TOLERACE_DEVIL";
+	if (.@opt_id == 201)	return "RACE_WEAPON_TOLERACE_HUMAN";
+	if (.@opt_id == 202)	return "RACE_WEAPON_TOLERACE_ANGEL";
+	if (.@opt_id == 203)	return "RACE_WEAPON_TOLERACE_DRAGON";
+	
+	// Player race tolerance/damage (206-217)
+	if (.@opt_id == 206)	return "Damage Reduction from Player";
+	if (.@opt_id == 207)	return "Damage Reduction from Doram";
+	if (.@opt_id == 208)	return "ATK% against Player";
+	if (.@opt_id == 209)	return "ATK% against Doram";
+	if (.@opt_id == 210)	return "MATK% against Player";
+	if (.@opt_id == 211)	return "MATK% against Doram";
+	if (.@opt_id == 212)	return "RACE_CRI_PERCENT_PLAYER_HUMAN";
+	if (.@opt_id == 213)	return "RACE_CRI_PERCENT_PLAYER_DORAM";
+	if (.@opt_id == 214)	return "RACE_IGNORE_DEF_PERCENT_PLAYER_HUMAN";
+	if (.@opt_id == 215)	return "RACE_IGNORE_DEF_PERCENT_PLAYER_DORAM";
+	if (.@opt_id == 216)	return "RACE_IGNORE_MDEF_PERCENT_PLAYER_HUMAN";
+	if (.@opt_id == 217)	return "RACE_IGNORE_MDEF_PERCENT_PLAYER_DORAM";
+	
+	// Misc (218-257)
+	if (.@opt_id == 218)	return "REFLECT_DAMAGE_PERCENT";
+	if (.@opt_id == 219)	return "Melee ATK %";
+	if (.@opt_id == 220)	return "Melee Damage Received";
+	
+	// Add skill magic damage (221-231)
+	if (.@opt_id == 221)	return "ADDSKILLMDAMAGE_NOTHING";
+	if (.@opt_id == 222)	return "ADDSKILLMDAMAGE_WATER";
+	if (.@opt_id == 223)	return "ADDSKILLMDAMAGE_GROUND";
+	if (.@opt_id == 224)	return "ADDSKILLMDAMAGE_FIRE";
+	if (.@opt_id == 225)	return "ADDSKILLMDAMAGE_WIND";
+	if (.@opt_id == 226)	return "ADDSKILLMDAMAGE_POISON";
+	if (.@opt_id == 227)	return "ADDSKILLMDAMAGE_SAINT";
+	if (.@opt_id == 228)	return "ADDSKILLMDAMAGE_DARKNESS";
+	if (.@opt_id == 229)	return "ADDSKILLMDAMAGE_TELEKINESIS";
+	if (.@opt_id == 230)	return "ADDSKILLMDAMAGE_UNDEAD";
+	if (.@opt_id == 231)	return "ADDSKILLMDAMAGE_ALL";
+	
+	// EXP bonuses (232-242)
+	if (.@opt_id == 232)	return "ADDEXPPERCENT_KILLRACE_NOTHING";
+	if (.@opt_id == 233)	return "ADDEXPPERCENT_KILLRACE_UNDEAD";
+	if (.@opt_id == 234)	return "ADDEXPPERCENT_KILLRACE_ANIMAL";
+	if (.@opt_id == 235)	return "ADDEXPPERCENT_KILLRACE_PLANT";
+	if (.@opt_id == 236)	return "ADDEXPPERCENT_KILLRACE_INSECT";
+	if (.@opt_id == 237)	return "ADDEXPPERCENT_KILLRACE_FISHS";
+	if (.@opt_id == 238)	return "ADDEXPPERCENT_KILLRACE_DEVIL";
+	if (.@opt_id == 239)	return "ADDEXPPERCENT_KILLRACE_HUMAN";
+	if (.@opt_id == 240)	return "ADDEXPPERCENT_KILLRACE_ANGEL";
+	if (.@opt_id == 241)	return "ADDEXPPERCENT_KILLRACE_DRAGON";
+	if (.@opt_id == 242)	return "Experience Received from Monsters";
+	
+	// Additional stats (243-257)
+	if (.@opt_id == 243)	return "VAR_POWAMOUNT";
+	if (.@opt_id == 244)	return "VAR_SPLAMOUNT";
+	if (.@opt_id == 245)	return "VAR_STAAMOUNT";
+	if (.@opt_id == 246)	return "VAR_WISAMOUNT";
+	if (.@opt_id == 247)	return "VAR_CONAMOUNT";
+	if (.@opt_id == 248)	return "VAR_CRTAMOUNT";
+	if (.@opt_id == 249)	return "VAR_PATKAMOUNT";
+	if (.@opt_id == 250)	return "VAR_SMATKAMOUNT";
+	if (.@opt_id == 251)	return "VAR_RESAMOUNT";
+	if (.@opt_id == 252)	return "VAR_MRESAMOUNT";
+	if (.@opt_id == 253)	return "VAR_HEAL_PLUS";
+	if (.@opt_id == 254)	return "VAR_CRITICAL_RATE";
+	if (.@opt_id == 255)	return "Movement Speed Increase";
+	if (.@opt_id == 256)	return "Rare chance to autocast Meteor";
+	if (.@opt_id == 257)	return "Drop Rate Bonus %";
+	
+	// Option not found
+	return "Unknown Option (ID:" + .@opt_id + ")";
+}
+// Function to check if option has value 0 (cannot be rerolled)
+function	script	F_IsZeroValueOption	{
+	set .@opt_id, getarg(0);
+	
+	// Options that always have value 0
+	switch(.@opt_id) {
+		case 163:	// DAMAGE_SIZE_PERFECT
+		case 185:	// WEAPON_INDESTRUCTIBLE
+		case 176:	// WEAPON_ATTR_WATER
+		case 177:	// WEAPON_ATTR_GROUND
+		case 178:	// WEAPON_ATTR_FIRE
+		case 179:	// WEAPON_ATTR_WIND
+		case 180:	// WEAPON_ATTR_POISON
+		case 181:	// WEAPON_ATTR_SAINT
+		case 182:	// WEAPON_ATTR_DARKNESS
+		case 183:	// WEAPON_ATTR_TELEKINESIS
+		case 184:	// WEAPON_ATTR_UNDEAD
+		case 186:	// BODY_INDESTRUCTIBLE
+		case 175:	// WEAPON_ATTR_NOTHING
+		case 76:	// BODY_ATTR_NOTHING
+		case 77:	// BODY_ATTR_WATER
+		case 78:	// BODY_ATTR_GROUND
+		case 79:	// BODY_ATTR_FIRE
+		case 80:	// BODY_ATTR_WIND
+		case 81:	// BODY_ATTR_POISON
+		case 82:	// BODY_ATTR_SAINT
+		case 83:	// BODY_ATTR_DARKNESS
+		case 84:	// BODY_ATTR_TELEKINESIS
+		case 85:	// BODY_ATTR_UNDEAD
+			return 1;	// Yes, this is a zero-value option
+		default:
+			return 0;	// No, this option can have values
+	}
+}
+
+// Function to get min/max values for an option based on slot and equipment type
+
+// Function to get min/max values for an option based on slot and equipment type
+function	script	F_GetOptionValueRange	{
+	.@opt_id = getarg(0);
+	.@slot_num = getarg(1);	// 1-5
+	.@equip_type = getarg(2);	// "weapon", "armor", "accessory"
+	
+	// Default ranges
+	set .@min, 1;
+	set .@max, 10;
+	
+	// Define value ranges based on slot number
+	switch(.@slot_num) {
+		case 1:
+			// Slot 1 options (usually stat bonuses)
+			switch(.@opt_id) {
+				case 1:		// VAR_MAXHPAMOUNT
+					set .@min, 100; set .@max, 2500; break;
+				case 2:		// VAR_MAXSPAMOUNT
+					set .@min, 20; set .@max, 400; break;
+				case 3:		// VAR_STRAMOUNT
+				case 4:		// VAR_AGIAMOUNT
+				case 5:		// VAR_VITAMOUNT
+				case 6:		// VAR_INTAMOUNT
+				case 7:		// VAR_DEXAMOUNT
+				case 8:		// VAR_LUKAMOUNT
+					if (.@equip_type == "armor") {
+						set .@min, 1; set .@max, 5;
+					} else if (.@equip_type == "accessory") {
+						set .@min, 1; set .@max, 5;
+					} else { // weapon
+						set .@min, 2; set .@max, 10;
+					}
+					break;
+				case 170:	// DEC_SPELL_CAST_TIME
+					if (.@equip_type == "armor") {
+						set .@min, 5; set .@max, 20;
+					} else if (.@equip_type == "accessory") {
+						set .@min, 5; set .@max, 20;
+					} else { // weapon
+						set .@min, 5; set .@max, 20;
+					}
+					break;
+				default:
+					// Default for slot 1
+					set .@min, 1; set .@max, 10;
+			}
+			break;
+			
+		case 2:
+			// Slot 2 options
+			switch(.@opt_id) {
+				case 22:	// VAR_AVOIDSUCCESSVALUE
+					set .@min, 10; set .@max, 35; break;
+				case 15:	// VAR_PLUSASPD
+					set .@min, 1; set .@max, 3; break;
+				case 16:	// VAR_PLUSASPDPERCENT
+					if (.@equip_type == "armor") {
+						set .@min, 5; set .@max, 20;
+					} else {
+						set .@min, 5; set .@max, 25;
+					}
+					break;
+				case 13:	// VAR_ATKPERCENT
+				case 14:	// VAR_MAGICATKPERCENT
+					if (.@equip_type == "accessory") {
+						set .@min, 5; set .@max, 10;
+					} else {
+						set .@min, 5; set .@max, 15;
+					}
+					break;
+				case 17:	// VAR_ATTPOWER
+				case 19:	// VAR_ATTMPOWER
+					if (.@equip_type == "accessory") {
+						set .@min, 10; set .@max, 50;
+					} else {
+						set .@min, 20; set .@max, 150;
+					}
+					break;
+				case 18:	// VAR_HITSUCCESSVALUE
+					set .@min, 10; set .@max, 50; break;
+				case 24:	// VAR_CRITICALSUCCESSVALUE
+					set .@min, 5; set .@max, 12; break;
+				case 168:	// HEAL_VALUE
+				case 169:	// HEAL_MODIFY_PERCENT
+					set .@min, 10; set .@max, 25; break;
+				case 219:	// MELEE_ATTACK_DAMAGE_TARGET
+					set .@min, 10; set .@max, 20; break;
+				case 167:	// RANGE_ATTACK_DAMAGE_USER
+				case 165:	// DAMAGE_CRI_USER
+				case 220:	// MELEE_ATTACK_DAMAGE_USER
+					set .@min, 5; set .@max, 20; break;
+				case 20:	// VAR_ITEMDEFPOWER
+				case 21:	// VAR_MDEFPOWER
+					set .@min, 5; set .@max, 15; break;
+				default:
+					// Default for slot 2
+					set .@min, 5; set .@max, 25;
+			}
+			break;
+			
+		case 3:
+			// Slot 3 options (race damage/tolerance)
+			switch(.@opt_id) {
+				case 87: case 88: case 89: case 90: case 91: case 92: case 93: case 94: case 95: case 96:
+					// Race tolerance
+					if (.@equip_type == "armor") {
+						set .@min, 5; set .@max, 20;
+					} else {
+						set .@min, 5; set .@max, 15;
+					}
+					break;
+				case 97: case 98: case 99: case 100: case 101: case 102: case 103: case 104: case 105: case 106:
+					// Race damage
+					set .@min, 10; set .@max, 25; break;
+				case 157: case 158: case 159:	// Size damage target
+				case 160: case 161: case 162:	// Size damage user
+					if (.@equip_type == "armor") {
+						set .@min, 5; set .@max, 15;
+					} else {
+						set .@min, 10; set .@max, 25;
+					}
+					break;
+				default:
+					// Default for slot 3
+					set .@min, 5; set .@max, 25;
+			}
+			break;
+			
+		case 4:
+			// Slot 4 options
+			switch(.@opt_id) {
+				case 9:		// VAR_MAXHPPERCENT
+					set .@min, 2; set .@max, 15; break;
+				case 10:	// VAR_MAXSPPERCENT
+					set .@min, 2; set .@max, 10; break;
+				case 23:	// VAR_PLUSAVOIDSUCCESSVALUE
+					set .@min, 2; set .@max, 10; break;
+				case 164:	// DAMAGE_CRI_TARGET
+					set .@min, 10; set .@max, 25; break;
+				case 37: case 39: case 41: case 43: case 45: case 47: case 49: case 51: case 53: case 55:
+					// Damage property target
+					set .@min, 5; set .@max, 20; break;
+				case 25: case 26: case 27: case 28: case 29: case 30: case 31: case 32: case 33: case 34: case 193:
+					// Attribute tolerance
+					if (.@equip_type == "armor") {
+						if (.@opt_id == 25) {
+							set .@min, 5; set .@max, 10;
+						} else if (.@opt_id == 193) {
+							set .@min, 1; set .@max, 10;
+						} else {
+							set .@min, 5; set .@max, 20;
+						}
+					} else {
+						set .@min, 5; set .@max, 15;
+					}
+					break;
+				default:
+					// Default for slot 4
+					set .@min, 2; set .@max, 20;
+			}
+			break;
+			
+		case 5:
+			// Slot 5 options
+			switch(.@opt_id) {
+				case 242:	// ADDEXPPERCENT_KILLRACE_ALL
+					set .@min, 1; set .@max, 5; break;
+				case 171:	// DEC_SPELL_DELAY_TIME
+					set .@min, 2; set .@max, 10; break;
+				case 172:	// DEC_SP_CONSUMPTION
+					set .@min, 5; set .@max, 10; break;
+				case 148:	// CLASS_DAMAGE_BOSS_TARGET
+				case 150:	// CLASS_DAMAGE_BOSS_USER
+					set .@min, 5; set .@max, 15; break;
+				case 255:	// VAR_MOVESPEED
+					if (.@equip_type == "armor") {
+						set .@min, 2; set .@max, 5;
+					} else {
+						set .@min, 1; set .@max, 10;
+					}
+					break;
+				case 256:	// VAR_POCKETMETEOR
+				case 257:	// VAR_DROPRATE
+					set .@min, 1; set .@max, 5; break;
+				default:
+					// Default for slot 5
+					set .@min, 1; set .@max, 15;
+			}
+			break;
+	}
+	
+	// Special case: if this is a zero-value option, set min/max to 0
+	if (callfunc("F_IsZeroValueOption", .@opt_id)) {
+		set .@min, 0;
+		set .@max, 0;
+	}
+	
+	return .@min * 10000 + .@max;	// Pack min and max
+}
+
+//
+function	script	F_MemeOpt_Slot1	{
+	// Slot 1: Total chance sum = 6000*6 + 1500*2 + 3000*4 + 1500*2 + 500*2 + 250 + 6000*2 + 3000 = 48,250
+	set .@total_chance, 48250;
+	set .@r, rand(1, .@total_chance);
+	set .@result_id, 0;
+	set .@result_value, 0;
+	
+	// Note: Using cumulative subtraction method
+	
+	if ((.@r -= 6000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_STRAMOUNT");
+		set .@result_value, rand(2, 10);
+	}
+	else if ((.@r -= 6000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_AGIAMOUNT");
+		set .@result_value, rand(1, 5);
+	}
+	else if ((.@r -= 6000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_VITAMOUNT");
+		set .@result_value, rand(1, 5);
+	}
+	else if ((.@r -= 6000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_INTAMOUNT");
+		set .@result_value, rand(1, 5);
+	}
+	else if ((.@r -= 6000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_DEXAMOUNT");
+		set .@result_value, rand(1, 5);
+	}
+	else if ((.@r -= 6000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_LUKAMOUNT");
+		set .@result_value, rand(1, 5);
+	}
+	else if ((.@r -= 1500) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_SIZE_PERFECT");
+		set .@result_value, 0;
+	}
+	else if ((.@r -= 1500) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "WEAPON_INDESTRUCTIBLE");
+		set .@result_value, 0;
+	}
+	else if ((.@r -= 3000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "WEAPON_ATTR_WATER");
+		set .@result_value, 0;
+	}
+	else if ((.@r -= 3000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "WEAPON_ATTR_GROUND");
+		set .@result_value, 0;
+	}
+	else if ((.@r -= 3000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "WEAPON_ATTR_FIRE");
+		set .@result_value, 0;
+	}
+	else if ((.@r -= 3000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "WEAPON_ATTR_WIND");
+		set .@result_value, 0;
+	}
+	else if ((.@r -= 1500) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "WEAPON_ATTR_POISON");
+		set .@result_value, 0;
+	}
+	else if ((.@r -= 1500) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "WEAPON_ATTR_SAINT");
+		set .@result_value, 0;
+	}
+	else if ((.@r -= 500) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "WEAPON_ATTR_DARKNESS");
+		set .@result_value, 0;
+	}
+	else if ((.@r -= 500) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "WEAPON_ATTR_TELEKINESIS");
+		set .@result_value, 0;
+	}
+	else if ((.@r -= 250) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "WEAPON_ATTR_UNDEAD");
+		set .@result_value, 0;
+	}
+	else if ((.@r -= 6000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_MAXHPAMOUNT");
+		set .@result_value, rand(100, 2500);
+	}
+	else if ((.@r -= 6000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_MAXSPAMOUNT");
+		set .@result_value, rand(20, 400);
+	}
+	else if ((.@r -= 3000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DEC_SPELL_CAST_TIME");
+		set .@result_value, rand(5, 20);
+	}
+	else {
+		// Fallback: VAR_STRAMOUNT with value 2
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_STRAMOUNT");
+		set .@result_value, 2;
+	}
+	
+	// Return packed value: ID * 10000 + VALUE
+	return .@result_id * 10000 + .@result_value;
+}
+//===== By: ==================================================
+function	script	F_MemeOpt_Slot2	{
+	// Slot 2: Total chance sum = 200 + 450*11 = 200 + 4950 = 5150
+	set .@total_chance, 5150;
+	set .@r, rand(1, .@total_chance);
+	set .@result_id, 0;
+	set .@result_value, 0;
+	
+	if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "MELEE_ATTACK_DAMAGE_TARGET");
+		set .@result_value, rand(10, 20);
+	}
+	else if ((.@r -= 450) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_AVOIDSUCCESSVALUE");
+		set .@result_value, rand(10, 35);
+	}
+	else if ((.@r -= 450) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_PLUSASPD");
+		set .@result_value, rand(1, 3);
+	}
+	else if ((.@r -= 450) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_PLUSASPDPERCENT");
+		set .@result_value, rand(5, 25);
+	}
+	else if ((.@r -= 450) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_ATKPERCENT");
+		set .@result_value, rand(5, 15);
+	}
+	else if ((.@r -= 450) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_MAGICATKPERCENT");
+		set .@result_value, rand(5, 15);
+	}
+	else if ((.@r -= 450) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_ATTPOWER");
+		set .@result_value, rand(20, 150);
+	}
+	else if ((.@r -= 450) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_HITSUCCESSVALUE");
+		set .@result_value, rand(10, 50);
+	}
+	else if ((.@r -= 450) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_ATTMPOWER");
+		set .@result_value, rand(20, 150);
+	}
+	else if ((.@r -= 450) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_CRITICALSUCCESSVALUE");
+		set .@result_value, rand(5, 12);
+	}
+	else if ((.@r -= 450) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "HEAL_VALUE");
+		set .@result_value, rand(10, 25);
+	}
+	else if ((.@r -= 450) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "HEAL_MODIFY_PERCENT");
+		set .@result_value, rand(10, 25);
+	}
+	else {
+		// Fallback: VAR_ATKPERCENT with value 5
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_ATKPERCENT");
+		set .@result_value, 5;
+	}
+	
+	return .@result_id * 10000 + .@result_value;
+}
+//===== By: ==================================================
+function	script	F_MemeOpt_Slot3	{
+	// Slot 3: Total chance sum = 150*20 + 100*3 = 3000 + 300 = 3300
+	set .@total_chance, 3300;
+	set .@r, rand(1, .@total_chance);
+	set .@result_id, 0;
+	set .@result_value, 0;
+	
+	// Race Damage options (10 options, 150 each)
+	if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_DAMAGE_NOTHING");
+		set .@result_value, rand(10, 25);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_DAMAGE_UNDEAD");
+		set .@result_value, rand(10, 25);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_DAMAGE_ANIMAL");
+		set .@result_value, rand(10, 25);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_DAMAGE_PLANT");
+		set .@result_value, rand(10, 25);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_DAMAGE_INSECT");
+		set .@result_value, rand(10, 25);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_DAMAGE_FISHS");
+		set .@result_value, rand(10, 25);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_DAMAGE_DEVIL");
+		set .@result_value, rand(10, 25);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_DAMAGE_HUMAN");
+		set .@result_value, rand(10, 25);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_DAMAGE_ANGEL");
+		set .@result_value, rand(10, 25);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_DAMAGE_DRAGON");
+		set .@result_value, rand(10, 25);
+	}
+	
+	// Race Tolerance options (10 options, 150 each)
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_NOTHING");
+		set .@result_value, rand(5, 10);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_UNDEAD");
+		set .@result_value, rand(5, 10);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_ANIMAL");
+		set .@result_value, rand(5, 10);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_PLANT");
+		set .@result_value, rand(5, 10);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_INSECT");
+		set .@result_value, rand(5, 10);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_FISHS");
+		set .@result_value, rand(5, 10);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_DEVIL");
+		set .@result_value, rand(5, 10);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_HUMAN");
+		set .@result_value, rand(5, 10);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_ANGEL");
+		set .@result_value, rand(5, 15);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_DRAGON");
+		set .@result_value, rand(5, 15);
+	}
+	
+	// Size Damage options (3 options, 100 each)
+	else if ((.@r -= 100) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_SIZE_SMALL_TARGET");
+		set .@result_value, rand(10, 25);
+	}
+	else if ((.@r -= 100) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_SIZE_MIDIUM_TARGET");
+		set .@result_value, rand(10, 25);
+	}
+	else if ((.@r -= 100) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_SIZE_LARGE_TARGET");
+		set .@result_value, rand(10, 25);
+	}
+	else {
+		// Fallback: RACE_DAMAGE_HUMAN with value 10
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_DAMAGE_HUMAN");
+		set .@result_value, 10;
+	}
+	
+	return .@result_id * 10000 + .@result_value;
+}
+//===== By: ==================================================
+function	script	F_MemeOpt_Slot4	{
+	// Slot 4: Total chance sum = 200*10 + 250*4 = 2000 + 1000 = 3000
+	set .@total_chance, 3000;
+	set .@r, rand(1, .@total_chance);
+	set .@result_id, 0;
+	set .@result_value, 0;
+	
+	// Damage Property Target options (10 options, 200 each)
+	if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_PROPERTY_NOTHING_TARGET");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_PROPERTY_WATER_TARGET");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_PROPERTY_GROUND_TARGET");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_PROPERTY_FIRE_TARGET");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_PROPERTY_WIND_TARGET");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_PROPERTY_POISON_TARGET");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_PROPERTY_SAINT_TARGET");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_PROPERTY_DARKNESS_TARGET");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_PROPERTY_TELEKINESIS_TARGET");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_PROPERTY_UNDEAD_TARGET");
+		set .@result_value, rand(5, 20);
+	}
+	
+	// Other options (4 options, 250 each)
+	else if ((.@r -= 250) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_MAXHPPERCENT");
+		set .@result_value, rand(2, 15);
+	}
+	else if ((.@r -= 250) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_MAXSPPERCENT");
+		set .@result_value, rand(2, 10);
+	}
+	else if ((.@r -= 250) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_PLUSAVOIDSUCCESSVALUE");
+		set .@result_value, rand(2, 10);
+	}
+	else if ((.@r -= 250) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_CRI_TARGET");
+		set .@result_value, rand(10, 25);
+	}
+	else {
+		// Fallback: VAR_MAXHPPERCENT with value 2
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_MAXHPPERCENT");
+		set .@result_value, 2;
+	}
+	
+	return .@result_id * 10000 + .@result_value;
+}
+//===== By: ==================================================
+function	script	F_MemeOpt_Slot5	{
+	// Slot 5: Total chance sum = 200 + 150 + 200 + 100 = 650
+	set .@total_chance, 650;
+	set .@r, rand(1, .@total_chance);
+	set .@result_id, 0;
+	set .@result_value, 0;
+	
+	if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "ADDEXPPERCENT_KILLRACE_ALL");
+		set .@result_value, rand(1, 5);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DEC_SPELL_DELAY_TIME");
+		set .@result_value, rand(2, 10);
+	}
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DEC_SP_CONSUMPTION");
+		set .@result_value, rand(5, 10);
+	}
+	else if ((.@r -= 100) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "CLASS_DAMAGE_BOSS_TARGET");
+		set .@result_value, rand(5, 15);
+	}
+	else {
+		// Fallback: ADDEXPPERCENT_KILLRACE_ALL with value 1
+		set .@result_id, callfunc("F_GetOptIDByName", "ADDEXPPERCENT_KILLRACE_ALL");
+		set .@result_value, 1;
+	}
+	
+	return .@result_id * 10000 + .@result_value;
+}
+//===== By: ==================================================
+function	script	F_MemeOpt_Armor_Slot1	{
+	// Slot 1: Total chance sum = 6000*5 + 6500 + 1500 + 6000*2 + 1000 = 46,500
+	set .@total_chance, 46500;
+	set .@r, rand(1, .@total_chance);
+	set .@result_id, 0;
+	set .@result_value, 0;
+	
+	if ((.@r -= 6000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_STRAMOUNT");
+		set .@result_value, rand(1, 5);
+	}
+	else if ((.@r -= 6000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_AGIAMOUNT");
+		set .@result_value, rand(1, 5);
+	}
+	else if ((.@r -= 6500) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_VITAMOUNT");
+		set .@result_value, rand(2, 10);
+	}
+	else if ((.@r -= 6000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_INTAMOUNT");
+		set .@result_value, rand(1, 5);
+	}
+	else if ((.@r -= 6000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_DEXAMOUNT");
+		set .@result_value, rand(1, 5);
+	}
+	else if ((.@r -= 6000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_LUKAMOUNT");
+		set .@result_value, rand(1, 5);
+	}
+	else if ((.@r -= 1500) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "BODY_INDESTRUCTIBLE");
+		set .@result_value, 0;
+	}
+	else if ((.@r -= 6000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_MAXHPAMOUNT");
+		set .@result_value, rand(100, 2500);
+	}
+	else if ((.@r -= 6000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_MAXSPAMOUNT");
+		set .@result_value, rand(20, 400);
+	}
+	else if ((.@r -= 1000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DEC_SPELL_CAST_TIME");
+		set .@result_value, rand(5, 20);
+	}
+	else {
+		// Fallback: VAR_VITAMOUNT with value 2
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_VITAMOUNT");
+		set .@result_value, 2;
+	}
+	
+	return .@result_id * 10000 + .@result_value;
+}
+//===== By: ==================================================
+function	script	F_MemeOpt_Armor_Slot2	{
+	// Slot 2: Total chance sum = 450 + 1000*4 + 333*3 = 450 + 4000 + 999 = 5,449
+	set .@total_chance, 5449;
+	set .@r, rand(1, .@total_chance);
+	set .@result_id, 0;
+	set .@result_value, 0;
+	
+	if ((.@r -= 450) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_PLUSASPDPERCENT");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 1000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_AVOIDSUCCESSVALUE");
+		set .@result_value, rand(10, 35);
+	}
+	else if ((.@r -= 1000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_ITEMDEFPOWER");
+		set .@result_value, rand(5, 15);
+	}
+	else if ((.@r -= 1000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_MDEFPOWER");
+		set .@result_value, rand(5, 15);
+	}
+	else if ((.@r -= 1000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "HEAL_VALUE");
+		set .@result_value, rand(10, 25);
+	}
+	else if ((.@r -= 1000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "HEAL_MODIFY_PERCENT");
+		set .@result_value, rand(10, 25);
+	}
+	else if ((.@r -= 333) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RANGE_ATTACK_DAMAGE_USER");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 333) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_CRI_USER");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 333) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "MELEE_ATTACK_DAMAGE_USER");
+		set .@result_value, rand(5, 20);
+	}
+	else {
+		// Fallback: VAR_AVOIDSUCCESSVALUE with value 10
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_AVOIDSUCCESSVALUE");
+		set .@result_value, 10;
+	}
+	
+	return .@result_id * 10000 + .@result_value;
+}
+//===== By: ==================================================
+function	script	F_MemeOpt_Armor_Slot3	{
+	// Slot 3: Total chance sum = 300*10 + 200*3 = 3000 + 600 = 3,600
+	set .@total_chance, 3600;
+	set .@r, rand(1, .@total_chance);
+	set .@result_id, 0;
+	set .@result_value, 0;
+	
+	// Race Tolerance options (10 options, 300 each)
+	if ((.@r -= 300) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_NOTHING");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 300) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_UNDEAD");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 300) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_ANIMAL");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 300) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_PLANT");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 300) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_INSECT");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 300) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_FISHS");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 300) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_DEVIL");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 300) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_HUMAN");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 300) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_ANGEL");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 300) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_DRAGON");
+		set .@result_value, rand(5, 20);
+	}
+	
+	// Damage Size User options (3 options, 200 each)
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_SIZE_SMALL_USER");
+		set .@result_value, rand(5, 15);
+	}
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_SIZE_MIDIUM_USER");
+		set .@result_value, rand(5, 15);
+	}
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_SIZE_LARGE_USER");
+		set .@result_value, rand(5, 15);
+	}
+	else {
+		// Fallback: RACE_TOLERACE_HUMAN with value 5
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_HUMAN");
+		set .@result_value, 5;
+	}
+	
+	return .@result_id * 10000 + .@result_value;
+}
+//===== Current Version: =====================================
+function	script	F_MemeOpt_Armor_Slot4	{
+	// Slot 4: Total chance sum = 300*10 + 50 + 200*3 = 3000 + 50 + 600 = 3,650
+	set .@total_chance, 3650;
+	set .@r, rand(1, .@total_chance);
+	set .@result_id, 0;
+	set .@result_value, 0;
+	
+	// Attribute Tolerance options (11 options)
+	if ((.@r -= 300) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "ATTR_TOLERACE_NOTHING");
+		set .@result_value, rand(5, 10);
+	}
+	else if ((.@r -= 300) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "ATTR_TOLERACE_WATER");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 300) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "ATTR_TOLERACE_GROUND");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 300) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "ATTR_TOLERACE_FIRE");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 300) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "ATTR_TOLERACE_WIND");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 300) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "ATTR_TOLERACE_POISON");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 300) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "ATTR_TOLERACE_SAINT");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 300) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "ATTR_TOLERACE_DARKNESS");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 300) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "ATTR_TOLERACE_TELEKINESIS");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 300) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "ATTR_TOLERACE_UNDEAD");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 50) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "ATTR_TOLERACE_ALL");
+		set .@result_value, rand(1, 10);
+	}
+	
+	// Other options (3 options, 200 each)
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_MAXHPPERCENT");
+		set .@result_value, rand(2, 15);
+	}
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_MAXSPPERCENT");
+		set .@result_value, rand(2, 10);
+	}
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_PLUSAVOIDSUCCESSVALUE");
+		set .@result_value, rand(2, 10);
+	}
+	else {
+		// Fallback: ATTR_TOLERACE_NOTHING with value 5
+		set .@result_id, callfunc("F_GetOptIDByName", "ATTR_TOLERACE_NOTHING");
+		set .@result_value, 5;
+	}
+	
+	return .@result_id * 10000 + .@result_value;
+}
+//= 1.0
+function	script	F_MemeOpt_Armor_Slot5	{
+	// Slot 5: Total chance sum = 200 + 150 + 200 + 150 + 100 = 800
+	set .@total_chance, 800;
+	set .@r, rand(1, .@total_chance);
+	set .@result_id, 0;
+	set .@result_value, 0;
+	
+	if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "ADDEXPPERCENT_KILLRACE_ALL");
+		set .@result_value, rand(1, 5);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DEC_SPELL_DELAY_TIME");
+		set .@result_value, rand(2, 10);
+	}
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DEC_SP_CONSUMPTION");
+		set .@result_value, rand(5, 10);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "CLASS_DAMAGE_BOSS_USER");
+		set .@result_value, rand(5, 10);
+	}
+	else if ((.@r -= 100) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_MOVESPEED");
+		set .@result_value, rand(2, 5);
+	}
+	else {
+		// Fallback: ADDEXPPERCENT_KILLRACE_ALL with value 1
+		set .@result_id, callfunc("F_GetOptIDByName", "ADDEXPPERCENT_KILLRACE_ALL");
+		set .@result_value, 1;
+	}
+	
+	return .@result_id * 10000 + .@result_value;
+}
+//===== Compatible With: =====================================
+function	script	F_MemeOpt_Acc_Slot1	{
+	// Slot 1: Total chance sum = 6000*7 + 2500 = 42,000 + 2500 = 44,500
+	set .@total_chance, 44500;
+	set .@r, rand(1, .@total_chance);
+	set .@result_id, 0;
+	set .@result_value, 0;
+	
+	if ((.@r -= 6000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_STRAMOUNT");
+		set .@result_value, rand(1, 5);
+	}
+	else if ((.@r -= 6000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_AGIAMOUNT");
+		set .@result_value, rand(1, 5);
+	}
+	else if ((.@r -= 6000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_VITAMOUNT");
+		set .@result_value, rand(1, 5);
+	}
+	else if ((.@r -= 6000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_INTAMOUNT");
+		set .@result_value, rand(1, 5);
+	}
+	else if ((.@r -= 6000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_DEXAMOUNT");
+		set .@result_value, rand(1, 5);
+	}
+	else if ((.@r -= 6000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_LUKAMOUNT");
+		set .@result_value, rand(1, 5);
+	}
+	else if ((.@r -= 6000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_MAXHPAMOUNT");
+		set .@result_value, rand(100, 2500);
+	}
+	else if ((.@r -= 6000) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_MAXSPAMOUNT");
+		set .@result_value, rand(20, 400);
+	}
+	else if ((.@r -= 2500) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DEC_SPELL_CAST_TIME");
+		set .@result_value, rand(5, 20);
+	}
+	else {
+		// Fallback: VAR_STRAMOUNT with value 1
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_STRAMOUNT");
+		set .@result_value, 1;
+	}
+	
+	return .@result_id * 10000 + .@result_value;
+}
+//= rAthena Project
+function	script	F_MemeOpt_Acc_Slot2	{
+	// Slot 2: Total chance sum = 450 + 400 + 500 + 450*8 = 450 + 400 + 500 + 3600 = 4,950
+	set .@total_chance, 4950;
+	set .@r, rand(1, .@total_chance);
+	set .@result_id, 0;
+	set .@result_value, 0;
+	
+	if ((.@r -= 450) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_AVOIDSUCCESSVALUE");
+		set .@result_value, rand(10, 35);
+	}
+	else if ((.@r -= 400) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_PLUSASPD");
+		set .@result_value, rand(1, 3);
+	}
+	else if ((.@r -= 500) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_PLUSASPDPERCENT");
+		set .@result_value, rand(5, 25);
+	}
+	else if ((.@r -= 450) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_ATKPERCENT");
+		set .@result_value, rand(5, 10);
+	}
+	else if ((.@r -= 450) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_MAGICATKPERCENT");
+		set .@result_value, rand(5, 10);
+	}
+	else if ((.@r -= 450) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_ATTPOWER");
+		set .@result_value, rand(10, 50);
+	}
+	else if ((.@r -= 450) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_HITSUCCESSVALUE");
+		set .@result_value, rand(10, 50);
+	}
+	else if ((.@r -= 450) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_ATTMPOWER");
+		set .@result_value, rand(10, 50);
+	}
+	else if ((.@r -= 450) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_CRITICALSUCCESSVALUE");
+		set .@result_value, rand(5, 12);
+	}
+	else if ((.@r -= 450) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "HEAL_VALUE");
+		set .@result_value, rand(10, 25);
+	}
+	else if ((.@r -= 450) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "HEAL_MODIFY_PERCENT");
+		set .@result_value, rand(10, 25);
+	}
+	else {
+		// Fallback: VAR_AVOIDSUCCESSVALUE with value 10
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_AVOIDSUCCESSVALUE");
+		set .@result_value, 10;
+	}
+	
+	return .@result_id * 10000 + .@result_value;
+}
+//===== Description: =========================================
+function	script	F_MemeOpt_Acc_Slot3	{
+	// Slot 3: Total chance sum = 150*20 + 100*3 = 3000 + 300 = 3,300
+	set .@total_chance, 3300;
+	set .@r, rand(1, .@total_chance);
+	set .@result_id, 0;
+	set .@result_value, 0;
+	
+	// Race Damage options (10 options, 150 each)
+	if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_DAMAGE_NOTHING");
+		set .@result_value, rand(10, 25);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_DAMAGE_UNDEAD");
+		set .@result_value, rand(10, 25);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_DAMAGE_ANIMAL");
+		set .@result_value, rand(10, 25);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_DAMAGE_PLANT");
+		set .@result_value, rand(10, 25);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_DAMAGE_INSECT");
+		set .@result_value, rand(10, 25);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_DAMAGE_FISHS");
+		set .@result_value, rand(10, 25);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_DAMAGE_DEVIL");
+		set .@result_value, rand(10, 25);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_DAMAGE_HUMAN");
+		set .@result_value, rand(10, 25);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_DAMAGE_ANGEL");
+		set .@result_value, rand(10, 25);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_DAMAGE_DRAGON");
+		set .@result_value, rand(10, 25);
+	}
+	
+	// Race Tolerance options (10 options, 150 each)
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_NOTHING");
+		set .@result_value, rand(5, 10);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_UNDEAD");
+		set .@result_value, rand(5, 10);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_ANIMAL");
+		set .@result_value, rand(5, 10);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_PLANT");
+		set .@result_value, rand(5, 10);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_INSECT");
+		set .@result_value, rand(5, 10);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_FISHS");
+		set .@result_value, rand(5, 10);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_DEVIL");
+		set .@result_value, rand(5, 10);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_HUMAN");
+		set .@result_value, rand(5, 10);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_ANGEL");
+		set .@result_value, rand(5, 15);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_TOLERACE_DRAGON");
+		set .@result_value, rand(5, 15);
+	}
+	
+	// Size Damage Target options (3 options, 100 each)
+	else if ((.@r -= 100) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_SIZE_SMALL_TARGET");
+		set .@result_value, rand(10, 25);
+	}
+	else if ((.@r -= 100) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_SIZE_MIDIUM_TARGET");
+		set .@result_value, rand(10, 25);
+	}
+	else if ((.@r -= 100) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_SIZE_LARGE_TARGET");
+		set .@result_value, rand(10, 25);
+	}
+	else {
+		// Fallback: RACE_DAMAGE_HUMAN with value 10
+		set .@result_id, callfunc("F_GetOptIDByName", "RACE_DAMAGE_HUMAN");
+		set .@result_value, 10;
+	}
+	
+	return .@result_id * 10000 + .@result_value;
+}
+//= Deals with a player to apply random item option
+function	script	F_MemeOpt_Acc_Slot4	{
+	// Slot 4: Total chance sum = 200*10 + 250*4 = 2000 + 1000 = 3,000
+	set .@total_chance, 3000;
+	set .@r, rand(1, .@total_chance);
+	set .@result_id, 0;
+	set .@result_value, 0;
+	
+	// Damage Property Target options (10 options, 200 each)
+	if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_PROPERTY_NOTHING_TARGET");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_PROPERTY_WATER_TARGET");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_PROPERTY_GROUND_TARGET");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_PROPERTY_FIRE_TARGET");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_PROPERTY_WIND_TARGET");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_PROPERTY_POISON_TARGET");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_PROPERTY_SAINT_TARGET");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_PROPERTY_DARKNESS_TARGET");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_PROPERTY_TELEKINESIS_TARGET");
+		set .@result_value, rand(5, 20);
+	}
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_PROPERTY_UNDEAD_TARGET");
+		set .@result_value, rand(5, 20);
+	}
+	
+	// Other options (4 options, 250 each)
+	else if ((.@r -= 250) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_MAXHPPERCENT");
+		set .@result_value, rand(2, 15);
+	}
+	else if ((.@r -= 250) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_MAXSPPERCENT");
+		set .@result_value, rand(2, 10);
+	}
+	else if ((.@r -= 250) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_PLUSAVOIDSUCCESSVALUE");
+		set .@result_value, rand(2, 10);
+	}
+	else if ((.@r -= 250) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DAMAGE_CRI_TARGET");
+		set .@result_value, rand(10, 25);
+	}
+	else {
+		// Fallback: VAR_MAXHPPERCENT with value 2
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_MAXHPPERCENT");
+		set .@result_value, 2;
+	}
+	
+	return .@result_id * 10000 + .@result_value;
+}
+//= for the price of zeny/cashpoint
+function	script	F_MemeOpt_Acc_Slot5	{
+	// Slot 5: Total chance sum = 200 + 150 + 200 + 100 + 75 + 75 = 800
+	set .@total_chance, 800;
+	set .@r, rand(1, .@total_chance);
+	set .@result_id, 0;
+	set .@result_value, 0;
+	
+	if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "ADDEXPPERCENT_KILLRACE_ALL");
+		set .@result_value, rand(1, 5);
+	}
+	else if ((.@r -= 150) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DEC_SPELL_DELAY_TIME");
+		set .@result_value, rand(2, 10);
+	}
+	else if ((.@r -= 200) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "DEC_SP_CONSUMPTION");
+		set .@result_value, rand(5, 10);
+	}
+	else if ((.@r -= 100) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "CLASS_DAMAGE_BOSS_TARGET");
+		set .@result_value, rand(5, 10);
+	}
+	else if ((.@r -= 75) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_POCKETMETEOR");
+		set .@result_value, rand(1, 5);
+	}
+	else if ((.@r -= 75) <= 0) {
+		set .@result_id, callfunc("F_GetOptIDByName", "VAR_DROPRATE");
+		set .@result_value, rand(1, 5);
+	}
+	else {
+		// Fallback: ADDEXPPERCENT_KILLRACE_ALL with value 1
+		set .@result_id, callfunc("F_GetOptIDByName", "ADDEXPPERCENT_KILLRACE_ALL");
+		set .@result_value, 1;
+	}
+	
+	return .@result_id * 10000 + .@result_value;
+}
+//============================================================
+
+// reroller
+prt_in,289,135,4	script	Meme Roller	10006,{
+	// Get NPC variables
+	set .@price_per_option, .price_per_option;
+	set .@slot_price_multiplier[1], .slot_price_multiplier_1;
+	set .@slot_price_multiplier[2], .slot_price_multiplier_2;
+	set .@slot_price_multiplier[3], .slot_price_multiplier_3;
+	set .@slot_price_multiplier[4], .slot_price_multiplier_4;
+	set .@slot_price_multiplier[5], .slot_price_multiplier_5;
+	set .@required_item_id, .required_item_id;
+	set .@required_item_amount, .required_item_amount;
+	set .@cooldown_reroll, .cooldown_reroll;
+
+	// Format price for display
+	set .@price_formatted$, "";
+	set .@temp_price, .price_per_option;
+	while (.@temp_price >= 1000) {
+		set .@price_formatted$, "," + ( .@temp_price % 1000 ) + .@price_formatted$;
+		set .@temp_price, .@temp_price / 1000;
+	}
+	set .@price_formatted$, .@temp_price + .@price_formatted$;
+
+	mes "[Mr. MemeROller]";
+	mes "Welcome to the Meme ReROller service!";
+	mes "I can help you reroll your equipment stats bonus.";
+	mes "For a fair price, of course.";
+	next;
+
+	set .@choice, select(
+//		"Reroll all options on an item (^0000FF" + .@price_formatted$ + "z per option^000000):" +
+		"Reroll all enchantments on an item. ( ^0000FFZeny^000000 ):" +
+		"Reroll a specific slot. ( ^FF0000Advanced^000000 ):"
+		) - 1;
+
+	switch(.@choice) {
+		case 0:
+			callfunc "F_RerollAllOptions", .@price_per_option, .@required_item_id, .@required_item_amount;
+			end;
+		case 1:
+			callfunc "F_RerollSpecificSlot", .@price_per_option, .@slot_price_multiplier, 
+				.@required_item_id, .@required_item_amount, .@cooldown_reroll;
+			end;
+	}
+	
+	close;
+
+OnInit:
+	// ===== CONFIGURATION =====
+	
+	// Base price per option for regular reroll
+	set .price_per_option, 50000;
+	
+	// Price multipliers for specific slot reroll (slot 1-5)
+	set .slot_price_multiplier_1, 1;   // Slot 1: 1x base price
+	set .slot_price_multiplier_2, 2;   // Slot 2: 2x base price
+	set .slot_price_multiplier_3, 3;   // Slot 3: 3x base price
+	set .slot_price_multiplier_4, 4;   // Slot 4: 4x base price
+	set .slot_price_multiplier_5, 5;   // Slot 5: 5x base price
+	
+	// Required item for advanced options (set to 0 for none)
+	set .required_item_id, 6909;        // Token item ID (example)
+	set .required_item_amount, 200;       // Amount required
+	
+	// Cooldown time in seconds for specific slot reroll
+	set .cooldown_reroll, 90;        // 3 hours = 10800 seconds
+	
+	end;
+}
+
+// ============================================================================
+// Function 1: Reroll All Options (WITH CLICKABLE ITEMS)
+// ============================================================================
+function	script	F_RerollAllOptions	{
+	.@price_per_option = getarg(0);
+	.@required_item_id = getarg(1);
+	.@required_item_amount = getarg(2);
+	.@required_item_id = 0;
+	
+	mes "[Mr. Meme Roller]";
+	mes "I'll reroll ALL enchantments on your equipped item.";
+	if (.@required_item_id > 0) {
+		mes "Also requires: ^FF0000" + .@required_item_amount + "x <ITEM>" + getitemname(.@required_item_id) + "<INFO>" + .@required_item_id + "</INFO></ITEM>^000000.";
+	}
+	mes "Note: ^0000FFNew enchantments will replace old ones according to the number of slots. Ex: if you rolled a 4th or 5th slot in the 3rd slot it will replace with a roll of the 3rd slot^000000.";
+	mes "Note 2: ^0000FFWhen rerolling weapons, all weapon-type options may appear. (Melee, Ranged, Magic)^000000.";
+	next;
+
+	// Equipment slots to scan
+	setarray .@eq[0],
+		EQI_ARMOR,
+		EQI_HAND_L,
+		EQI_HAND_R,
+		EQI_GARMENT,
+		EQI_SHOES,
+		EQI_ACC_L,
+		EQI_ACC_R;
+
+	set .@menu$, "";
+	set .@count, 0;
+
+	// Build menu - items in select menus ARE clickable
+	for (.@i = 0; .@i < getarraysize(.@eq); .@i++) {
+		if (!getequipisequiped(.@eq[.@i])) continue;
+		
+		set .@opt_count, 0;
+		for (.@j = 0; .@j < 5; .@j++) {
+			if (getequiprandomoption(.@eq[.@i], .@j, ROA_ID) > 0)
+// debug memero	if (getequiprandomoption(.@eq[.@i], .@j, ROA_ID) >= 0)
+				.@opt_count++;
+		}
+		if (.@opt_count <= 0) continue;
+		
+		set .@total_cost, .@opt_count * .@price_per_option;
+		set .@item_id, getequipid(.@eq[.@i]);
+		// For select() menus, just use getitemname() - they're automatically clickable
+		set .@menu$, .@menu$ + "^5a274d" + getitemname(.@item_id) + "^000000" + 
+			" ~ ^0000FF[" + .@opt_count + "]^000000 Options ~ ^FF0000" + .@total_cost + "z^000000:";
+		.@slot_list[.@count] = .@eq[.@i];
+		.@opt_count_list[.@count] = .@opt_count;
+		.@count++;
+	}
+
+	if (!.@count) {
+		mes "You have no equipped items with random enchantments.";
+		close;
+	}
+
+	set .@sel, select(.@menu$) - 1;
+	set .@slot, .@slot_list[.@sel];
+	set .@item_opt_count, .@opt_count_list[.@sel];
+	set .@total_cost, .@item_opt_count * .@price_per_option;
+	set .@item_id, getequipid(.@slot);
+
+	mes "[Mr. Meme Roller]";
+	mes "Rerolling enchantments on:";
+	// For equipped items in mes, use the ITEM tag with the base item ID
+	mes "^0000FF<ITEM>" + getitemname(.@item_id) + "<INFO>" + .@item_id + "</INFO></ITEM>^000000";
+	mes "^0000FF" + .@item_opt_count + "^000000 options for ^FF0000" + .@total_cost + " zeny^000000.";
+	if (.@required_item_id > 0) {
+		mes "Also requires: ^FF0000" + .@required_item_amount + "x <ITEM>" + getitemname(.@required_item_id) + "<INFO>" + .@required_item_id + "</INFO></ITEM>^000000.";
+	}
+	next;
+
+	// Check requirements
+	if (Zeny < .@total_cost) {
+		mes "[Mr. Meme Roller]";
+		mes "You need ^FF0000" + .@total_cost + " zeny^000000.";
+		mes "You only have ^0000FF" + Zeny + " zeny^000000.";
+		close;
+	}
+	
+	if (.@required_item_id > 0 && countitem(.@required_item_id) < .@required_item_amount) {
+		mes "[Mr. Meme Roller]";
+		mes "You need ^FF0000" + .@required_item_amount + "x <ITEM>" + getitemname(.@required_item_id) + "<INFO>" + .@required_item_id + "</INFO></ITEM>^000000.";
+		mes "You only have ^0000FF" + countitem(.@required_item_id) + " <ITEM>" + getitemname(.@required_item_id) + "<INFO>" + .@required_item_id + "</INFO></ITEM>^000000.";
+		close;
+	}
+
+	// Ask for confirmation
+	mes "[Mr. Meme Roller]";
+	mes "Confirm reroll of ^0000FF" + .@item_opt_count + "^000000 options?";
+	mes "Cost: ^FF0000" + .@total_cost + " zeny^000000";
+	if (.@required_item_id > 0) {
+		mes "and ^FF0000" + .@required_item_amount + "x <ITEM>" + getitemname(.@required_item_id) + "<INFO>" + .@required_item_id + "</INFO></ITEM>^000000";
+	}
+	next;
+	
+	if (select("Yes, reroll all options:No, cancel") == 2) {
+		mes "[Mr. Meme Roller]";
+		mes "Come back when you're ready!";
+		close;
+	}
+
+	// Deduct costs
+	set Zeny, Zeny - .@total_cost;
+	if (.@required_item_id > 0) {
+		delitem .@required_item_id, .@required_item_amount;
+	}
+
+	// Determine equipment type
+	set .@func_prefix$, "";
+	
+	if (.@slot == EQI_ARMOR || .@slot == EQI_GARMENT || .@slot == EQI_SHOES) {
+		set .@func_prefix$, "F_MemeOpt_Armor_";
+	}
+	else if (.@slot == EQI_ACC_L || .@slot == EQI_ACC_R) {
+		set .@func_prefix$, "F_MemeOpt_Acc_";
+	}
+	else if (.@slot == EQI_HAND_R) {
+		set .@item_id, getequipid(EQI_HAND_R);
+		if (getiteminfo(.@item_id, 3) == 4) {
+			set .@func_prefix$, "F_MemeOpt_Armor_";
+		}
+	}
+
+	// Reroll existing options
+	for (.@i = 0; .@i < 5; .@i++) {
+		if (getequiprandomoption(.@slot, .@i, ROA_ID) <= 0) continue;
+		
+		if (.@func_prefix$ == "") {
+			switch(.@i) {
+				case 0: .@ret = callfunc("F_MemeOpt_Slot1"); break;
+				case 1: .@ret = callfunc("F_MemeOpt_Slot2"); break;
+				case 2: .@ret = callfunc("F_MemeOpt_Slot3"); break;
+				case 3: .@ret = callfunc("F_MemeOpt_Slot4"); break;
+				case 4: .@ret = callfunc("F_MemeOpt_Slot5"); break;
+			}
+		}
+		else {
+			switch(.@i) {
+				case 0: .@ret = callfunc(.@func_prefix$ + "Slot1"); break;
+				case 1: .@ret = callfunc(.@func_prefix$ + "Slot2"); break;
+				case 2: .@ret = callfunc(.@func_prefix$ + "Slot3"); break;
+				case 3: .@ret = callfunc(.@func_prefix$ + "Slot4"); break;
+				case 4: .@ret = callfunc(.@func_prefix$ + "Slot5"); break;
+			}
+		}
+
+		setrandomoption(.@slot, .@i, .@ret / 10000, .@ret % 10000, 0);
+	}
+
+	mes "[Mr. Meme Roller]";
+	mes "Done! All options have been rerolled!";
+	if (.@required_item_id > 0) {
+		mes "Used: ^FF0000" + .@required_item_amount + "x <ITEM>" + getitemname(.@required_item_id) + "<INFO>" + .@required_item_id + "</INFO></ITEM>^000000.";
+	}
+	close;
+}
+
+// ============================================================================
+// Function 2: Reroll Specific Slot (WITH CLICKABLE ITEMS)
+// ============================================================================
+function	script	F_RerollSpecificSlot	{
+	.@price_per_option = getarg(0);
+	copyarray .@slot_multiplier, getarg(1), 6; // Array index 1-5
+	.@required_item_id = getarg(2);
+	.@required_item_amount = getarg(3);
+	.@cooldown = getarg(4);
+	
+	// Check cooldown
+	if (gettimetick(2) < #MEMEROLLER_SPECIFIC_COOLDOWN + .@cooldown) {
+		set .@remaining, #MEMEROLLER_SPECIFIC_COOLDOWN + .@cooldown - gettimetick(2);
+		
+		// Format time: hours, minutes, seconds
+		set .@hours, .@remaining / 3600;
+		set .@minutes, (.@remaining % 3600) / 60;
+		set .@seconds, .@remaining % 60;
+		
+		set .@time_str$, "";
+		if (.@hours > 0) {
+			set .@time_str$, .@time_str$ + .@hours + " hour" + ((.@hours > 1) ? "s" : "");
+		}
+		if (.@minutes > 0) {
+			if (.@time_str$ != "") set .@time_str$, .@time_str$ + ", ";
+			set .@time_str$, .@time_str$ + .@minutes + " minute" + ((.@minutes > 1) ? "s" : "");
+		}
+		if (.@seconds > 0 || .@time_str$ == "") {
+			if (.@time_str$ != "") set .@time_str$, .@time_str$ + ", ";
+			set .@time_str$, .@time_str$ + .@seconds + " second" + ((.@seconds > 1) ? "s" : "");
+		}
+		
+		mes "[Mr. Meme Roller]";
+		mes "You need to wait before using this service again.";
+		mes "Time remaining: ^FF0000" + .@time_str$ + "^000000.";
+		close;
+	}
+	
+	mes "[Mr. Meme Roller]";
+	mes "I'll reroll a SPECIFIC Slot (enchantment and its value).";
+	mes "Higher slots cost more!";
+	if (.@required_item_id > 0) {
+		mes "It also requires: ^FF0000" + .@required_item_amount + "x <ITEM>" + getitemname(.@required_item_id) + "<INFO>" + .@required_item_id + "</INFO></ITEM>^000000.";
+	}
+	mes "Higher slots cost more!";
+	mes "Note: ^0000FFNew enchantments will replace old ones according to the number of slots. Ex: if you rolled a 4th or 5th slot in the 3rd slot it will replace with a roll of the 3rd slot^000000.";
+	mes "Note 2: ^0000FFWhen rerolling weapons, all weapon-type options may appear. (Melee, Ranged, Magic)^000000.";
+	next;
+
+	// Equipment selection - SINGLE SELECTION
+	setarray .@eq[0],
+		EQI_ARMOR,
+		EQI_HAND_L,
+		EQI_HAND_R,
+		EQI_GARMENT,
+		EQI_SHOES,
+		EQI_ACC_L,
+		EQI_ACC_R;
+
+	set .@menu$, "";
+	set .@count, 0;
+
+	// Build equipment menu
+	for (.@i = 0; .@i < getarraysize(.@eq); .@i++) {
+		if (!getequipisequiped(.@eq[.@i])) continue;
+		
+		set .@opt_count, 0;
+		for (.@j = 0; .@j < 5; .@j++) {
+			if (getequiprandomoption(.@eq[.@i], .@j, ROA_ID) > 0)
+				.@opt_count++;
+		}
+		if (.@opt_count <= 0) continue;
+		
+		set .@item_id, getequipid(.@eq[.@i]);
+		set .@menu$, .@menu$ + "^5a274d" + getitemname(.@item_id) + "^000000" + 
+			" ~ ^0000FF[" + .@opt_count + "]^000000 Options:";
+		.@slot_list[.@count] = .@eq[.@i];
+		.@count++;
+	}
+
+	if (!.@count) {
+		mes "You have no equipped items with random options.";
+		close;
+	}
+
+	set .@sel, select(.@menu$) - 1;
+	set .@slot, .@slot_list[.@sel];
+	set .@item_id, getequipid(.@slot);
+
+	// Show available slots for this item
+	mes "[Mr. Meme Roller]";
+	mes "Select which slot to reroll on:";
+	// For equipped items in mes, use the ITEM tag with the base item ID
+	mes "^0000FF<ITEM>" + getitemname(.@item_id) + "<INFO>" + .@item_id + "</INFO></ITEM>^000000";
+	next;
+	
+	// Build slot menu
+	set .@slot_menu$, "";
+	set .@slot_count, 0;
+	
+	for (.@i = 0; .@i < 5; .@i++) {
+		.@opt_id = getequiprandomoption(.@slot, .@i, ROA_ID);
+		if (.@opt_id > 0) {
+			.@opt_value = getequiprandomoption(.@slot, .@i, ROA_VALUE);
+			.@opt_name$ = callfunc("F_GetOptNameByID", .@opt_id);
+			.@cost = .@price_per_option * .@slot_multiplier[.@i + 2];
+			
+			set .@slot_menu$, .@slot_menu$ + "Slot (" + (.@i + 1) +") ^0000FF" + .@opt_name$ + "^000000 ~ ^FF0000" + .@cost + "z^000000:";
+			
+			.@available_slots[.@slot_count] = .@i;
+			.@slot_cost[.@slot_count] = .@cost;
+			.@slot_ids[.@slot_count] = .@opt_id;
+			.@slot_values[.@slot_count] = .@opt_value;
+			set .@slot_count, .@slot_count + 1;
+		}
+	}
+	
+	if (.@slot_count == 0) {
+		mes "This item has no random options.";
+		close;
+	}
+	
+	// SINGLE SELECT
+	set .@slot_sel, select(.@slot_menu$) - 1;
+	set .@selected_slot, .@available_slots[.@slot_sel];
+	set .@total_cost, .@slot_cost[.@slot_sel] * 1;
+	set .@current_id, .@slot_ids[.@slot_sel];
+	set .@current_value, .@slot_values[.@slot_sel];
+	set .@current_name$, callfunc("F_GetOptNameByID", .@current_id);
+	
+
+	mes "[Mr. Meme Roller]";
+	mes "Rerolling Slot " + (.@selected_slot + 1) + " on: ^0000FF<ITEM>" + getitemname(.@item_id) + "<INFO>" + .@item_id + "</INFO></ITEM>^000000";
+	if (.@current_value == 0) mes "Current: ^0000FF" + .@current_name$ + "";
+	if (.@current_value > 0){mes "Current: ^0000FF" + .@current_name$ + "^000000 (Value: " + .@current_value + ")";}
+	mes "Cost: ^FF0000" + .@total_cost + " zeny^000000";
+
+	if (.@required_item_id > 0) {
+		mes "Also requires: ^FF0000" + .@required_item_amount + "x <ITEM>" + getitemname(.@required_item_id) + "<INFO>" + .@required_item_id + "</INFO></ITEM>^000000.";
+	}
+	next;
+
+	// Check requirements
+	if (Zeny < .@total_cost) {
+		mes "[Mr. Meme Roller]";
+		mes "You need ^FF0000" + .@total_cost + " zeny^000000.";
+		mes "You only have ^0000FF" + Zeny + " zeny^000000.";
+		close;
+	}
+	
+	if (.@required_item_id > 0 && countitem(.@required_item_id) < .@required_item_amount) {
+		mes "[Mr. Meme Roller]";
+		mes "You need ^FF0000" + .@required_item_amount + "x <ITEM>" + getitemname(.@required_item_id) + "<INFO>" + .@required_item_id + "</INFO></ITEM>^000000.";
+		mes "You only have ^0000FF" + countitem(.@required_item_id) + " <ITEM>" + getitemname(.@required_item_id) + "<INFO>" + .@required_item_id + "</INFO></ITEM>^000000.";
+		close;
+	}
+
+	// Confirm
+	mes "[Mr. Meme Roller]";
+	mes "Reroll Slot " + (.@selected_slot + 1) + "?";
+	mes "This will change BOTH the option type and value!";
+	next;
+	
+	if (select("Yes, reroll this slot:No, cancel") == 2) {
+		mes "[Mr. Meme Roller]";
+		mes "Come back when you're ready!";
+		close;
+	}
+
+	// Deduct costs
+	set Zeny, Zeny - .@total_cost;
+	if (.@required_item_id > 0) {
+		delitem .@required_item_id, .@required_item_amount;
+	}
+	
+	// Set cooldown
+	set #MEMEROLLER_SPECIFIC_COOLDOWN, gettimetick(2);
+
+	// Determine equipment type and get new option
+	set .@func_prefix$, "";
+	
+	if (.@slot == EQI_ARMOR || .@slot == EQI_GARMENT || .@slot == EQI_SHOES) {
+		set .@func_prefix$, "F_MemeOpt_Armor_";
+	}
+	else if (.@slot == EQI_ACC_L || .@slot == EQI_ACC_R) {
+		set .@func_prefix$, "F_MemeOpt_Acc_";
+	}
+	else if (.@slot == EQI_HAND_R) {
+		set .@item_id, getequipid(EQI_HAND_R);
+		if (getiteminfo(.@item_id, 3) == 4) {
+			set .@func_prefix$, "F_MemeOpt_Armor_";
+		}
+	}
+	
+	// Call appropriate function based on slot
+	if (.@func_prefix$ == "") {
+		switch(.@selected_slot) {
+			case 0: .@ret = callfunc("F_MemeOpt_Slot1"); break;
+			case 1: .@ret = callfunc("F_MemeOpt_Slot2"); break;
+			case 2: .@ret = callfunc("F_MemeOpt_Slot3"); break;
+			case 3: .@ret = callfunc("F_MemeOpt_Slot4"); break;
+			case 4: .@ret = callfunc("F_MemeOpt_Slot5"); break;
+		}
+	}
+	else {
+		switch(.@selected_slot) {
+			case 0: .@ret = callfunc(.@func_prefix$ + "Slot1"); break;
+			case 1: .@ret = callfunc(.@func_prefix$ + "Slot2"); break;
+			case 2: .@ret = callfunc(.@func_prefix$ + "Slot3"); break;
+			case 3: .@ret = callfunc(.@func_prefix$ + "Slot4"); break;
+			case 4: .@ret = callfunc(.@func_prefix$ + "Slot5"); break;
+		}
+	}
+	
+	.@new_id = .@ret / 10000;
+	.@new_value = .@ret % 10000;
+	.@new_name$ = callfunc("F_GetOptNameByID", .@new_id);
+	
+	// Apply new option
+	setrandomoption(.@slot, .@selected_slot, .@new_id, .@new_value, 0);
+	
+	mes "[Mr. Meme Roller]";
+	mes "Done! Slot " + (.@selected_slot + 1) + " has been rerolled!";
+	if (.@current_value == 0) mes "Old: ^FF0000" + .@current_name$ + "^000000";
+	if (.@new_value == 0) mes "New: ^00FF00" + .@new_name$ + "^000000";
+	if (.@current_value > 0) mes "Old: ^FF0000" + .@current_name$ + "^000000 (Value: " + .@current_value + ")";
+	if (.@new_value > 0) mes "New: ^00FF00" + .@new_name$ + "^000000 (Value: " + .@new_value + ")";
+	
+	// Calculate cooldown time in readable format
+	set .@hours, .@cooldown / 3600;
+	set .@minutes, (.@cooldown % 3600) / 60;
+	set .@cooldown_str$, .@hours + " hour" + ((.@hours > 1) ? "s" : "");
+	if (.@minutes > 0) {
+		set .@cooldown_str$, .@cooldown_str$ + " and " + .@minutes + " minute" + ((.@minutes > 1) ? "s" : "");
+	}
+	// Check cooldown
+	if (gettimetick(2) < #MEMEROLLER_SPECIFIC_COOLDOWN + .@cooldown) {
+		set .@remaining, #MEMEROLLER_SPECIFIC_COOLDOWN + .@cooldown - gettimetick(2);
+		
+		// Format time: hours, minutes, seconds
+		set .@hours, .@remaining / 3600;
+		set .@minutes, (.@remaining % 3600) / 60;
+		set .@seconds, .@remaining % 60;
+		
+		set .@time_str$, "";
+		if (.@hours > 0) {
+			set .@time_str$, .@time_str$ + .@hours + " hour" + ((.@hours > 1) ? "s" : "");
+		}
+		if (.@minutes > 0) {
+			if (.@time_str$ != "") set .@time_str$, .@time_str$ + ", ";
+			set .@time_str$, .@time_str$ + .@minutes + " minute" + ((.@minutes > 1) ? "s" : "");
+		}
+		if (.@seconds > 0 || .@time_str$ == "") {
+			if (.@time_str$ != "") set .@time_str$, .@time_str$ + ", ";
+			set .@time_str$, .@time_str$ + .@seconds + " second" + ((.@seconds > 1) ? "s" : "");
+		}
+		
+		mes "You need to wait before using this service again.";
+		mes "Time remaining: ^FF0000" + .@time_str$ + "^000000.";
+		close;
+	}
+	close;
+}

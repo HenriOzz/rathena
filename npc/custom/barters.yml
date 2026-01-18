@@ -45,3 +45,190 @@
 Header:
   Type: BARTER_DB
   Version: 2
+
+Body:
+###########################################################################
+##= MemeRO
+###########################################################################
+  - Name: Judge_Shop
+    Items:
+      - Index: 0
+        Item: Battle_Manual
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 25
+      - Index: 1
+        Item: Job_Manual50
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 25
+      - Index: 2
+        Item: Bubble_Gum
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 10
+      - Index: 3
+        Item: Blacksmith_Blessing
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 500
+      - Index: 4
+        Item: Biolab_Contract_Box
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 1000
+      - Index: 5
+        Item: Oridecon
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 5
+      - Index: 6
+        Item: Elunium
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 5
+      - Index: 7
+        Item: Enriched_Oridecon
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 250
+      - Index: 8
+        Item: Enriched_Elunium
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 250
+      - Index: 9
+        Item: HD_Oridecon
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 100
+      - Index: 10
+        Item: HD_Elunium
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 100
+      - Index: 11
+        Item: HE_Bubble_Gum
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 250
+      - Index: 12
+        Item: Poison_Bottle
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 10
+      - Index: 13
+        Item: Germination_Breed
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 50
+      - Index: 14
+        Item: Yggdrasilberry
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 10
+      - Index: 15
+        Item: Inventory_Ex
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 200
+      - Index: 16
+        Item: Max_Weight_Up_Scroll
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 250
+      - Index: 17
+        Item: F_Convex_Mirror
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 25       
+      - Index: 18
+        Item: Boarding_Halter_Box1
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 250           
+      - Index: 19
+        Item: MEME_Merchant_Box1
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 250                
+      - Index: 20
+        Item: G_Almighty
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 100   
+      - Index: 21
+        Item: Token_Of_Siegfried
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 150          
+      - Index: 22
+        Item: Mental_Potion
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 100
+      - Index: 23
+        Item: G_Mental_Potion
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 300            
+      - Index: 24
+        Item: Small_Life_Potion
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 100   
+      - Index: 25
+        Item: Small_Mana_Potion
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 100               
+      - Index: 26
+        Item: G_Small_Life_Potion
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 300   
+      - Index: 27
+        Item: G_Small_Mana_Potion
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 300
+      - Index: 28
+        Item: MEME_RENTALBOX_Succubus
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 300
+      - Index: 29
+        Item: Scroll_Linker
+        RequiredItems:
+          - Index: 0
+            Item: Nyangvine_Fruit
+            Amount: 5

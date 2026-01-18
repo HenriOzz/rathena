@@ -1,0 +1,27 @@
+prontera,150,193,4	script	Kafra Meme::kaf_pronteraMeme	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	if ( countitem(250003) ==0 ) getitem 250003,1;
+	mes "[Kafra Employee]";
+	mes "Welcome~!";
+	mes "The Kafra Services";
+	mes "are always on your side.";
+	mes "So how can I help you?";
+	callfunc "F_Kafra",5,1,0,40,800;
+	savepoint "prontera",156,191,1,1;
+	callfunc "F_KafEnd",0,1,"in the city of Prontera";
+}
+
+prt_in,46,110,3	script	Kafra Meme::kaf_pronteraMemeIN	115,{
+//	cutin "kafra_03",2;
+	callfunc "F_KafSet";
+	if ( countitem(250003) ==0 ) getitem 250003,1;
+	mes "[Kafra Employee]";
+	mes "Welcome~!";
+	mes "The Kafra Services";
+	mes "are always on your side.";
+	mes "So how can I help you?";
+	callfunc "F_Kafra",5,1,0,40,800;
+	savepoint "prt_in",44,106,1,1;
+	callfunc "F_KafEnd",0,1,"";
+}

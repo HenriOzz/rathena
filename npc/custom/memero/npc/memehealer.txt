@@ -22,3 +22,5 @@ prt_in,45,100,3	script	Quick Rest	800,{
 		@HD = gettimetick(2) + .@Delay;
 	end;
 }
+
+prontera,158,192,1	duplicate(Quick Rest)	Quick Rest#prt	569

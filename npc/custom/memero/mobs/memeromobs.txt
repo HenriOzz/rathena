@@ -1,0 +1,91 @@
+// Target Dummy
+
+prt_in,283,136,0,0	monster	Target Dummy	2408,1,1000
+//==================================================
+// nyd - Nidhoggur's Nest
+//==================================================
+1@nyd,0,0	monster	Dark Pinguicula	2015,40,5000
+1@nyd,0,0	monster	Rhyncho	2020,52,5000
+1@nyd,0,0	monster	Phylla	2021,48,5000
+1@nyd,0,0	monster	Dark Shadow	2023,40,5000
+
+
+1@nyd,0,0	monster	Aqua Elemental	2016,30,5000
+1@nyd,0,0	monster	Ancient Tree	2019,40,5000
+1@nyd,0,0,0,0	boss_monster	Nidhoggur's Shadow	2022,1,3600000,600000,0
+
+//==================================================
+// 2@cata - Sealed Shrine 
+//==================================================
+2@cata,0,0	monster	Evil Druid	1117,9,5000
+2@cata,0,0	monster	Khalitzburg	1132,9,5000
+2@cata,0,0	monster	Wraith Dead	1291,9,5000
+2@cata,0,0	monster	Mini Demon	1292,9,5000
+2@cata,0,0	monster	Banshee	1867,9,5000
+2@cata,0,0	monster	Dark Shadow	1869,9,5000
+2@cata,0,0,0,0	boss_monster	Unsealed Baphomet	1929,1,3600000,600000,0
+
+//==================================================
+// 1@gl_k - Old Glast Heim Chivalry 1F 
+//==================================================
+
+1@gl_k,0,0	monster	Corrupted Steward	2464,42,5000
+1@gl_k,0,0	monster	Corrupted Monk	2465,20,5000
+1@gl_k,0,0	monster	Grand Chamberlain in pain	2466,42,5000
+1@gl_k,0,0	monster	Maggot	2467,30,5000
+1@gl_k,0,0	monster	Corrupted Palace Guard	2468,44,5000
+1@gl_k,0,0	monster	Wandering Archer	2469,56,5000
+1@gl_k,0,0	monster	Corrupted Abysmal Knight	2470,10,5000
+1@gl_k,0,0	monster	Suffering Khalitzburg	2471,12,5000
+1@gl_k,0,0,0,0	boss_monster	Root of Corruption	2475,1,3600000,600000,0
+
+//==================================================
+// 2@gl_k - Old Glast Heim Chivalry 2F 
+//==================================================
+
+2@gl_k,0,0	monster	Corrupted Palace Guard	2468,20,5000
+2@gl_k,0,0	monster	Wandering Archer	2469,42,5000
+2@gl_k,0,0	monster	Corrupted Abysmal Knight	2470,30,5000
+2@gl_k,0,0	monster	Suffering Khalitzburg	2471,44,5000
+2@gl_k,0,0	monster	Bloody Knight	2472,56,5000
+2@gl_k,0,0	monster	1st Commander of Destruction	2473,10,5000
+2@gl_k,0,0	monster	2nd Commander of Destruction	2474,12,5000
+2@gl_k,0,0,0,0	boss_monster	Amdarais	2476,1,3600000,600000,0
+
+//==================================================
+// 1@mist - The Hazy Maze Forest 
+//==================================================
+1@mist,0,0	monster	Pom Spider	2138,37,5000
+1@mist,0,0	monster	Angra Mantis	2137,39,5000
+1@mist,0,0	monster	Parus	2136,43,5000
+1@mist,0,0	monster	Little Fatum	2134,23,5000
+1@mist,0,0	monster	Miming	2133,19,5000
+1@mist,0,0	monster	Nydhoggur Memory	2132,15,5000
+1@mist,0,0,0,0	boss_monster	Lost Dragon	2131,1,3600000,600000,0
+
+//==================================================
+// Drain 1 e 2 - Malangdo Culvert
+//==================================================
+1@pump,0,0	monster	Hydra	1068,20,5000
+1@pump,0,0	monster	Deep Sea Vadon	2174,3,5000
+1@pump,0,0	monster	Deep Sea Crab	2176,3,5000
+1@pump,0,0	monster	Deep Sea Cornutus	2177,3,5000
+1@pump,0,0	monster	Deep Sea Shellfish	2178,3,5000
+1@pump,0,0	monster	Deep Sea Kukre	2179,3,5000
+1@pump,0,0	monster	Seaweed	2191,1,5000
+1@pump,0,0,0,0	boss_monster	Dark Coelacanth	2187,1,3600000,600000,0
+1@pump,0,0,0,0	boss_monster	Weird Coelacanth	2188,1,3600000,600000,0
+//
+2@pump,0,0	monster	Deep Sea Strouf	2180,2,5000
+2@pump,0,0	monster	Deep Sea Sword Fish	2181,2,5000
+2@pump,0,0	monster	Deep Sea Marc	2182,2,5000
+2@pump,0,0	monster	Deep Sea Anolian	2183,2,5000
+2@pump,0,0	monster	Deep Sea Obeaune	2184,2,5000
+2@pump,0,0	monster	Deep Sea Kapha	2185,2,5000
+2@pump,0,0	monster	Seaweed	2191,1,5000
+2@pump,0,0,0,0	boss_monster	Violent Coelacanth	2190,1,3600000,600000,0
+2@pump,0,0,0,0	boss_monster	Mutant Coelacanth	2189,1,3600000,600000,0
+
+//==================================================
+//==================================================
+//==================================================

@@ -1,0 +1,577 @@
+// Meme RO mining 
+
+-	script	Meme Rock#0::memerock	-1,{
+	// Distance approach function Start
+	getmapxy(.@map$, .@npc_x, .@npc_y, BL_NPC);
+	getmapxy(.@map$, .@player_x, .@player_y, 1);
+	
+	.@distance = distance(.@npc_x, .@npc_y, .@player_x, .@player_y);
+	
+	if (.@distance > 2) {
+		unitwalkto getcharid(3), getnpcid(0), strnpcinfo(0) + "::OnStartMining";
+		end;
+	}
+	// Distance approach function End
+	goto OnStartMining;
+	end;
+
+OnStartMining:
+	getmapxy(.@map$, .@npc_x, .@npc_y, BL_NPC);
+	getmapxy(.@map$, .@player_x, .@player_y, 1);
+	.@distance = distance(.@npc_x, .@npc_y, .@player_x, .@player_y);
+	
+	if (.@distance > 2) {
+		end;
+	}
+	
+	// PICKAXE NEEDS
+	if ((countitem(252500) + rentalcountitem(252500)) < 1) {
+		mes "I don't have a pickaxe with me!";
+		mes "I should get one in the Meme's Headquarters.";
+		close;
+	}
+	
+	// SIMPLE CHECK WITHOUT SUFFIX
+	if (#PICKAXE_DURABILITY < 1) {
+		mes "My pickaxe is broken!";
+		mes "I should get another one in the Meme's Headquarters.";
+		close;
+	}
+	
+	specialeffect2 EF_REPAIRWEAPON;
+	progressbar "ffff00",2;
+	set .@mining_ran,rand(1,100);
+	
+	if (.@mining_ran > 60) { // 61 a 100 40%
+		getitem 7049,rand(1,3); //Stone
+		initnpctimer;
+		// SIMPLE DURABILITY REDUCTION
+		set #PICKAXE_DURABILITY, #PICKAXE_DURABILITY - 1;
+		callsub check_pickaxe_break;
+		disablenpc();
+		end;
+	}
+	
+	specialeffect2 EF_REPAIRWEAPON;
+	progressbar "ffffff",2;
+	set .@mining_ran,rand(1,100);
+	
+	if (.@mining_ran > 30) { // 31 a 60 30%
+		if (rand(1,2) == 1) {
+			getitem 756,rand(1,4);
+		} else {
+			getitem 757,rand(1,4);
+		} // Rough Ori/Elu
+		
+		initnpctimer;
+		
+		// SIMPLE DURABILITY REDUCTION
+		set #PICKAXE_DURABILITY, #PICKAXE_DURABILITY - 1;
+		callsub check_pickaxe_break;
+		
+		// Monster Accident //////
+		if (rand(1,100) > 30) { 
+			if (rand(1,2) == 1) {
+				monster strcharinfo(3), .@npc_x, .@npc_y, "--ja--", 1784, rand(1,2);
+			} 
+		}
+		/////////////////////////
+		disablenpc();
+		end;
+	}
+	
+	specialeffect2 EF_REPAIRWEAPON;
+	progressbar "ffff00",2;
+	
+	if (.@mining_ran > 15) { // 16 a 30 15%
+		if (rand(1,2) == 1) {
+			getitem 984,rand(1,3);
+		} else {
+			getitem 985,rand(1,3);
+		} // Ori/Elu
+		
+		getitem 6909,rand(5,10); // Nyan
+		initnpctimer;
+		
+		// SIMPLE DURABILITY REDUCTION
+		set #PICKAXE_DURABILITY, #PICKAXE_DURABILITY - 1;
+		callsub check_pickaxe_break;
+		
+		// Monster Accident //////
+		if (rand(1,100) > 40) { 
+			if (rand(1,3) != 1) {
+				monster strcharinfo(3), .@npc_x, .@npc_y, "--ja--", 1274, rand(1,3);
+			} else {
+				summon strcharinfo(0)+"'s Minion",1793,90000;
+				if (rand(1,2) == 1) {
+					summon strcharinfo(0)+"'s Minion",1793,30000;
+				}
+			}
+		}
+		/////////////////////////
+		disablenpc();
+		end;
+	}
+	
+	specialeffect2 EF_REPAIRWEAPON;
+	progressbar "ffff00",2;
+	
+	if (.@mining_ran > 5) { // 6 a 15 10%
+		switch(rand(1,4)) {
+		case 1:
+			getitem 6240,rand(1,2); // HD Ori
+			break;
+		case 2:
+			getitem 6241,rand(1,2); // HD Elu
+			break;
+		case 3:
+			getitem 7620,rand(1,2); // Emriched Ori
+			break;
+		case 4:
+			getitem 7619,rand(1,2); // Emriched Elu
+			break;
+		}
+		
+		getitem 6909,rand(10,50); // Nyan
+		specialeffect EF_COIN;
+		initnpctimer;
+		
+		// SIMPLE DURABILITY REDUCTION
+		set #PICKAXE_DURABILITY, #PICKAXE_DURABILITY - 2;
+		callsub check_pickaxe_break;
+		
+		// Monster Accident //////
+		if (rand(1,100) > 50) { 
+			if (rand(1,3) != 1) {
+				monster strcharinfo(3), .@npc_x, .@npc_y, "--ja--", 1615, rand(2,6);
+			} else {
+				summon strcharinfo(0)+"'s Minion",1615,90000;
+				summon strcharinfo(0)+"'s Minion",1615,90000;
+				if (rand(1,2) == 1) {
+					summon strcharinfo(0)+"'s Minion",1615,30000;
+				}
+				if (rand(1,2) == 1) {
+					summon strcharinfo(0)+"'s Minion",1615,30000;
+				}
+				if (rand(1,2) == 1) {
+					summon strcharinfo(0)+"'s Minion",1615,30000;
+				}
+			}
+		}
+		/////////////////////////
+		disablenpc();
+		end;
+	}
+	
+	specialeffect2 EF_REPAIRWEAPON;
+	specialeffect 8;
+	progressbar "ffff00",2; // 1 a 5 5%
+	
+	switch(rand(1,6)) {
+	case 1:
+		getitem 6240,rand(3,10); // HD Ori
+		break;
+	case 2:
+		getitem 6241,rand(3,10); // HD Elu
+		break;
+	case 3:
+		getitem 7620,rand(3,10); // Emriched Ori
+		break;
+	case 4:
+		getitem 7619,rand(3,10); // Emriched Elu
+		break;
+	case 5:
+		getitem 6635,rand(1,3); // BSB
+		break;
+	case 6:
+		getitem 969,rand(1,3); // Gold
+		break;
+	}
+	
+	if (rand(1,2) == 1) {
+		getitem 984,rand(10,30);
+	} else {
+		getitem 985,rand(10,30);
+	} // Ori/Elu
+	
+	getitem 6909,rand(50,250); // Nyan
+	specialeffect 18;
+	specialeffect 804;
+	initnpctimer;
+	
+	// SIMPLE DURABILITY REDUCTION
+	set #PICKAXE_DURABILITY, #PICKAXE_DURABILITY - 3;
+	callsub check_pickaxe_break;
+	
+	// Monster Accident //////
+	if (rand(1,100) > 80) { 
+		if (rand(1,4) != 1) {
+			monster strcharinfo(3), .@npc_x, .@npc_y, "--ja--", 1583,1;
+			specialeffect 666;
+		} else {
+			summon strcharinfo(0)+"'s Minion",1583,300000;
+			summon strcharinfo(0)+"'s Minion",1615,180000;
+			summon strcharinfo(0)+"'s Minion",1615,180000;
+			summon strcharinfo(0)+"'s Minion",1793,180000;
+			summon strcharinfo(0)+"'s Minion",1793,180000;
+			summon strcharinfo(0)+"'s Minion",1793,180000;
+			summon strcharinfo(0)+"'s Minion",1793,180000;
+		}
+	}
+	/////////////////////////
+	disablenpc();
+	end;
+
+check_pickaxe_break:
+		
+		dispbottom	"Durability: " + #PICKAXE_DURABILITY + "/100";
+	// Check random break 
+	if (#PICKAXE_DURABILITY <= 50) {
+		if (#PICKAXE_DURABILITY > 0){
+		if (rand(0,#PICKAXE_DURABILITY*3) <= 1) {
+			set #PICKAXE_DURABILITY, 0;
+			callsub check_pickaxe_break;
+			return;
+			}
+		}
+	}
+	
+	// Check if pickaxe broke
+	if (#PICKAXE_DURABILITY <= 0) {
+		set #PICKAXE_DURABILITY, 0;
+		if ((countitem(252500) + rentalcountitem(252500)) > 0) {
+			delitem 252500, 1;
+			specialeffect2 106;
+			specialeffect2 111;
+			specialeffect2 155;
+			// specialeffect 938;
+			// specialeffect 889;
+			message strcharinfo(0), "FUCK! My pickaxe is broken!";
+			dispbottom "Your pickaxe has broken!";
+			return;
+		}
+	}
+	return;
+
+OnTimer30000:
+	set .@spawn_ran,rand(.@spawn_ran,100);
+	if (.@spawn_ran > 60) {
+		set .@spawn_ran,0;
+		enablenpc();
+		stopnpctimer;
+		end;
+	} else {
+		stopnpctimer;
+		initnpctimer;
+		end;
+	}
+	
+OnInit: // Done so it doesn't automatically spawn all nodes at once.
+	initnpctimer;
+	disablenpc();
+	end;
+}
+
+// [Keep all your duplicate NPC locations here...]
+
+prontera,159,185,0	duplicate(memerock)	Prontera Obelisk#1	1674
+
+
+
+// ein_dun02
+
+ein_dun02,242,196,0	duplicate(memerock)	Meme Rock#2	1907
+ein_dun02,244,187,0	duplicate(memerock)	Meme Rock#3	1907
+ein_dun02,251,191,0	duplicate(memerock)	Meme Rock#4	1907
+ein_dun02,274,192,0	duplicate(memerock)	Meme Rock#5	1907
+ein_dun02,269,197,0	duplicate(memerock)	Meme Rock#6	1907
+ein_dun02,281,186,0	duplicate(memerock)	Meme Rock#7	1907
+ein_dun02,265,206,0	duplicate(memerock)	Meme Rock#8	1907
+
+
+ein_dun02,105,250,0	duplicate(memerock)	Meme Rock#9	1907
+ein_dun02,151,283,0	duplicate(memerock)	Meme Rock#10	1907
+ein_dun02,16,261,0	duplicate(memerock)	Meme Rock#11	1907
+
+ein_dun02,260,63,0	duplicate(memerock)	Meme Rock#12	1907
+ein_dun02,262,70,0	duplicate(memerock)	Meme Rock#13	1907
+ein_dun02,253,81,0	duplicate(memerock)	Meme Rock#14	1907
+
+ein_dun02,190,154,0	duplicate(memerock)	Meme Rock#15	1907
+ein_dun02,191,147,0	duplicate(memerock)	Meme Rock#16	1907
+ein_dun02,193,141,0	duplicate(memerock)	Meme Rock#17	1907
+ein_dun02,248,80,0	duplicate(memerock)	Meme Rock#18	1907
+
+ein_dun02,183,127,0	duplicate(memerock)	Meme Rock#19	1907
+ein_dun02,178,124,0	duplicate(memerock)	Meme Rock#20	1907
+ein_dun02,174,117,0	duplicate(memerock)	Meme Rock#21	1907 
+
+ein_dun02,278,83,0	duplicate(memerock)	Meme Rock#22	1907
+ein_dun02,46,245,0	duplicate(memerock)	Meme Rock#23	1907
+ein_dun02,254,115,0	duplicate(memerock)	Meme Rock#24	1907
+ein_dun02,252,108,0	duplicate(memerock)	Meme Rock#25	1907
+ein_dun02,253,89,0	duplicate(memerock)	Meme Rock#26	1907
+
+ein_dun02,215,238,0	duplicate(memerock)	Meme Rock#27	1907
+ein_dun02,216,247,0	duplicate(memerock)	Meme Rock#28	1907
+ein_dun02,219,207,0	duplicate(memerock)	Meme Rock#29	1907
+ein_dun02,200,247,0	duplicate(memerock)	Meme Rock#30	1907
+// prontera,163,185,0	duplicate(memerock)	Meme Rock#5	1907
+
+//==================================================
+// SIMPLE Pickaxe Rental NPC (No suffix)
+//==================================================
+
+//==================================================
+// Pickaxe Rental NPC with 24-hour cooldown and bypass option
+//==================================================
+
+prontera,141,179,5	script	Pickaxe Rental	848,{
+	// Check if player already has a pickaxe
+	if ((countitem(252500) + rentalcountitem(252500)) > 0) {
+		mes "[Pickaxe Rental]";
+		mes "You already have a pickaxe in your inventory.";
+		mes "Make sure to use it before it expires!";
+		close;
+	}
+	
+	// Check if player is on cooldown
+	if (#PICKAXE_RENTAL_COOLDOWN > gettimetick(2)) {
+		.@time_left = #PICKAXE_RENTAL_COOLDOWN - gettimetick(2);
+		.@hours_left = .@time_left / 3600;
+		.@minutes_left = (.@time_left % 3600) / 60;
+		
+		mes "[Pickaxe Rental]";
+		mes "Sorry, you can only rent one pickaxe every 24 hours.";
+		mes "You still have to wait ^FF0000" + .@hours_left + " hours and " + .@minutes_left + " minutes^000000.";
+		mes "";
+		mes "However, I can make an exception if you're willing to pay...";
+		next;
+		mes "[Pickaxe Rental]";
+		mes "For ^FF0000" + $rentalpremium_price + "^000000 Zeny and " + $rentalpremium_item_price + "x <ITEM>" + getitemname($rentalpremium_item_id) + "<INFO>" + $rentalpremium_item_id + "</INFO></ITEM>^000000.";
+		mes "I'll rent you another pickaxe right now!";
+		mes "";
+		mes "Would you like to:";
+		next;
+		
+		switch(select("Pay premium to rent now:Wait for cooldown:Cancel")) {
+		case 1:
+			// Check if player has enough resources for premium rental
+			if (Zeny < $rentalpremium_price) {
+				mes "[Pickaxe Rental]";
+				mes "You don't have enough Zeny!";
+				mes "You need " + $rentalpremium_price + " Zeny for the premium rental.";
+				close;
+			}
+			
+			if (countitem($rentalpremium_item_id) < $rentalpremium_item_price) {
+				mes "[Pickaxe Rental]";
+				mes "You don't have enough <ITEM>" + getitemname($rentalpremium_item_id) + "<INFO>" + $rentalpremium_item_id + "</INFO></ITEM>!";
+				mes "You need " + $rentalpremium_item_price + "x <ITEM>" + getitemname($rentalpremium_item_id) + "<INFO>" + $rentalpremium_item_id + "</INFO></ITEM>for the premium rental.";
+				mes "You have only" + countitem($rentalpremium_item_id) + ".";
+				close;
+			}
+			
+			mes "[Pickaxe Rental]";
+			mes "Excellent! Let me get your pickaxe ready.";
+			mes "This will cost you ^FF0000" + $rentalpremium_price + " Zeny^000000 and " + $rentalpremium_item_price + "x <ITEM>" + getitemname($rentalpremium_item_id) + "<INFO>" + $rentalpremium_item_id + "</INFO></ITEM>^000000.";
+			next;
+			
+			if (select("Rent:Cancel") == 1) {
+				// Take payment
+				Zeny -= $rentalpremium_price;
+				delitem $rentalpremium_item_id, $rentalpremium_item_price;
+				
+				// Give pickaxe
+				rentitem 252500, 86400; // 24 hours in seconds
+				
+				// Set durability (but keep cooldown for next rental)
+				set #PICKAXE_DURABILITY, 100;
+				
+				mes "[Pickaxe Rental]";
+				mes "Here's your premium rental pickaxe!";
+				mes "It has 100 durability and lasts 24 hours.";
+				mes "Remember, you still have" + .@hours_left + " hours and " + .@minutes_left + " minutes for your next rental!";
+				close;
+			}
+			mes "[Pickaxe Rental]";
+			mes "Maybe next time then.";
+			close;
+			
+		case 2:
+			mes "[Pickaxe Rental]";
+			mes "Alright, come back in " + .@hours_left + " hours and " + .@minutes_left + " minutes.";
+			mes "I'll be here!";
+			close;
+			
+		case 3:
+			mes "[Pickaxe Rental]";
+			mes "Come back if you change your mind!";
+			close;
+		}
+	}
+	
+	mes "[Pickaxe Rental]";
+	mes "Hello there! Looking to do some mining?";
+	mes "I can rent you a pickaxe for 24 hours.";
+	mes "The rental fee is ^FF0000" + $rental_price + " Zeny^000000.";
+	mes "";
+	mes "While mining with this pickaxe:";
+	mes "- Each monster killed will drop an apple";
+	mes "- Pickaxe loses 10 durability per mining attempt";
+	mes "- Pickaxe expires after 24 hours or breaks at 0 durability";
+	mes "";
+	mes "^FF0000Note:^000000 You can only rent one pickaxe every 24 hours.";
+	mes "Would you like to rent one?";
+	next;
+	
+	if (select("Rent a pickaxe:No, thanks") == 2) {
+		mes "[Pickaxe Rental]";
+		mes "Come back if you change your mind!";
+		close;
+	}
+	
+	// Check if player has enough zeny
+	if (Zeny < $rental_price) {
+		mes "[Pickaxe Rental]";
+		mes "Sorry, you don't have enough zeny.";
+		mes "You need " + $rental_price + " Zeny.";
+		close;
+	}
+	
+	// Rent the pickaxe
+	Zeny -= $rental_price;
+	rentitem 252500, 86400; // 24 hours in seconds
+	
+	// Set durability and cooldown
+	set #PICKAXE_DURABILITY, 100;
+	set #PICKAXE_RENTAL_COOLDOWN, gettimetick(2) + (24 * 60 * 60); // 24 hours from now
+	
+	mes "[Pickaxe Rental]";
+	mes "Here's your pickaxe!";
+	mes "It has 100 durability and lasts 24 hours.";
+	mes "Use the command ^FF0000@pickaxe^000000 to check its status.";
+	mes "";
+	mes "^FF0000Reminder:^000000 You can rent another pickaxe in 24 hours.";
+	close;
+
+OnInit:
+	$rental_price = 5000; // Rental price
+	$rentalpremium_price = 1000000; // Rental Premium price
+	$rentalpremium_item_id = 6909; // Premium ID item
+	$rentalpremium_item_price = 500; // Premium item price
+	end;
+}
+
+
+//==================================================
+// SIMPLE Monster Kill Event (No suffix)
+//==================================================
+
+// desativado temporariamente porque a mineiracao nao era pra esse sistema, usarei outro item para esse formato
+/*
+-	script	pickaxe_kill_effect#pax	-1,{
+OnNPCKillEvent:
+	// SIMPLE CHECK (NO SUFFIX)
+	if (#PICKAXE_DURABILITY > 0) {
+		// Check if pickaxe is still in inventory
+		if ((countitem(252500) + rentalcountitem(252500)) > 0) {
+			// Give apple
+			getitem 512, 1;
+			
+			// Reduce durability by 1
+			set #PICKAXE_DURABILITY, #PICKAXE_DURABILITY - 1;
+			
+			// Check if it broke
+			if (#PICKAXE_DURABILITY <= 0) {
+				set #PICKAXE_DURABILITY, 0;
+				delitem 252500, 1;
+				dispbottom "Your pickaxe broke from killing monsters!";
+			} else if (#PICKAXE_DURABILITY <= 10) {
+				dispbottom "Pickaxe Durability: " + #PICKAXE_DURABILITY + "/100 - Low!";
+			}
+		} else {
+			// Pickaxe not in inventory
+			set #PICKAXE_DURABILITY, 0;
+		}
+	}
+	end;
+}
+*/
+
+//==================================================
+// SIMPLE Pickaxe Status Command (No suffix)
+//==================================================
+
+-	script	pickaxe_status#pax	-1,{
+OnInit:
+	bindatcmd "pickaxe", strnpcinfo(0) + "::OnCheckPickaxe";
+	bindatcmd "durability", strnpcinfo(0) + "::OnAdjustDurability";
+	end;
+	
+OnCheckPickaxe:
+	if (#PICKAXE_DURABILITY > 0) {
+		message strcharinfo(0), "^FF0000[Pickaxe Status]^000000";
+		message strcharinfo(0), "Durability: " + #PICKAXE_DURABILITY + "/100";
+		
+		if ((countitem(252500) + rentalcountitem(252500)) == 0) {
+			message strcharinfo(0), "WARNING: Pickaxe not in inventory!";
+		}
+		
+		// Show low durability warning
+		if (#PICKAXE_DURABILITY <= 10) {
+			message strcharinfo(0), "LOW DURABILITY WARNING!";
+		}
+		
+		// Check cooldown status
+		if (#PICKAXE_RENTAL_COOLDOWN > gettimetick(2)) {
+			.@time_left = #PICKAXE_RENTAL_COOLDOWN - gettimetick(2);
+			.@hours_left = .@time_left / 3600;
+			.@minutes_left = (.@time_left % 3600) / 60;
+			message strcharinfo(0), "Next rental available in: " + .@hours_left + "h " + .@minutes_left + "m";
+		}
+	} else {
+		message strcharinfo(0), "You don't have an active pickaxe.";
+		
+		// Check cooldown even if no pickaxe
+		if (#PICKAXE_RENTAL_COOLDOWN > gettimetick(2)) {
+			.@time_left = #PICKAXE_RENTAL_COOLDOWN - gettimetick(2);
+			.@hours_left = .@time_left / 3600;
+			.@minutes_left = (.@time_left % 3600) / 60;
+			message strcharinfo(0), "Rental cooldown: " + .@hours_left + "h " + .@minutes_left + "m";
+		} else {
+			message strcharinfo(0), "You can rent a pickaxe now!";
+		}
+	}
+	end;
+	
+OnAdjustDurability:
+	// GM command to adjust durability
+	.@amount = atoi(getarg(1));
+	
+	if (.@amount == 0) {
+		message strcharinfo(0), "Usage: @durability <amount>";
+		message strcharinfo(0), "Example: @durability -10 (reduce by 10)";
+		message strcharinfo(0), "Example: @durability 5 (add 5 durability)";
+		end;
+	}
+	
+	// Adjust durability
+	set #PICKAXE_DURABILITY, #PICKAXE_DURABILITY - .@amount;
+	
+	// Make sure it doesn't go negative
+	if (#PICKAXE_DURABILITY < 0) {
+		set #PICKAXE_DURABILITY, 0;
+	}
+	
+	// Check if it broke
+	if (#PICKAXE_DURABILITY <= 0) {
+		if ((countitem(252500) + rentalcountitem(252500)) > 0) {
+			delitem 252500, 1;
+			message strcharinfo(0), "Pickaxe broke!";
+		}
+	}
+	
+	message strcharinfo(0), "New durability: " + #PICKAXE_DURABILITY + "/100";
+	end;
+}

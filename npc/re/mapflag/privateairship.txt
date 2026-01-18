@@ -708,3 +708,62 @@ yuno_fild08	mapflag	privateairship_destination
 yuno_fild09	mapflag	privateairship_destination
 yuno_fild11	mapflag	privateairship_destination
 yuno_fild12	mapflag	privateairship_destination
+
+// MemeRO
+
+prt_in	mapflag	privateairship_source
+prt_in	mapflag	privateairship_destination
+
+moc_fild20	mapflag	privateairship_source
+moc_fild20	mapflag	privateairship_destination
+
+moc_fild22	mapflag	privateairship_source
+moc_fild22	mapflag	privateairship_destination
+
+xmas_dun01	mapflag	privateairship_source
+xmas_dun01	mapflag	privateairship_destination
+
+xmas_dun02	mapflag	privateairship_source
+xmas_dun02	mapflag	privateairship_destination
+
+gld_dun01	mapflag	privateairship_source
+gld_dun01	mapflag	privateairship_destination
+
+gld_dun02	mapflag	privateairship_source
+gld_dun02	mapflag	privateairship_destination
+
+gld_dun03	mapflag	privateairship_source
+gld_dun03	mapflag	privateairship_destination
+
+gld_dun04	mapflag	privateairship_source
+gld_dun04	mapflag	privateairship_destination
+
+gld_dun01_2	mapflag	privateairship_source
+gld_dun01_2	mapflag	privateairship_destination
+
+gld_dun02_2	mapflag	privateairship_source
+gld_dun02_2	mapflag	privateairship_destination
+
+gld_dun03_2	mapflag	privateairship_source
+gld_dun03_2	mapflag	privateairship_destination
+
+gld_dun04_2	mapflag	privateairship_source
+gld_dun04_2	mapflag	privateairship_destination
+
+gld2_pay	mapflag	privateairship_source
+gld2_pay	mapflag	privateairship_destination
+
+gld2_ald	mapflag	privateairship_source
+gld2_ald	mapflag	privateairship_destination
+
+gld2_prt	mapflag	privateairship_source
+gld2_prt	mapflag	privateairship_destination
+
+gld2_gef	mapflag	privateairship_source
+gld2_gef	mapflag	privateairship_destination
+
+schg_dun01	mapflag	privateairship_source
+schg_dun01	mapflag	privateairship_destination
+
+teg_dun02	mapflag	privateairship_source
+teg_dun02	mapflag	privateairship_destination

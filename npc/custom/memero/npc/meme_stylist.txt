@@ -1,0 +1,89 @@
+//===== Hercules Script ======================================
+//= Stylist
+//===== By: ==================================================
+//= Euphy
+//===== Current Version: =====================================
+//= 1.1
+//===== Description: =========================================
+//= Changes your hair style, hair color, and cloth color.
+//===== Additional Comments: =================================
+//= 1.1 Switched to 'getbattleflag', credits to Saithis. [Euphy]
+//= limit doram class hstyle and hcolor line(18,19). [HaureN]
+//= 1.2 Dynamic menu order based on last action. [Modified]
+//============================================================
+
+prt_in,279,125,1	script	Stylist#custom_stylist	10580,{
+	@doram_hs = 6;
+	@doram_hc = 8;
+	if( Class == 4218 ){
+		setarray .@Styles[1],7, // a partir do 8 crasha
+		@doram_hs,
+		@doram_hc;
+	}
+	else{
+		setarray .@Styles[1],
+			// getbattleflag("max_cloth_color"),
+			getbattleflag("max_cloth_color"),
+			getbattleflag("max_hair_style"),
+			getbattleflag("max_hair_color");
+	}
+	setarray .@Look[1],
+		LOOK_CLOTHES_COLOR,
+		LOOK_HAIR,
+		LOOK_HAIR_COLOR;
+	set .@s, select(" ~ Cloth color: ~ Hairstyle: ~ Hair color");
+	set .@Revert, getlook(.@Look[.@s]); 
+	set .@Style,1;
+	set .@menu_order, 0; // 0 = normal order (Next first), 1 = reversed order (Previous first)
+	
+	while(1) {
+		setlook .@Look[.@s], .@Style;
+		message strcharinfo(0),"This is style #"+.@Style+".";
+		
+		// Calculate next and previous values for display
+		set .@next_val, ((.@Style != .@Styles[.@s])?.@Style+1:1);
+		set .@prev_val, ((.@Style != 1)?.@Style-1:.@Styles[.@s]);
+		
+		// Build menu based on current order
+		if (.@menu_order == 0) {
+			// Normal order: Next, Previous, Jump, Revert
+			set .@menu$, " ~ Next (^0055FF"+.@next_val+"^000000): ~ Previous (^0055FF"+.@prev_val+"^000000): ~ Jump to...: ~ Revert to original (^0055FF"+.@Revert+"^000000)";
+		} else {
+			// Reversed order: Previous, Next, Jump, Revert
+			set .@menu$, " ~ Previous (^0055FF"+.@prev_val+"^000000): ~ Next (^0055FF"+.@next_val+"^000000): ~ Jump to...: ~ Revert to original (^0055FF"+.@Revert+"^000000)";
+		}
+		
+		// Get player's choice
+		set .@choice, select(.@menu$);
+		
+		// Adjust choice based on menu order
+		if (.@menu_order == 1) {
+			// If menu is reversed, swap choices 1 and 2
+			if (.@choice == 1) set .@choice, 2;
+			else if (.@choice == 2) set .@choice, 1;
+		}
+		
+		switch(.@choice) {
+		case 1: // Next
+			set .@Style, .@next_val;
+			set .@menu_order, 0; // Set to normal order (Next first)
+			break;
+		case 2: // Previous
+			set .@Style, .@prev_val;
+			set .@menu_order, 1; // Set to reversed order (Previous first)
+			break;
+		case 3: // Jump
+			message strcharinfo(0),"Choose a style between 1 - "+.@Styles[.@s]+".";
+			input .@Style,0,.@Styles[.@s];
+			if (!.@Style)
+				set .@Style, rand(1,.@Styles[.@s]);
+			// Keep current menu order when jumping
+			break;
+		case 4: // Revert
+			set .@Style, .@Revert;
+			setlook .@Look[.@s], .@Revert;
+			// Keep current menu order when reverting
+			break;
+		}
+	}
+}
