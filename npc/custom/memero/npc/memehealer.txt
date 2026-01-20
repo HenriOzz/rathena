@@ -1,5 +1,5 @@
 // a galinha era 800 o sprite, 19997 pug
-prt_in,45,100,3	script	Quick Rest	800,{
+prt_in,45,100,3	script	Quick Rest	19997,{
 
 	.@Buffs = 1;	// Also buff players? (1: yes / 0: no)
 	.@Delay = 5;	// Heal delay, in seconds

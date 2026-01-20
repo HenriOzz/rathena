@@ -1,0 +1,788 @@
+// Meme RO harvesting 
+
+-	script	Meme Bush#0::memebush	-1,{
+	// Distance approach function Start
+	getmapxy(.@map$, .@npc_x, .@npc_y, BL_NPC);
+	getmapxy(.@map$, .@player_x, .@player_y, 1);
+	
+	.@distance = distance(.@npc_x, .@npc_y, .@player_x, .@player_y);
+	
+	if (.@distance > 2) {
+		unitwalkto getcharid(3), getnpcid(0), strnpcinfo(0) + "::OnStartHarvesting";
+		end;
+	}
+	// Distance approach function End
+	goto OnStartHarvesting;
+	end;
+
+OnStartHarvesting:
+	getmapxy(.@map$, .@npc_x, .@npc_y, BL_NPC);
+	getmapxy(.@map$, .@player_x, .@player_y, 1);
+	.@distance = distance(.@npc_x, .@npc_y, .@player_x, .@player_y);
+	
+	if (.@distance > 2) {
+		end;
+	}
+	
+
+	// FARMTOOLS NEEDS
+	set .@harvesting_toolbonus,2;
+	if ((countitem(252501) + rentalcountitem(252501)) < 1) {
+	message strcharinfo(0), "I could harvest more if only I had farming tools...";
+	set .@harvesting_toolbonus,1;
+	}
+	
+	
+//	specialeffect2 EF_REPAIRWEAPON;
+	progressbar "ffff00",2/.@harvesting_toolbonus;
+	set .@harvesting_ran,rand(1,100);
+	getitem 6909,rand(1,2); // Nyan
+	//
+		switch(rand(1,27)) {
+	case 1:
+		getitem 507,rand(1,2*.@harvesting_toolbonus); // red herb
+		break;
+	case 2:
+		getitem 508,rand(1,2*.@harvesting_toolbonus); // yellow herb
+		break;
+	case 3:
+		getitem 511,rand(1,2*.@harvesting_toolbonus); // green herb
+		break;
+	case 4:
+		getitem 520,rand(1,1*.@harvesting_toolbonus); // hinalle leaflet
+		break;
+	case 5:
+		getitem 521,rand(1,1*.@harvesting_toolbonus); // aloe leaflet
+		break;
+	case 6:
+		getitem 522,rand(1,1*.@harvesting_toolbonus); // mastela
+		break;
+	case 7:
+		getitem 581,rand(1,1*.@harvesting_toolbonus); // edible mushroom
+		break;
+	case 8:
+		getitem 684,rand(1,1*.@harvesting_toolbonus); // Herb of Incantation
+		break;
+	case 9:
+		getitem 683,rand(1,1*.@harvesting_toolbonus); // Durian
+		break;
+	case 10:
+		getitem 578,rand(1,1*.@harvesting_toolbonus); // strawberry
+		break;
+	case 11:
+		getitem 577,rand(1,1*.@harvesting_toolbonus); // bag of grain
+		break;
+	case 12:
+		getitem 576,rand(1,1*.@harvesting_toolbonus); // prickly fruit
+		break;
+	case 13:
+		getitem 582,rand(1,1*.@harvesting_toolbonus); // orange
+		break;
+	case 14:
+		getitem 587,rand(1,1*.@harvesting_toolbonus); // red prickly fruit
+		break;
+	case 15:
+		getitem 703,rand(1,3*.@harvesting_toolbonus); // hinale
+		break;
+	case 16:
+		getitem 704,rand(1,3*.@harvesting_toolbonus); // aloe
+		break;
+	case 17:
+		getitem 705,rand(1,3*.@harvesting_toolbonus); // clover
+		break;
+	case 18:
+		getitem 706,rand(1,3); // 4 leaf clover
+		break;
+	case 19:
+		getitem 707,rand(1,3*.@harvesting_toolbonus); // Singing Plant
+		break;
+	case 20:
+		getitem 708,rand(1,3*.@harvesting_toolbonus); // Ment
+		break;
+	case 21:
+		getitem 709,rand(1,3*.@harvesting_toolbonus); // Izidor
+		break;
+	case 22:
+		getitem 710,rand(1,3*.@harvesting_toolbonus); // Illusion Flower
+		break;
+	case 23:
+		getitem 711,rand(1,3*.@harvesting_toolbonus); // Shoot
+		break;
+	case 24:
+		getitem 712,rand(1,3*.@harvesting_toolbonus); // Flower
+		break;
+	case 25:
+		getitem 5737,1; // Cactus Hat
+		break;
+	case 26:
+		getitem 1026,rand(1,3*.@harvesting_toolbonus); // Acorn 
+		break;
+	case 27:
+		monster strcharinfo(3), .@npc_x, .@npc_y, "--ja--", 1604, rand(1,2/.@harvesting_toolbonus); // hornet agressive
+		break;		
+	}
+
+			if ((countitem(252501) + rentalcountitem(252501)) > 0) {
+			set #FARMTOOLS_DURABILITY, #FARMTOOLS_DURABILITY - 1;
+			callsub check_farm_tools_break;
+			}
+	// prevent abuse. se alguem ja coletou, os proximos a coletar serão interrompidos na primeira try
+	if (.harvested_times > 0) {
+		.harvested_times = 0;
+		initnpctimer;
+		disablenpc();
+		end;
+	}
+	.harvested_times = 1;
+	///////////////////////////////
+//	specialeffect2 EF_REPAIRWEAPON;
+	progressbar "ffffff",3/.@harvesting_toolbonus;
+	set .@harvesting_ran,rand(1,100);
+	getitem 6909,rand(1,3); // Nyan
+	//
+		switch(rand(1,27)) {
+	case 1:
+		getitem 507,rand(1,2); // red herb
+		break;
+	case 2:
+		getitem 508,rand(1,2); // yellow herb
+		break;
+	case 3:
+		getitem 511,rand(1,2); // green herb
+		break;
+	case 4:
+		getitem 520,rand(1,1); // hinalle leaflet
+		break;
+	case 5:
+		getitem 521,rand(1,1); // aloe leaflet
+		break;
+	case 6:
+		getitem 522,rand(1,1); // mastela
+		break;
+	case 7:
+		getitem 581,rand(1,1); // edible mushroom
+		break;
+	case 8:
+		getitem 684,rand(1,1); // Herb of Incantation
+		break;
+	case 9:
+		getitem 683,rand(1,1); // Durian
+		break;
+	case 10:
+		getitem 578,rand(1,1); // strawberry
+		break;
+	case 11:
+		getitem 577,rand(1,1); // bag of grain
+		break;
+	case 12:
+		getitem 510,rand(1,1); // Blue Herb
+		break;
+	case 13:
+		getitem 509,rand(1,1); // White Herb
+		break;
+	case 14:
+		getitem 587,rand(1,1); // red prickly fruit
+		break;
+	case 15:
+		getitem 703,rand(1,3); // hinale
+		break;
+	case 16:
+		getitem 704,rand(1,3); // aloe
+		break;
+	case 17:
+		getitem 705,rand(1,3); // clover
+		break;
+	case 18:
+		getitem 7198,rand(1,3); // Huge Leaf
+		break;
+	case 19:
+		getitem 707,rand(1,3); // Singing Plant
+		break;
+	case 20:
+		getitem 7197,rand(1,3); // Tough Vines
+		break;
+	case 21:
+		getitem 7194,rand(1,3); // Soft Blade of Grass
+		break;
+	case 22:
+		getitem 710,rand(1,3); // Illusion Flower
+		break;
+	case 23:
+		getitem 6042,rand(1,3); // Ordinary Branch
+		break;
+	case 24:
+		getitem 6041,rand(1,3); // Strong Vine
+		break;
+	case 25:
+		getitem 6113,1; // Vital Flower
+		break;
+	case 26:
+		getitem 6563,rand(1,3); // Weeds 
+		break;
+	case 27:
+		monster strcharinfo(3), .@npc_x, .@npc_y, "--ja--", 1604, rand(2,10); // hornet agressive
+		break;		
+	}
+
+	/*
+	if (.@harvesting_ran > 30) { // 31 a 60 30%
+		// here it was the mining drop, instead it will drop regardless of fail.
+
+		initnpctimer;
+		
+		// SIMPLE DURABILITY REDUCTION
+		set #FARMTOOLS_DURABILITY, #FARMTOOLS_DURABILITY - 1;
+		callsub check_farm_tools_break;
+		disablenpc();
+		end;
+	}
+	*/
+			if ((countitem(252501) + rentalcountitem(252501)) > 0) {
+			set #FARMTOOLS_DURABILITY, #FARMTOOLS_DURABILITY - 1;
+			callsub check_farm_tools_break;
+			}
+//	specialeffect2 EF_REPAIRWEAPON;
+	progressbar "ffff00",4/.@harvesting_toolbonus;
+			switch(rand(1,7)) {
+	case 1:
+		getitem 507,rand(1,5); // red herb
+		break;
+	case 2:
+		getitem 508,rand(1,5); // yellow herb
+		break;
+	case 3:
+		getitem 511,rand(1,5); // green herb
+		break;
+	case 4:
+		getitem 510,rand(1,3); // Blue Herb
+		break;
+	case 5:
+		getitem 509,rand(1,3); // White Herb
+		break;
+	case 6:
+		monster strcharinfo(3), .@npc_x, .@npc_y, "--ja--", 1604, rand(2,5); // hornet agressive
+		break;		
+	case 7:
+		monster strcharinfo(3), .@npc_x, .@npc_y, "--ja--", 1303, rand(2,3); // lvl 120 hornet agressive
+		break;		
+	}
+	if (rand(1,100) > 60)	monster strcharinfo(3), .@npc_x, .@npc_y, "--ja--", 1604, rand(1,rand(1,10)); // hornet agressive
+	getitem 6909,rand(5,10); // Nyan
+
+	if (.@harvesting_ran > 15/.@harvesting_toolbonus) { // 16 a 30 15%
+		if (rand(1,3) == 1) {
+			getitem 608,rand(1,2);
+		} else {
+			getitem 12292,rand(1,2);
+		} // Ori/Elu
+
+	if (rand(1,100) > 80) {switch(rand(1,14)) {
+	case 1:
+		getitem 619,1; // pets
+		break;
+	case 2:
+		getitem 621,1; // pets
+		break;
+	case 3:
+		getitem 622,1; // pets
+		break;
+	case 4:
+		getitem 629,1; // pets
+		break;
+	case 5:
+		getitem 630,1; // pets
+		break;
+	case 6:
+		getitem 631,1; // pets
+		break;
+	case 7:
+		getitem 623,1; // pets
+		break;
+	case 8:
+		getitem 632,1; // pets
+		break;
+	case 9:
+		getitem 12365,1; // pets
+		break;
+	case 10:
+		getitem 12359,1; // pets
+		break;
+	case 11:
+		getitem 23257,1; // pets
+		break;
+	case 12:
+		getitem 607,rand(1,2); // ygg
+		break;
+	case 13:
+		getitem 608,rand(1,2); // ygg
+		break;
+	case 14:
+		getitem 610,rand(1,2); // ygg
+		break;
+		
+	}}
+		initnpctimer;
+		disablenpc();
+		end;
+	}
+
+			if ((countitem(252501) + rentalcountitem(252501)) > 0) {
+			set #FARMTOOLS_DURABILITY, #FARMTOOLS_DURABILITY - 1;
+			callsub check_farm_tools_break;
+			}
+//	specialeffect2 EF_REPAIRWEAPON;
+	progressbar "ffff00",5/.@harvesting_toolbonus;
+	//
+		switch(rand(1,6)) {
+	case 1:
+		getitem 507,rand(1,5); // red herb
+		break;
+	case 2:
+		getitem 508,rand(1,5); // yellow herb
+		break;
+	case 3:
+		getitem 511,rand(1,5); // green herb
+		break;
+	case 4:
+		getitem 510,rand(1,3); // Blue Herb
+		break;
+	case 5:
+		getitem 509,rand(1,5); // White Herb
+		break;
+	case 6:
+		monster strcharinfo(3), .@npc_x, .@npc_y, "--ja--", 1604, rand(2,15); // hornet agressive
+		break;		
+	}
+		monster strcharinfo(3), .@npc_x, .@npc_y, "--ja--", 1604, rand(2,rand(2,15)); // hornet agressive
+		getitem 6909,rand(5,20); // Nyan
+	
+	if (.@harvesting_ran > 5/.@harvesting_toolbonus) { // 6 a 15 10%
+		if (rand(1,3) == 1) {
+			getitem 608,rand(1,3);
+		} else {
+			getitem 12292,rand(1,3);
+		} // Ori/Elu
+
+	if (rand(1,100) > 60) {switch(rand(1,14)) {
+	case 1:
+		getitem 619,1; // pets
+		break;
+	case 2:
+		getitem 621,1; // pets
+		break;
+	case 3:
+		getitem 622,1; // pets
+		break;
+	case 4:
+		getitem 629,1; // pets
+		break;
+	case 5:
+		getitem 630,1; // pets
+		break;
+	case 6:
+		getitem 631,1; // pets
+		break;
+	case 7:
+		getitem 623,1; // pets
+		break;
+	case 8:
+		getitem 632,1; // pets
+		break;
+	case 9:
+		getitem 12365,1; // pets
+		break;
+	case 10:
+		getitem 12359,1; // pets
+		break;
+	case 11:
+		getitem 23257,1; // pets
+		break;
+	case 12:
+		getitem 607,rand(1,2); // ygg
+		break;
+	case 13:
+		getitem 608,rand(1,2); // ygg
+		break;
+	case 14:
+		getitem 610,rand(1,2); // ygg
+		break;
+		
+	}}
+
+//		specialeffect EF_COIN;
+		initnpctimer;
+	
+		// Monster Accident //////
+		if (rand(1,100) > 50) { 
+			if (rand(1,3) != 1) {
+				monster strcharinfo(3), .@npc_x, .@npc_y, "--ja--", 1162, rand(2,6);
+			} else {
+			summon strcharinfo(0)+"'s Minion",1162,180000;
+			summon strcharinfo(0)+"'s Minion",1162,180000;
+			}
+		}
+		/////////////////////////
+		disablenpc();
+		end;
+	}
+	
+			if ((countitem(252501) + rentalcountitem(252501)) > 0) {
+			set #FARMTOOLS_DURABILITY, #FARMTOOLS_DURABILITY - 2;
+			callsub check_farm_tools_break;
+			}
+//	specialeffect2 EF_REPAIRWEAPON;
+	specialeffect 8;
+	progressbar "ffff00",6/.@harvesting_toolbonus; // 1 a 5 5%
+
+	switch(rand(1,7)) {
+	case 1:
+		getitem 507,rand(2,20); // red herb
+		break;
+	case 2:
+		getitem 508,rand(2,20); // yellow herb
+		break;
+	case 3:
+		getitem 511,rand(2,20); // green herb
+		break;
+	case 4:
+		getitem 510,rand(2,20); // Blue Herb
+		break;
+	case 5:
+		getitem 509,rand(2,20); // White Herb
+		break;
+	case 6:
+		monster strcharinfo(3), .@npc_x, .@npc_y, "--ja--", 1604, rand(5,rand(5,20)); // hornet agressive
+		break;		
+	case 7:
+		monster strcharinfo(3), .@npc_x, .@npc_y, "--ja--", 1303, rand(5,rand(5,20)); // lvl 120 hornet agressive
+		break;		
+	}
+	getitem 6909,rand(25,250); // Nyan
+	
+	specialeffect 18;
+	specialeffect 804;
+	initnpctimer;
+			if ((countitem(252501) + rentalcountitem(252501)) > 0) {
+			set #FARMTOOLS_DURABILITY, #FARMTOOLS_DURABILITY - 3;
+			callsub check_farm_tools_break;
+			}
+	// Monster Accident //////
+	if (rand(1,100) > 80) { 
+		if (rand(1,4) != 1) {
+			monster strcharinfo(3), .@npc_x, .@npc_y, "--ja--", 1059,1;
+			specialeffect 666;
+		} else {
+			summon strcharinfo(0)+"'s Minion",1059,300000;
+			summon strcharinfo(0)+"'s Minion",1162,180000;
+			summon strcharinfo(0)+"'s Minion",1162,180000;
+			summon strcharinfo(0)+"'s Minion",1162,180000;
+			summon strcharinfo(0)+"'s Minion",1162,180000;
+		}
+	}
+	/////////////////////////
+	disablenpc();
+	end;
+
+check_farm_tools_break:
+		dispbottom	"Durability: " + #FARMTOOLS_DURABILITY + "/100";
+	// Check random break 
+	if (#FARMTOOLS_DURABILITY <= 50) {
+		if (#FARMTOOLS_DURABILITY > 0){
+		if (rand(0,#FARMTOOLS_DURABILITY*3) <= 1) {
+			set #FARMTOOLS_DURABILITY, 0;
+			callsub check_farm_tools_break;
+			return;
+			}
+		}
+	}
+	
+	// Check if farm tools broke
+	if (#FARMTOOLS_DURABILITY <= 0) {
+		set #FARMTOOLS_DURABILITY, 0;
+		if ((countitem(252501) + rentalcountitem(252501)) > 0) {
+			delitem 252501, 1;
+			specialeffect2 106;
+			specialeffect2 111;
+			specialeffect2 155;
+			// specialeffect 938;
+			// specialeffect 889;
+			message strcharinfo(0), "FUCK! My farm tools is broken!";
+			dispbottom "Your farm tools has broken!";
+			return;
+		}
+	}
+	return;
+
+OnTimer300000:
+	set .@spawn_ran,rand(.@spawn_ran,100);
+	if (.@spawn_ran > 60) {
+		set .@spawn_ran,0;
+		.harvested_times = 0;
+		enablenpc();
+		stopnpctimer;
+		end;
+	} else {
+		stopnpctimer;
+		initnpctimer;
+		end;
+	}
+	
+OnInit: // Done so it doesn't automatically spawn all nodes at once.
+	initnpctimer;
+	disablenpc();
+	end;
+}
+
+// [Keep all your duplicate NPC locations here...]
+
+prontera,155,185,0	duplicate(memebush)	Prontera Bush#1	19998
+prontera,114,212,0	duplicate(memebush)	Prontera Bush#2	19998
+prontera,156,186,0	duplicate(memebush)	Prontera Bush#3	19998
+
+// prt_fild08
+
+prt_fild08,116,249,0	duplicate(memebush)	Meme Bush#1	19998
+prt_fild08,114,212,0	duplicate(memebush)	Meme Bush#2	19998
+prt_fild08,71,316,0	duplicate(memebush)	Meme Bush#3	19998
+prt_fild08,55,325,0	duplicate(memebush)	Meme Bush#4	19998
+prt_fild08,258,353,0	duplicate(memebush)	Meme Bush#5	19998
+prt_fild08,170,135,0	duplicate(memebush)	Meme Bush#6	19998
+prt_fild08,119,78,0	duplicate(memebush)	Meme Bush#7	19998
+prt_fild08,93,41,0	duplicate(memebush)	Meme Bush#8	19998
+prt_fild08,87,92,0	duplicate(memebush)	Meme Bush#9	19998
+prt_fild08,254,177,0	duplicate(memebush)	Meme Bush#10	19998
+prt_fild08,274,172,0	duplicate(memebush)	Meme Bush#11	19998
+prt_fild08,263,288,0	duplicate(memebush)	Meme Bush#12	19998
+prt_fild08,307,353,0	duplicate(memebush)	Meme Bush#13	19998
+prt_fild08,312,50,0	duplicate(memebush)	Meme Bush#14	19998
+prt_fild08,169,216,0	duplicate(memebush)	Meme Bush#15	19998
+
+// prt_fild07
+prt_fild07,119,371,0	duplicate(memebush)	Meme Bush#16	19998
+prt_fild07,194,244,0	duplicate(memebush)	Meme Bush#17	19998
+prt_fild07,117,220,0	duplicate(memebush)	Meme Bush#18	19998
+prt_fild07,34,306,0	duplicate(memebush)	Meme Bush#19	19998
+prt_fild07,346,272,0	duplicate(memebush)	Meme Bush#20	19998
+prt_fild07,214,29,0	duplicate(memebush)	Meme Bush#21	19998
+prt_fild07,172,46,0	duplicate(memebush)	Meme Bush#22	19998
+prt_fild07,116,50,0	duplicate(memebush)	Meme Bush#23	19998
+prt_fild07,32,45,0	duplicate(memebush)	Meme Bush#24	19998
+prt_fild07,264,216,0	duplicate(memebush)	Meme Bush#25	19998
+prt_fild07,239,242,0	duplicate(memebush)	Meme Bush#26	19998
+prt_fild07,279,151,0	duplicate(memebush)	Meme Bush#27	19998
+prt_fild07,60,232,0	duplicate(memebush)	Meme Bush#28	19998
+prt_fild07,306,81,0	duplicate(memebush)	Meme Bush#29	19998
+prt_fild07,356,156,0	duplicate(memebush)	Meme Bush#30	19998
+
+// prt_fild06
+prt_fild06,153,89,0	duplicate(memebush)	Meme Bush#31	19998
+prt_fild06,227,291,0	duplicate(memebush)	Meme Bush#32	19998
+prt_fild06,265,308,0	duplicate(memebush)	Meme Bush#33	19998
+prt_fild06,88,274,0	duplicate(memebush)	Meme Bush#34	19998
+prt_fild06,58,251,0	duplicate(memebush)	Meme Bush#35	19998
+prt_fild06,176,252,0	duplicate(memebush)	Meme Bush#36	19998
+prt_fild06,156,258,0	duplicate(memebush)	Meme Bush#37	19998
+prt_fild06,295,134,0	duplicate(memebush)	Meme Bush#38	19998
+prt_fild06,285,209,0	duplicate(memebush)	Meme Bush#39	19998
+prt_fild06,322,218,0	duplicate(memebush)	Meme Bush#40	19998
+prt_fild06,329,291,0	duplicate(memebush)	Meme Bush#41	19998
+prt_fild06,104,107,0	duplicate(memebush)	Meme Bush#42	19998
+prt_fild06,64,88,0	duplicate(memebush)	Meme Bush#43	19998
+prt_fild06,78,242,0	duplicate(memebush)	Meme Bush#44	19998
+prt_fild06,56,299,0	duplicate(memebush)	Meme Bush#45	19998
+// prt_fild01
+prt_fild01,369,120,0	duplicate(memebush)	Meme Bush#46	19998
+prt_fild01,229,125,0	duplicate(memebush)	Meme Bush#47	19998
+prt_fild01,242,293,0	duplicate(memebush)	Meme Bush#48	19998
+prt_fild01,261,57,0	duplicate(memebush)	Meme Bush#49	19998
+prt_fild01,375,210,0	duplicate(memebush)	Meme Bush#50	19998
+prt_fild01,114,179,0	duplicate(memebush)	Meme Bush#51	19998
+prt_fild01,244,164,0	duplicate(memebush)	Meme Bush#52	19998
+prt_fild01,232,147,0	duplicate(memebush)	Meme Bush#53	19998
+prt_fild01,78,77,0	duplicate(memebush)	Meme Bush#54	19998
+prt_fild01,30,300,0	duplicate(memebush)	Meme Bush#55	19998
+prt_fild01,68,355,0	duplicate(memebush)	Meme Bush#56	19998
+prt_fild01,91,371,0	duplicate(memebush)	Meme Bush#57	19998
+prt_fild01,166,369,0	duplicate(memebush)	Meme Bush#58	19998
+prt_fild01,133,118,0	duplicate(memebush)	Meme Bush#59	19998
+prt_fild01,207,200,0	duplicate(memebush)	Meme Bush#60	19998
+//==================================================
+// SIMPLE Farm Tools Rental NPC (No suffix)
+//==================================================
+
+//==================================================
+// Farm Tools Rental NPC with 24-hour cooldown and bypass option
+//==================================================
+
+prontera,141,189,5	script	Farm Tools Rental	848,{
+	// Check if player already has a farm tools
+	if ((countitem(252501) + rentalcountitem(252501)) > 0) {
+		mes "[Farm Tools Rental]";
+		mes "You already have a farm tools in your inventory.";
+		mes "Make sure to use it before it expires!";
+		close;
+	}
+	
+	// Check if player is on cooldown
+	if (#FARMTOOLS_RENTAL_COOLDOWN > gettimetick(2)) {
+		.@time_left = #FARMTOOLS_RENTAL_COOLDOWN - gettimetick(2);
+		.@hours_left = .@time_left / 3600;
+		.@minutes_left = (.@time_left % 3600) / 60;
+		
+		mes "[Farm Tools Rental]";
+		mes "Sorry, you can only rent one farm tools every 24 hours.";
+		mes "You still have to wait ^FF0000" + .@hours_left + " hours and " + .@minutes_left + " minutes^000000.";
+		mes "";
+		mes "However, I can make an exception if you're willing to pay...";
+		next;
+		mes "[Farm Tools Rental]";
+		mes "For ^FF0000" + $rentalpremium_price + "^000000 Zeny and " + $rentalpremium_item_price + "x <ITEM>" + getitemname($rentalpremium_item_id) + "<INFO>" + $rentalpremium_item_id + "</INFO></ITEM>^000000.";
+		mes "I'll rent you another farm tools right now!";
+		mes "";
+		mes "Would you like to:";
+		next;
+		
+		switch(select("Pay premium to rent now:Wait for cooldown:Cancel")) {
+		case 1:
+			// Check if player has enough resources for premium rental
+			if (Zeny < $rentalpremium_price) {
+				mes "[Farm Tools Rental]";
+				mes "You don't have enough Zeny!";
+				mes "You need " + $rentalpremium_price + " Zeny for the premium rental.";
+				close;
+			}
+			
+			if (countitem($rentalpremium_item_id) < $rentalpremium_item_price) {
+				mes "[Farm Tools Rental]";
+				mes "You don't have enough <ITEM>" + getitemname($rentalpremium_item_id) + "<INFO>" + $rentalpremium_item_id + "</INFO></ITEM>!";
+				mes "You need " + $rentalpremium_item_price + "x <ITEM>" + getitemname($rentalpremium_item_id) + "<INFO>" + $rentalpremium_item_id + "</INFO></ITEM>for the premium rental.";
+				mes "You have only" + countitem($rentalpremium_item_id) + ".";
+				close;
+			}
+			
+			mes "[Farm Tools Rental]";
+			mes "Excellent! Let me get your farm tools ready.";
+			mes "This will cost you ^FF0000" + $rentalpremium_price + " Zeny^000000 and " + $rentalpremium_item_price + "x <ITEM>" + getitemname($rentalpremium_item_id) + "<INFO>" + $rentalpremium_item_id + "</INFO></ITEM>^000000.";
+			next;
+			
+			if (select("Rent:Cancel") == 1) {
+				// Take payment
+				Zeny -= $rentalpremium_price;
+				delitem $rentalpremium_item_id, $rentalpremium_item_price;
+				
+				// Give farm tools
+				rentitem 252501, 86400; // 24 hours in seconds
+				
+				// Set durability (but keep cooldown for next rental)
+				set #FARMTOOLS_DURABILITY, 100;
+				
+				mes "[Farm Tools Rental]";
+				mes "Here's your premium rental farm tools!";
+				mes "It has 100 durability and lasts 24 hours.";
+				mes "Remember, you still have" + .@hours_left + " hours and " + .@minutes_left + " minutes for your next rental!";
+				close;
+			}
+			mes "[Farm Tools Rental]";
+			mes "Maybe next time then.";
+			close;
+			
+		case 2:
+			mes "[Farm Tools Rental]";
+			mes "Alright, come back in " + .@hours_left + " hours and " + .@minutes_left + " minutes.";
+			mes "I'll be here!";
+			close;
+			
+		case 3:
+			mes "[Farm Tools Rental]";
+			mes "Come back if you change your mind!";
+			close;
+		}
+	}
+	
+	mes "[Farm Tools Rental]";
+	mes "Hello there! Looking to do some harvesting?";
+	mes "I can rent you a farm tools for 24 hours.";
+	mes "The rental fee is ^FF0000" + $rental_price + " Zeny^000000.";
+	mes "";
+	mes "While harvesting with this farm tools:";
+	mes "- Each monster killed will drop an apple";
+	mes "- Farm Tools loses 10 durability per harvesting attempt";
+	mes "- Farm Tools expires after 24 hours or breaks at 0 durability";
+	mes "";
+	mes "^FF0000Note:^000000 You can only rent one farm tools every 24 hours.";
+	mes "Would you like to rent one?";
+	next;
+	
+	if (select("Rent a farm tools:No, thanks") == 2) {
+		mes "[Farm Tools Rental]";
+		mes "Come back if you change your mind!";
+		close;
+	}
+	
+	// Check if player has enough zeny
+	if (Zeny < $rental_price) {
+		mes "[Farm Tools Rental]";
+		mes "Sorry, you don't have enough zeny.";
+		mes "You need " + $rental_price + " Zeny.";
+		close;
+	}
+	
+	// Rent the farm tools
+	Zeny -= $rental_price;
+	rentitem 252501, 86400; // 24 hours in seconds
+	
+	// Set durability and cooldown
+	set #FARMTOOLS_DURABILITY, 100;
+	set #FARMTOOLS_RENTAL_COOLDOWN, gettimetick(2) + (24 * 60 * 60); // 24 hours from now
+	
+	mes "[Farm Tools Rental]";
+	mes "Here's your farm tools!";
+	mes "It has 100 durability and lasts 24 hours.";
+	mes "Use the command ^FF0000@farm tools^000000 to check its status.";
+	mes "";
+	mes "^FF0000Reminder:^000000 You can rent another farm tools in 24 hours.";
+	close;
+
+OnInit:
+	$rental_price = 5000; // Rental price
+	$rentalpremium_price = 1000000; // Rental Premium price
+	$rentalpremium_item_id = 6909; // Premium ID item
+	$rentalpremium_item_price = 500; // Premium item price
+	end;
+}
+
+
+//==================================================
+// SIMPLE Monster Kill Event (No suffix)
+//==================================================
+
+// desativado temporariamente porque a mineiracao nao era pra esse sistema, usarei outro item para esse formato
+/*
+-	script	farm tools_kill_effect#pax	-1,{
+OnNPCKillEvent:
+	// SIMPLE CHECK (NO SUFFIX)
+	if (#FARMTOOLS_DURABILITY > 0) {
+		// Check if farm tools is still in inventory
+		if ((countitem(252501) + rentalcountitem(252501)) > 0) {
+			// Give apple
+			getitem 512, 1;
+			
+			// Reduce durability by 1
+			set #FARMTOOLS_DURABILITY, #FARMTOOLS_DURABILITY - 1;
+			
+			// Check if it broke
+			if (#FARMTOOLS_DURABILITY <= 0) {
+				set #FARMTOOLS_DURABILITY, 0;
+				delitem 252501, 1;
+				dispbottom "Your farm tools broke from killing monsters!";
+			} else if (#FARMTOOLS_DURABILITY <= 10) {
+				dispbottom "Farm Tools Durability: " + #FARMTOOLS_DURABILITY + "/100 - Low!";
+			}
+		} else {
+			// Farm Tools not in inventory
+			set #FARMTOOLS_DURABILITY, 0;
+		}
+	}
+	end;
+}
+*/

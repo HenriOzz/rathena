@@ -51,5 +51,5 @@ prontera,144,199,4	script	Reset NPC	478,{
 	if(.@Reset[3]) set reset_limit,reset_limit + 1;
 	close;
 }
-prt_in,290,129,3	duplicate(Reset NPC)	Reset NPC#prtin	478
-//19996 punirj
+prt_in,290,129,3	duplicate(Reset NPC)	Reset NPC#prtin	19996
+//19996 punirj 478

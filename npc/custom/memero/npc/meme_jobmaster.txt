@@ -357,7 +357,7 @@ function	Job_Change	{
 	// custom looks to bad sprites memero 
 	// Custom look settings based on job type
 	// Third job - toggle body2
-if (.@to_cls & EAJL_THIRD)	setlook LOOK_BODY2, !(getlook(LOOK_BODY2));
+// if (.@to_cls & EAJL_THIRD)	setlook LOOK_BODY2, !(getlook(LOOK_BODY2));
 
 	if (.@to_cls == Job_Novice_High)
 		resetlvl(1);
