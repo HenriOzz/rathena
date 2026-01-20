@@ -356,6 +356,8 @@ static inline unsigned char clif_bl_type(const block_list* bl, bool walking) {
 				case AI_ABR:
 					return 0xd; //NPC_ABR_TYPE
 				case AI_BIONIC:
+				case AI_MEME_PET: // MemeRO change, BIONIC ou ABR parecem ser iguais,
+				case AI_MEME_SUMMON:
 					return 0xe; //NPC_BIONIC_TYPE
 				default:
 					return 0x5; //NPC_MOB_TYPE
@@ -1734,6 +1736,8 @@ int32 clif_spawn( const block_list* bl, bool walking ){
 			else if(md->special_state.size==SZ_MEDIUM)
 				clif_specialeffect(md,EF_BABYBODY2,AREA);
 			if ( md->special_state.ai == AI_ABR || md->special_state.ai == AI_BIONIC )
+				clif_summon_init(*md);
+			if ( md->special_state.ai == AI_MEME_SUMMON || md->special_state.ai == AI_MEME_PET ) // MemeRO change, incluide hp bar. AI implement
 				clif_summon_init(*md);
 			clif_name_area(md);
 		}
@@ -10045,9 +10049,10 @@ void clif_name( const block_list* src, const block_list* bl, send_target target 
 				if( battle_config.show_mob_info&4 ){
 					str_p += sprintf( str_p, "Lv. %d | ", md->level );
 				}
-
+				// MemeRO change, HP + HP%
 				if( battle_config.show_mob_info&1 ){
-					str_p += sprintf( str_p, "HP: %u/%u | ", md->status.hp, md->status.max_hp );
+//					str_p += sprintf( str_p, "HP: %u/%u | ", md->status.hp, md->status.max_hp );
+					str_p += sprintf( str_p, "HP: %u (%u%%) | ", md->status.hp, get_percentage( md->status.hp, md->status.max_hp ) );
 				}
 
 				if( battle_config.show_mob_info&2 ){

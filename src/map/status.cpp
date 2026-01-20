@@ -2271,6 +2271,30 @@ bool status_check_skilluse(const block_list* src, const block_list* target, uint
 			if (tsc && tsc->getSCE(SC_ELEMENTAL_VEIL) && !(src && status_get_class_(src) == CLASS_BOSS) && !status_has_mode(status, MD_DETECTOR))
 				return false;
 			[[fallthrough]];
+		// MemeRO Change Pact Summon AI. [Funcional!] Todo o BL_MOB foi necessario para prevenir cast ofensivo em mob aliado 
+		case BL_MOB:
+			if (skill_id && src->type == BL_PC){
+			nullpo_ret(target);
+			std::shared_ptr<s_skill_db> skill = skill_db.find(skill_id);
+			const mob_data *md = static_cast<const mob_data*>(target);
+			struct map_data *mapdata = map_getmapdata(src->m);
+			bool ally_summon_check = false;
+			int32 s_party = status_get_party_id(src);
+				if (mapdata->getMapFlag(MF_PVP)){
+					ally_summon_check = s_party && s_party == status_get_party_id(target);
+						}
+				else if (mapdata->getMapFlag(MF_GVG)){
+						ally_summon_check = status_get_guild_id(src) == status_get_guild_id(target);
+						}
+				else if (mapdata->getMapFlag(MF_BATTLEGROUND)){
+						ally_summon_check = bg_team_get_id(src) == bg_team_get_id(target);
+						}
+			if (md->master_id == src->id) ally_summon_check = true; // always true if it's the owner targeting its slave, forcing ignoring it.
+			if (ally_summon_check && flag == 0 && md->special_state.ai == AI_MEME_SUMMON && skill->inf == INF_ATTACK_SKILL) return false;
+			if (ally_summon_check && flag == 0 && md->special_state.ai == AI_MEME_PET && skill->inf == INF_ATTACK_SKILL) return false;
+			}
+			break;
+		// memero end
 		default:
 			// Check for chase-walk/hiding/cloaking opponents.
 			if( tsc ) {

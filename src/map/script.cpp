@@ -16684,7 +16684,8 @@ BUILDIN_FUNC(summon)
 	clif_skill_poseffect( *sd, AM_CALLHOMUN, 1, sd->x, sd->y, tick );
 
 	md->master_id = sd->id;
-	md->special_state.ai = AI_ATTACK;
+	// MemeRO change, replaced with our AI 
+	md->special_state.ai = AI_MEME_SUMMON;
 	if( md->deletetimer != INVALID_TIMER ){
 		delete_timer( md->deletetimer, mob_timer_delete );
 	}
@@ -16694,7 +16695,11 @@ BUILDIN_FUNC(summon)
 	mob_spawn( md );
 	clif_specialeffect( md,EF_ENTRY2,AREA );
 	sc_start4( nullptr,md, SC_MODECHANGE, 100, 1, 0, MD_AGGRESSIVE, 0, 60000 );
-
+	// MemeRO change, changing damage taken according to level
+	md->damagetaken = (md->level > 100) ? 100 : md->level;
+	// MemeRO change, Removing looter behavior from mobs summoned this way
+	md->status.mode = static_cast<enum e_mode>(md->status.mode&(~MD_LOOTER));
+	
 	script_pushint( st, md->id );
 
 	return SCRIPT_CMD_SUCCESS;

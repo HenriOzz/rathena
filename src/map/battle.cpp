@@ -2017,7 +2017,9 @@ int64 battle_calc_damage(block_list *src,block_list *bl,struct Damage *d,int64 d
 	} //End of caster SC_ check
 
 	//PK damage rates
-	if (battle_config.pk_mode == 1 && map_getmapflag(bl->m, MF_PVP) > 0)
+//	if (battle_config.pk_mode == 1 && map_getmapflag(bl->m, MF_PVP) > 0)
+	// MemeRO change, testing PK mode or pvp flag activates this instead of &&. 
+	if (battle_config.pk_mode == 1 || map_getmapflag(bl->m, MF_PVP) > 0)
 		damage = battle_calc_pk_damage(*src, *bl, damage, skill_id, flag);
 
 	if(battle_config.skill_min_damage && damage > 0 && damage < div_) {
@@ -2215,6 +2217,12 @@ int64 battle_calc_pk_damage(block_list &src, block_list &bl, int64 damage, uint1
 
 	if (battle_config.pk_mode == 0) // PK mode is disabled.
 		return damage;
+
+	// MemeRO change, summons have their damage reduced as well 20% of its damage currently
+	if (src.type == BL_MOB && bl.type == BL_PC) {
+		const mob_data* md = BL_CAST(BL_MOB,&src);
+		if (md->special_state.ai == AI_MEME_PET || md->special_state.ai == AI_MEME_SUMMON) damage = damage * 20 / 100;
+	}
 
 	if (src.type == BL_PC && bl.type == BL_PC) {
 		if (flag & BF_SKILL) { //Skills get a different reduction than non-skills. [Skotlex]
@@ -11059,6 +11067,8 @@ static bool battle_get_exception_ai( const block_list &src) {
 	switch (md->special_state.ai) {
 		case AI_ABR:
 		case AI_ATTACK:
+		case AI_MEME_PET:
+		case AI_MEME_SUMMON:
 		case AI_BIONIC:
 		case AI_ZANZOU:
 			return true;
@@ -11140,7 +11150,7 @@ int32 battle_check_target( const block_list* src, const block_list* target, int3
 		case BL_MOB:
 		{
 			const mob_data* md = static_cast<const mob_data*>(target);
-
+			
 			if (ud && ud->immune_attack)
 				return 0;
 			if((((md->special_state.ai == AI_SPHERE && battle_config.alchemist_summon_setting&2) || //Marine Spheres

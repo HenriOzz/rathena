@@ -1553,7 +1553,8 @@ static int32 mob_ai_sub_hard_slavemob(mob_data *md,t_tick tick)
 		// Slave is busy with a target.
 		if(md->target_id) {
 			// Player's slave should come back when master's too far, even if it is doing with a target.
-			if (bl->type == BL_PC && md->master_dist > 5) {
+			// MemeRO change, era 5 celulas
+			if (bl->type == BL_PC && md->master_dist > 10) {
 				mob_unlocktarget(md, tick);
 				unit_walktobl(md, bl, MOB_SLAVEDISTANCE, 1);
 				return 1;
@@ -2069,7 +2070,7 @@ static bool mob_ai_sub_hard(mob_data *md, t_tick tick)
 		return true;
 	}
 
-	//Target exists, attack or loot as applicable.
+	//Target exists, attack or loot as applicable. MEMETEST
 	if (tbl->type == BL_ITEM)
 	{	//Loot time.
 		flooritem_data *fitem;
@@ -2278,8 +2279,10 @@ void mob_set_attacked_id(int32 src_id, int32 target_id, t_tick tick, bool is_nor
 		case BL_MOB:
 		{
 			mob_data& md2 = *reinterpret_cast<mob_data*>(src);
+			
 			// Config to decide whether to retaliate versus the master or the mob
-			if (md2.master_id && battle_config.retaliate_to_master)
+			// MemeRO change, include to exclude our AI 
+			if (md2.master_id && battle_config.retaliate_to_master && md2.special_state.ai != AI_MEME_PET && md2.special_state.ai != AI_MEME_SUMMON)
 				md->attacked_id = md2.master_id;
 			else
 				md->attacked_id = src->id;
@@ -2782,8 +2785,9 @@ void mob_damage(mob_data *md, block_list *src, int32 damage)
 		clif_name_area(md);
 
 #if PACKETVER >= 20120404
+	// MemeRO change, including meme pet and meme summon ai to update hp bar
 	if (battle_config.monster_hp_bars_info && !map_getmapflag(md->m, MF_HIDEMOBHPBAR)) {
-		if (md->special_state.ai == AI_ABR || md->special_state.ai == AI_BIONIC) {
+		if (md->special_state.ai == AI_ABR || md->special_state.ai == AI_BIONIC || md->special_state.ai == AI_MEME_PET || md->special_state.ai == AI_MEME_SUMMON) {
 			clif_summon_hp_bar(*md);
 		}
 
@@ -3875,8 +3879,9 @@ void mob_heal(mob_data *md,uint32 heal)
 	if (battle_config.show_mob_info&3)
 		clif_name_area(md);
 #if PACKETVER >= 20120404
+	// MemeRO change, including meme pet and meme summon ai to update hp bar
 	if (battle_config.monster_hp_bars_info && !map_getmapflag(md->m, MF_HIDEMOBHPBAR)) {
-		if (md->special_state.ai == AI_ABR || md->special_state.ai == AI_BIONIC) {
+		if (md->special_state.ai == AI_ABR || md->special_state.ai == AI_BIONIC || md->special_state.ai == AI_MEME_PET || md->special_state.ai == AI_MEME_SUMMON) {
 			clif_summon_hp_bar(*md);
 		}
 

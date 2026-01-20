@@ -3612,6 +3612,8 @@
 	export_constant(AI_WAVEMODE);
 	export_constant(AI_ABR);
 	export_constant(AI_BIONIC);
+	export_constant(AI_MEME_SUMMON);
+	export_constant(AI_MEME_PET);
 
 	/* battle flags */
 	export_constant(BF_NONE);

@@ -7697,11 +7697,16 @@ ACMD_FUNC(summon)
 		return -1;
 
 	md->master_id=sd->id;
-	md->special_state.ai=AI_ATTACK;
+	// MemeRO change, replaced with our AI 
+	md->special_state.ai=AI_MEME_SUMMON;
 	md->deletetimer=add_timer(tick+(duration*60000),mob_timer_delete,md->id,0);
 	clif_specialeffect(md,EF_ENTRY2,AREA);
 	mob_spawn(md);
 	sc_start4(nullptr,md, SC_MODECHANGE, 100, 1, 0, MD_AGGRESSIVE, 0, 60000);
+	// MemeRO change, changing damage taken according to level
+	md->damagetaken = (md->level > 100) ? 100 : md->level;
+	// MemeRO change, Removing looter behavior from mobs summoned this way
+	md->status.mode = static_cast<enum e_mode>(md->status.mode&(~MD_LOOTER));
 	clif_skill_poseffect(*sd, AM_CALLHOMUN, 1, md->x, md->y, tick);
 	clif_displaymessage(fd, msg_txt(sd,39));	// All monster summoned!
 

@@ -445,6 +445,8 @@ enum mob_ai {
 	AI_WAVEMODE,
 	AI_ABR,
 	AI_BIONIC,
+	AI_MEME_SUMMON,
+	AI_MEME_PET,
 	AI_MAX
 };
 
