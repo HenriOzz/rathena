@@ -2070,7 +2070,7 @@ static bool mob_ai_sub_hard(mob_data *md, t_tick tick)
 		return true;
 	}
 
-	//Target exists, attack or loot as applicable. MEMETEST
+	//Target exists, attack or loot as applicable. MEMETEST??? nao lembro de ter alterado esta parte. a verificar
 	if (tbl->type == BL_ITEM)
 	{	//Loot time.
 		flooritem_data *fitem;
@@ -2843,7 +2843,7 @@ int32 mob_getdroprate(block_list *src, std::shared_ptr<s_mob_db> mob, int32 base
 
 			// In PK mode players get an additional drop chance bonus of 25% if there is a 20 level difference
 			if( battle_config.pk_mode && (int32)(mob->lv - sd->status.base_level) >= 20 ){
-				drop_rate_bonus += 25;
+				drop_rate_bonus += 0; // memero nerf? era 25
 			}
 
 			// Add class and race specific bonuses
