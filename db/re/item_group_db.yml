@@ -24376,7 +24376,7 @@ Body:
         List:
           - Index: 0
             Item: Nyangvine_Fruit
-            Rate: 1
+            Rate: 10
           - Index: 1
             Item: World_Tour_Ticket
             Rate: 1
