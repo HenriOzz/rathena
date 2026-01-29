@@ -4681,7 +4681,7 @@ void s_random_opt_group::apply( struct item& item ){
 			std::shared_ptr<s_random_opt_group_entry> option = util::vector_random( this->slots[static_cast<uint16>(i)] );
 
 			// Apply an entry without checking the chance
-			apply_sub( item.option[i], option );
+//			apply_sub( item.option[i], option ); MemeRO Core Change: random options podem NÃO VIR, antes era garantido vir 1 linha.
 		}
 	}
 
